@@ -1,26 +1,14 @@
-import { App } from 'vue';
-import { createNotifier } from './Notifier';
+import { App, inject } from 'vue';
+import { NotifierSymbol, createNotifier, useNotifier } from './Notifier';
 import { Notifier } from "./types";
-
-// @ts-ignore  
-declare module '@nuxt/types' {
-  interface NuxtAppOptions {
-    $notifier: Notifier;
-  }
-
-  interface Context {
-    $notifier: Notifier;
-  }
-
-  interface NuxtApp {
-    $notifier: Notifier;
-  }
-}
+import { InjectionKey } from 'vue';
+import { getCurrentInstance } from 'vue';
 
 export default {
   install: (app: App) => {
-    app.provide('$notifier', createNotifier(app));
+    app.provide(NotifierSymbol, createNotifier(app));
   },
 };
 
-export { createNotifier }
+export { createNotifier, useNotifier, NotifierSymbol }
+

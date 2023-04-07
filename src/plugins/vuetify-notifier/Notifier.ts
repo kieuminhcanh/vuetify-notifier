@@ -1,10 +1,15 @@
-import { App, createApp } from 'vue';
+import { App, createApp, getCurrentInstance } from 'vue';
 import ConfirmDialogComponent from './NotifierDialog.vue';
 import NotifierToast from "./NotifierToast.vue";
 import { NotifierDialogOptions, ConfirmResult, Notifier, NotifierContent, NotifierToastOptions, NotifierComponentOptions, NotifierComponent } from './types';
 import { dialogDefaultOptions, toastDefaultOptions, componentDefaultOptions } from "./DefaultOptions";
 import NotifierComponentVue from './NotifierComponent.vue';
 import { Component } from 'vue';
+
+import { inject } from 'vue';
+import { InjectionKey } from 'vue';
+
+export const NotifierSymbol: InjectionKey<Notifier> = Symbol.for('vuetify:notifier')
 
 export function createNotifier(app: App): Notifier {
 
@@ -160,3 +165,16 @@ export function createNotifier(app: App): Notifier {
 
 }
 
+export function useNotifier() {
+
+  const vm = getCurrentInstance()
+  if (!vm) {
+    throw new Error(`[Vuetify Notifier] useNotifier() must be called from inside a setup function`)
+  }
+
+  const notifier = inject(NotifierSymbol)
+
+  if (!notifier) throw new Error('[Vuetify Notifier] Could not find Notifier injection')
+
+  return notifier
+}

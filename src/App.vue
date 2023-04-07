@@ -4,7 +4,7 @@
       <v-btn icon="mdi-github" text href=">">Documentation</v-btn>
     </v-app-bar>
     <v-main>
-      <v-container>
+      <v-container>        
         <v-row>
           <v-col cols="12">
             <v-card title="Toast">
@@ -100,13 +100,14 @@
 </template>
 
 <script setup lang="ts">
-import { Notifier } from './plugins/vuetify-notifier/types';
-import { inject } from 'vue';
+
 
 import BasicComponent from './components/BasicComponent.vue';
 import AdvanceComponent from './components/AdvanceComponent.vue';
 
-const $notifier = inject('$notifier') as Notifier;
+import { NotifierSymbol, useNotifier } from "./plugins/vuetify-notifier";
+
+const $notifier = useNotifier();
 
 const notifierConfirm = async (status?: string) => {
   const result = await $notifier.confirm({

@@ -1,2 +1,0 @@
-import { Notifier } from "./index";
-
