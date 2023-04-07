@@ -15,7 +15,7 @@ export default defineConfig({
     lib: {
       // Could also be a dictionary or array of multiple entry points
       entry: resolve(__dirname, 'src/plugins/vuetify-notifier/index.ts'),
-      name: 'Vuetify Notifier',
+      name: 'vuetify-notifier',
       // the proper extensions will be added
       fileName: 'vuetify-notifier',
     },
@@ -27,6 +27,7 @@ export default defineConfig({
       output: {
         // Provide global variables to use in the UMD build
         // for externalized deps
+        exports: 'named',
         globals: {
           vue: 'Vue',
         },
