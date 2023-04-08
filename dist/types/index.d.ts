@@ -1,27 +1,38 @@
-import { Notifier } from "./index";
-
-// @ts-ignore  
-declare module '@nuxt/types' {
-  interface NuxtAppOptions {
-    $notifier: Notifier;
-  }
-
-  interface Context {
-    $notifier: Notifier;
-  }
-
-  interface NuxtApp {
-    $notifier: Notifier;
-  }
+import { App, Component } from "vue";
+import plugin from "../index";
+export default plugin;
+export * from "../index";
+declare module 'vuetify-notifier';
+declare module "vue" {
+    interface ComponentCustomProperties {
+        $notifier: Notifier;
+    }
 }
+declare module '#app' {
+    interface NuxtApp {
+        $notifier: Notifier;
+    }
 }
-export interface AlertOptions {
-    type?: 'success' | 'info' | 'warning' | 'error';
-    duration?: number;
+export interface NotifierOptions {
+    default?: NotifierDefaultOptions;
+    dialogOptions?: NotifierDialogOptions;
+    toastOptions?: NotifierToastOptions;
+    componentOptions?: NotifierComponentOptions;
 }
-export interface Alert {
-    show: (message: string, options?: AlertOptions) => void;
-    hide: () => void;
+export interface NotifierDefaultOptions {
+    defaultColor?: string;
+    defaultIcon?: string;
+    successIcon?: string;
+    infoIcon?: string;
+    warningIcon?: string;
+    errorIcon?: string;
+}
+export interface NotifierMountComponent {
+    component: Component;
+    app: App;
+    content: string | Component | NotifierContent;
+    status: string;
+    options: NotifierDialogOptions | NotifierToastOptions | NotifierComponentOptions;
 }
 export interface NotifierDialogOptions {
     transition?: string;

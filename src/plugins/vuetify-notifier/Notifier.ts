@@ -1,127 +1,56 @@
-import { App, createApp, getCurrentInstance } from 'vue';
-import ConfirmDialogComponent from './NotifierDialog.vue';
-import NotifierToast from "./NotifierToast.vue";
-import { NotifierDialogOptions, ConfirmResult, Notifier, NotifierContent, NotifierToastOptions, NotifierComponentOptions, NotifierComponent } from './types';
-import { dialogDefaultOptions, toastDefaultOptions, componentDefaultOptions } from "./DefaultOptions";
-import NotifierComponentVue from './NotifierComponent.vue';
-import { Component } from 'vue';
+import { App, createApp, getCurrentInstance, inject, InjectionKey, Component } from 'vue';
+import { NotifierDialogOptions, ConfirmResult, Notifier, NotifierContent, NotifierToastOptions, NotifierComponentOptions, NotifierComponent, NotifierOptions } from './types';
+import { defaultOptions } from "./utils/options";
 
-import { inject } from 'vue';
-import { InjectionKey } from 'vue';
+import NotifierDialogComponentVue from './components/NotifierDialog.vue';
+import NotifierToastComponentVue from "./components/NotifierToast.vue";
+import NotifierComponentVue from './components/NotifierComponent.vue';
 
 export const NotifierSymbol: InjectionKey<Notifier> = Symbol.for('vuetify:notifier')
 
-export function createNotifier(app: App): Notifier {
+import { mountComponent } from "./utils";
 
-  const confirm = (content: string | NotifierContent, status = 'default', options: NotifierDialogOptions = {}): Promise<ConfirmResult> => {
-    const vApp = document.querySelector('[data-v-app]') as HTMLElement;
-    const container = document.createElement('div');
+export function createNotifier(app: App, globalOptions: NotifierOptions = {}): Notifier {
 
-    const newOptions = { ...dialogDefaultOptions, ...options }
+  const confirm = (content: string | NotifierContent, status = 'default', opts?: NotifierDialogOptions): Promise<ConfirmResult> => {
 
-    return new Promise((resolve, reject) => {
-      const notifierDialogApp = createApp(ConfirmDialogComponent, {
-        content,
-        status,
-        options: newOptions,
-        onSubmit(value: any) {
-          resolve(value);
-          setTimeout(() => {
-            notifierDialogApp.unmount();
-            vApp.removeChild(container)
-          }, 500);
-        },
-        onCancel() {
-          switch (newOptions.handleCancel) {
-            case 'resolve':
-              resolve(false);
-              break;
-            case 'reject':
-              reject(false);
-              break;
-          }
-          setTimeout(() => {
-            notifierDialogApp.unmount();
-            vApp.removeChild(container)
-          }, 500);
+    const options = { ...defaultOptions.default, ...defaultOptions.dialogOptions, ...globalOptions?.default, ...globalOptions?.dialogOptions, ...opts }
+    console.log(options);
 
-        },
-      });
-
-
-      Object.assign(notifierDialogApp._context, app._context)
-      vApp?.appendChild(container);
-      notifierDialogApp.mount(container);
-
-    });
-
+    return mountComponent({
+      component: NotifierDialogComponentVue,
+      app,
+      content,
+      status,
+      options,
+    })
   }
 
-  const toast = (content: string | NotifierContent, status = 'default', options: NotifierToastOptions = {}): Promise<ConfirmResult> => {
-    const vApp = document.querySelector('[data-v-app]') as HTMLElement;
-    const container = document.createElement('div');
+  const toast = (content: string | NotifierContent, status = 'default', opts: NotifierToastOptions = {}): Promise<ConfirmResult> => {
 
-    const newOptions = { ...toastDefaultOptions, ...options }
+    const options = { ...defaultOptions.default, ...defaultOptions.toastOptions, ...globalOptions?.default, ...globalOptions?.toastOptions, ...opts }
 
-    return new Promise((resolve) => {
-      const notifierToastApp = createApp(NotifierToast, {
-        content,
-        status,
-        options: newOptions,
-        onSubmit(value: any) {
-          resolve(value);
-          setTimeout(() => {
-            notifierToastApp.unmount();
-            vApp.removeChild(container)
-          }, 500);
-        },
-        onCancel() {
-          setTimeout(() => {
-            notifierToastApp.unmount();
-            vApp.removeChild(container)
-          }, 500);
-        },
-      });
-
-      Object.assign(notifierToastApp._context, app._context)
-      vApp?.appendChild(container);
-      notifierToastApp.mount(container);
-    });
-
-
+    return mountComponent({
+      component: NotifierToastComponentVue,
+      app,
+      content,
+      status,
+      options,
+    })
   }
 
-  const component = (content: string | Component | NotifierComponent, options: NotifierComponentOptions = {}): Promise<ConfirmResult> => {
-    const vApp = document.querySelector('[data-v-app]') as HTMLElement;
-    const container = document.createElement('div');
 
-    const newOptions = { ...componentDefaultOptions, ...options }
+  const component = (content: string | Component | NotifierComponent, opts: NotifierComponentOptions = {}): Promise<ConfirmResult> => {
 
-    return new Promise((resolve) => {
-      const notifierComponentApp = createApp(NotifierComponentVue, {
-        content,
-        status,
-        options: newOptions,
-        onSubmit(value: any) {
-          resolve(value);
-          setTimeout(() => {
-            notifierComponentApp.unmount();
-            vApp.removeChild(container)
-          }, 500);
-        },
-        onCancel() {
-          setTimeout(() => {
-            notifierComponentApp.unmount();
-            vApp.removeChild(container)
-          }, 500);
-        },
-      });
+    const options = { ...defaultOptions.default, ...defaultOptions.componentOptions, ...globalOptions?.default, ...globalOptions?.componentOptions, ...opts }
 
-      Object.assign(notifierComponentApp._context, app._context)
-      vApp?.appendChild(container);
-      notifierComponentApp.mount(container);
-    });
-
+    return mountComponent({
+      component: NotifierComponentVue,
+      app,
+      content,
+      status: 'default',
+      options,
+    })
   }
 
   const confirmSuccess = (content: string | NotifierContent, options: NotifierDialogOptions = {}): Promise<ConfirmResult> => {
@@ -140,16 +69,45 @@ export function createNotifier(app: App): Notifier {
     return confirm(content, 'error', options);
   }
 
-  const prompt = (content: string | NotifierContent, status = 'default', options: NotifierDialogOptions = {}): Promise<ConfirmResult> => {
-    return confirm(content, status, { ...options, ...{ prompt: true } });
+  const toastSuccess = (content: string | NotifierContent, options: NotifierToastOptions = {}): Promise<ConfirmResult> => {
+    return toast(content, 'success', options);
   }
 
+  const toastInfo = (content: string | NotifierContent, options: NotifierToastOptions = {}): Promise<ConfirmResult> => {
+    return toast(content, 'info', options);
+  }
+
+  const toastWarning = (content: string | NotifierContent, options: NotifierToastOptions = {}): Promise<ConfirmResult> => {
+    return toast(content, 'warning', options);
+  }
+
+  const toastError = (content: string | NotifierContent, options: NotifierToastOptions = {}): Promise<ConfirmResult> => {
+    return toast(content, 'error', options);
+  }
+  
   const alert = (content: string | NotifierContent, status = 'default', options: NotifierDialogOptions = {}): Promise<ConfirmResult> => {
     return confirm(content, status, { ...options, ...{ secondaryButtonProps: { style: "display:none" } } });
   }
 
+  const alertSuccess = (content: string | NotifierContent, options: NotifierDialogOptions = {}): Promise<ConfirmResult> => {
+    return alert(content, 'success', options);
+  }
 
+  const alertInfo = (content: string | NotifierContent, options: NotifierDialogOptions = {}): Promise<ConfirmResult> => {
+    return alert(content, 'info', options);
+  }
 
+  const alertWarning = (content: string | NotifierContent, options: NotifierDialogOptions = {}): Promise<ConfirmResult> => {
+    return alert(content, 'warning', options);
+  }
+
+  const alertError = (content: string | NotifierContent, options: NotifierDialogOptions = {}): Promise<ConfirmResult> => {
+    return alert(content, 'error', options);
+  }
+
+  const prompt = (content: string | NotifierContent, status = 'default', options: NotifierDialogOptions = {}): Promise<ConfirmResult> => {
+    return confirm(content, status, { ...options, ...{ prompt: true } });
+  }
 
   return {
     confirm,
@@ -157,9 +115,21 @@ export function createNotifier(app: App): Notifier {
     confirmInfo,
     confirmWarning,
     confirmError,
-    prompt,
-    alert,
+
     toast,
+    toastSuccess,
+    toastInfo,
+    toastWarning,
+    toastError,
+    
+    alert,
+    alertSuccess,
+    alertInfo,
+    alertWarning,
+    alertError,
+
+    prompt,
+    
     component
   };
 

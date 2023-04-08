@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { NotifierDialogOptions } from "./types";
+import { NotifierDialogOptions } from "../types";
 import { PropType, computed, ref } from "vue";
 
 const props = defineProps({

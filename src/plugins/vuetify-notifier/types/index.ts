@@ -1,31 +1,48 @@
-import { Component } from "vue";
-import { DefineComponent } from "vue";
+import { App, Component } from "vue";
+
+import plugin from "../index";
+export default plugin;
+
+export * from "../index";
 
 // @ts-ignore
-declare module '@nuxt/types' {
-  interface NuxtAppOptions {
+declare module 'vuetify-notifier';
+
+declare module "vue" {
+  interface ComponentCustomProperties {
     $notifier: Notifier;
   }
+}
 
-  interface Context {
-    $notifier: Notifier;
-  }
-
+declare module '#app' {
   interface NuxtApp {
     $notifier: Notifier;
   }
 }
 
-export interface AlertOptions {
-  type?: 'success' | 'info' | 'warning' | 'error';
-  duration?: number;
+export interface NotifierOptions {
+  default?: NotifierDefaultOptions,
+  dialogOptions?: NotifierDialogOptions,
+  toastOptions?: NotifierToastOptions,
+  componentOptions?: NotifierComponentOptions,
 }
 
-export interface Alert {
-  show: (message: string, options?: AlertOptions) => void;
-  hide: () => void;
+export interface NotifierDefaultOptions {
+  defaultColor?: string,
+  defaultIcon?: string,
+  successIcon?: string,
+  infoIcon?: string,
+  warningIcon?: string,
+  errorIcon?: string,
 }
 
+export interface NotifierMountComponent {
+  component: Component,
+  app: App,
+  content: string | Component | NotifierContent,
+  status: string,
+  options: NotifierDialogOptions | NotifierToastOptions | NotifierComponentOptions
+}
 
 export interface NotifierDialogOptions {
   transition?: string;
@@ -52,9 +69,9 @@ export interface NotifierDialogOptions {
   secondaryButtonProps?: Record<string, any>,
 
   handleCancel?: 'resolve' | 'reject' | 'silent',
-  prompt?: boolean,
   inputProps?: Record<string, any>,
-
+  
+  prompt?: boolean,
   alert?: boolean,
 }
 
@@ -84,9 +101,21 @@ export interface Notifier {
   confirmInfo(content: string | NotifierContent, options?: NotifierDialogOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
   confirmWarning(content: string | NotifierContent, options?: NotifierDialogOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
   confirmError(content: string | NotifierContent, options?: NotifierDialogOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
-  prompt(content: string | NotifierContent, status?: string, options?: NotifierDialogOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
-  alert(content: string | NotifierContent, status?: string, options?: NotifierDialogOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
+  
   toast(content: string | NotifierContent, status?: string, options?: NotifierToastOptions): void;
+  toastSuccess(content: string | NotifierContent, options?: NotifierToastOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
+  toastInfo(content: string | NotifierContent, options?: NotifierToastOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
+  toastWarning(content: string | NotifierContent, options?: NotifierToastOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
+  toastError(content: string | NotifierContent, options?: NotifierToastOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
+  
+  alert(content: string | NotifierContent, status?: string, options?: NotifierDialogOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
+  alertSuccess(content: string | NotifierContent, options?: NotifierDialogOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
+  alertInfo(content: string | NotifierContent, options?: NotifierDialogOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
+  alertWarning(content: string | NotifierContent, options?: NotifierDialogOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
+  alertError(content: string | NotifierContent, options?: NotifierDialogOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
+  
+  prompt(content: string | NotifierContent, status?: string, options?: NotifierDialogOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
+
   component(content: string | NotifierContent | Component, options?: NotifierComponentOptions): void;
 
 }

@@ -1,18 +1,255 @@
-# Vue 3 + TypeScript + Vite
+# Vuetify Notifier
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Vuetify Notifier is a Vue 3 plugin that simplifies the process of displaying notifications, alerts, confirmations, and prompts in your Vue or Nuxt applications. It uses Vuetify components to provide a beautiful and customizable user experience.
 
-## Recommended IDE Setup
+## Installation
+```sh
+$ npm install -D vuetify-notifier
+or
+$ yarn add -D vuetify-notifier
+```
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Setup
+### Vue 3 | Vite
 
-## Type Support For `.vue` Imports in TS
+#### **`main.js|ts`**
+```js
+import { createApp } from 'vue';
+import App from './App.vue';
+import { createVuetify } from 'vuetify'
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+import * as components from 'vuetify/components' //option
+import * as directives from 'vuetify/directives' //option
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+import VuetifyNotifier from 'vuetify-notifier';
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+const vuetify = createVuetify({ components, directives, })
+
+const app = createApp(App);
+app.use(vuetify);
+
+app.use(VuetifyNotifier,{
+  default: {
+    defaultColor:"primary" //default color for all notifications
+  },  
+});
+
+app.mount('#app');
+
+```
+
+## Nuxt
+
+#### **`nuxt.config.js|ts`**
+```javascript
+export default defineNuxtConfig({
+   ...
+   modules: [      
+      'vuetify-notifier/nuxt'      
+   ],
+   notifier:{
+      default:{
+         ...
+      }
+   }
+   ...
+})
+```
+
+## Usage
+### Vue 3 | Vite
+
+```javascript
+<script setup>
+import { NotifierSymbol, useNotifier } from "vuetify-notifier";
+
+const $notifier = useNotifier();
+//or
+const $notifier = inject(NotifierSymbol);
+// and then
+
+const onLogin = async () => {
+  try {
+    await login();
+    $notifier.toast("Login successful", "success");
+  } catch (error) {
+    $notifier.error("Login failed", "success");
+  }
+};
+</script>
+```
+
+### Nuxt
+
+```javascript
+<script setup>
+// useNotifier() was auto import.Don't need to import the plugin in your page
+const $notifier = useNotifier();
+//or
+const $notifier = useNuxtApp();
+// and then
+
+const onLogin = async () => {
+  try {
+    await login();
+    $notifier.toast("Login successful", "success");
+  } catch (error) {
+    $notifier.error("Login failed", "success");
+  }
+};
+</script>
+```
+
+## API
+
+### Options
+
+
+### Methods
+The plugin adds $notifier to the Vue instance, which provides the following methods:
+
+**Confirm**
+- confirm(content, status, options)
+- confirmSuccess(content, options)
+- confirmInfo(content, options)
+- confirmWarning(content, options)
+- confirmError(content, options)
+
+**Alert**
+- alert(content, status, options)
+- alertSuccess(content, options)
+- ...
+
+
+**Toast**
+- toast(content, status, options)
+- toastSuccess(content, options)
+- ...
+
+**Prompt**
+- prompt(content, status, options)
+
+**Component**
+- component(content, options) 
+
+### Options
+Options for each method can be customized by providing an object as the last argument. You can configure default options globally for dialogs, toasts, and components
+** Options **
+```typescript
+export const defaultOptions: NotifierOptions = {
+  default: {
+    defaultColor: '',
+    defaultIcon: 'mdi-alert-circle',
+    successIcon: 'mdi-check-circle',
+    infoIcon: 'mdi-information',
+    warningIcon: 'mdi-alert',
+    errorIcon: 'mdi-alert-circle',
+  },
+  dialogOptions: {
+    transition: 'dialog-bottom-transition',
+    width: 500,
+    minWidth: 300,
+    minHeight: 250,
+    textAlign: 'center',
+    primaryButtonText: 'OK',
+    secondaryButtonText: 'Cancel',
+    showDivider: true,
+    buttonProps: {
+      width: '100',
+    },
+    
+    dialogProps?: {}, // https://vuetifyjs.com/en/api/v-dialog)
+    cardProps?: {}, // https://vuetifyjs.com/en/api/v-card)
+
+    buttonProps?: {}, // https://vuetifyjs.com/en/api/v-btn)
+
+    primaryButtonProps?: {}, // https://vuetifyjs.com/en/api/v-btn)
+    secondaryButtonProps?: {}, // https://vuetifyjs.com/en/api/v-btn)
+
+    handleCancel: 'silent',
+    inputProps: { // https://vuetifyjs.com/en/api/v-text-field/
+      label: 'Input',
+    }
+  },
+  toastOptions: {
+    toastProps: { // https://vuetifyjs.com/en/api/v-snackbar/
+      transition: 'v-scroll-x-transition',
+      location: 'top right',
+    },
+  },
+  componentOptions: {
+    existsButton: true,
+  }
+}
+
+```
+
+**Basic Examples**
+```javascript
+$notifier.confirm('Are you sure you want to delete this item?').then((result) => {
+  if (result) {
+    // Delete the item
+  }
+});
+
+
+$notifier.prompt('Enter your name:').then((name) => {
+  console.log('User entered name:', name);
+});
+
+$notifier.alert('This is an alert message!');
+
+$notifier.toast('Toast message');
+
+```
+
+**Advance Examples**
+```javascript
+$notifier.confirmWarning({
+   title: 'Warning',
+   text: 'Are you sure you want to delete this item?'
+}).then((result) => {
+  if (result) {
+    // Delete the item
+  }
+});
+
+$notifier.alertError({
+   title: 'Error',
+   text: 'This is an error alert message!'
+});
+
+$notifier.toastSuccess({
+   title: 'Success',
+   text: 'This is a success toast message!'
+});
+```
+
+**Super Advance Examples**
+```javascript
+import HelloWorld from './components/HelloWorld.vue';
+
+$notifier.component(HelloWorld).then((result) => {
+  console.log(result);
+});
+
+$notifier.component('global-component-name').then((result) => {
+  console.log(result);
+});
+
+$notifier.component({
+   title: 'Custom Component Title',
+   component: HelloWorld,
+}).then((result) => {
+  console.log(result);
+});
+
+// In your component. Please emit the event 'onSubmit' or 'onClose' to close the dialog
+<v-btn @click="$emit('onSubmit', 'Submit value')">Submit</v-btn>
+<v-btn @click="$emit('onCancel', 'Cancel value')">Cancel</v-btn>
+
+```
+For more information about available options and customization, please refer to the TypeScript interfaces in the source code.
+
+## License
+### MIT License

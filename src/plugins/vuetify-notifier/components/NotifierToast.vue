@@ -16,7 +16,7 @@
 <script setup lang="ts">
 
 import { PropType, computed, ref } from "vue";
-import { NotifierToastOptions } from "./types";
+import { NotifierToastOptions } from "../types";
 
 const props = defineProps({
   content: {

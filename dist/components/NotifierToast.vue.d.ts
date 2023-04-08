@@ -1,8 +1,8 @@
 import { PropType } from "vue";
-import { NotifierToastOptions } from "./types";
+import { NotifierToastOptions } from "../types";
 declare const _sfc_main: import("vue").DefineComponent<{
     content: {
-        type: (ObjectConstructor | StringConstructor)[];
+        type: (StringConstructor | ObjectConstructor)[];
         required: true;
         default: string;
     };
@@ -11,7 +11,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: true;
     };
     status: {
-        type: PropType<"default" | "success" | "info" | "warning" | "error">;
+        type: PropType<"default" | "success" | "error" | "warning" | "info">;
         required: true;
     };
     onSubmit: {
@@ -24,7 +24,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     };
 }, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     content: {
-        type: (ObjectConstructor | StringConstructor)[];
+        type: (StringConstructor | ObjectConstructor)[];
         required: true;
         default: string;
     };
@@ -33,7 +33,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: true;
     };
     status: {
-        type: PropType<"default" | "success" | "info" | "warning" | "error">;
+        type: PropType<"default" | "success" | "error" | "warning" | "info">;
         required: true;
     };
     onSubmit: {
