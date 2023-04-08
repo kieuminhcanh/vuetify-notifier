@@ -1,10 +1,38 @@
 <template>
   <v-layout>
     <v-app-bar title="Vuetify Notifier">
-      <v-btn icon="mdi-github" text href=">">Documentation</v-btn>
+      <v-btn icon="mdi-github" variant="text" href="https://github.com/kieuminhcanh/vuetify-notifier" target="_blank">
+        <v-tooltip activator="parent" location="bottom">Github</v-tooltip></v-btn>
+      <v-btn icon="mdi-code-tags" variant="text"
+        href="https://github.com/kieuminhcanh/vuetify-notifier/blob/master/src/App.vue" target="_blank">
+        <v-tooltip activator="parent" location="bottom">Source Code</v-tooltip></v-btn>
+
+
+      <v-tooltip location="bottom">
+        <template v-slot:activator="{ props }">
+          <v-btn icon v-bind="props" href="https://github.com/kieuminhcanh/vuetify-notifier" target="_blank">
+            <v-icon>
+              mdi-github
+            </v-icon>
+          </v-btn>
+        </template>
+        <span>Github</span>
+      </v-tooltip>
+      <v-tooltip location="bottom">
+        <template v-slot:activator="{ props }">
+          <v-btn icon v-bind="props" href="https://github.com/kieuminhcanh/vuetify-notifier/blob/master/src/App.vue"
+            target="_blank">
+            <v-icon>
+              mdi-code-tags
+            </v-icon>
+          </v-btn>
+        </template>
+        <span>Source Code</span>
+      </v-tooltip>
+
     </v-app-bar>
     <v-main>
-      <v-container>        
+      <v-container>
         <v-row>
           <v-col cols="12">
             <v-card title="Toast">

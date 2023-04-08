@@ -1,11 +1,11 @@
 {
   "name": "vuetify-notifier",
   "version": "0.0.4",
-  "type": "module",
   "license": "MIT",
   "files": [
     "dist"
   ],
+  "type": "module",
   "main": "./dist/vuetify-notifier.umd.cjs",
   "module": "./dist/vuetify-notifier.js",
   "exports": {
