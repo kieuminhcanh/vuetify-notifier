@@ -2,11 +2,11 @@
 import { defineNuxtPlugin } from '#app';
 
 // @ts-ignore: 
-import vuetifyNotifier, { createNotifier } from "../vuetify-notifier";
+import VuetifyNotifier, { createNotifier } from "../vuetify-notifier";
 
 // @ts-ignore
 export default defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.vueApp.use(vuetifyNotifier)
+  nuxtApp.vueApp.use(VuetifyNotifier)
   return {
     provide: { notifier: createNotifier(nuxtApp.vueApp) },
   };

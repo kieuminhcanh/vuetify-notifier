@@ -14,8 +14,7 @@ export function createNotifier(app: App, globalOptions: NotifierOptions = {}): N
 
   const confirm = (content: string | NotifierContent, status = 'default', opts?: NotifierDialogOptions): Promise<ConfirmResult> => {
 
-    const options = { ...defaultOptions.default, ...defaultOptions.dialogOptions, ...globalOptions?.default, ...globalOptions?.dialogOptions, ...opts }
-    console.log(options);
+    const options = { ...defaultOptions.default, ...defaultOptions.dialogOptions, ...globalOptions?.default, ...globalOptions?.dialogOptions, ...opts }    
 
     return mountComponent({
       component: NotifierDialogComponentVue,

@@ -69,10 +69,7 @@ const title = computed(() => typeof props.content === 'object' ? props.content?.
 const text = computed(() => typeof props.content === 'object' ? props.content?.text : props.content);
 
 
-const onSubmit = async (event: any) => {
-  console.log(typeof event
-  );
-
+const onSubmit = async (event: any) => {  
   const { valid } = await event
   if (!valid) return
 
