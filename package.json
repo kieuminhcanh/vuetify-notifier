@@ -1,6 +1,6 @@
 {
   "name": "vuetify-notifier",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "license": "MIT",
   "files": [
     "dist"
@@ -14,13 +14,18 @@
       "require": "./dist/vuetify-notifier.umd.cjs"
     },
     "./nuxt": {
-      "import": "./dist/nuxt/index.js"
+      "types": "./dist/nuxt/types.d.ts",
+      "import": "./dist/nuxt/module.mjs",
+      "require": "./dist/nuxt/module.cjs"
     }
   },
   "types": "./dist/types/index.d.ts",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build && npm run copy-nuxt",
+    "build": "vue-tsc && vite build",
+    "build:nuxt": "nuxt-module-build nuxt --outDir ../dist/nuxt",
+    "build:web": "vue-tsc && vite build --config vite.web.config.ts",
+    "build:all": "npm run build && npm run build:nuxt && npm run build:web",
     "preview": "vite preview",
     "copy-nuxt": "cp -r src/plugins/vuetify-notifier/nuxt dist"
   },
@@ -29,7 +34,10 @@
   },
   "devDependencies": {
     "@nuxt/kit": "^3.3.3",
+    "@nuxt/module-builder": "^0.2.1",
+    "@nuxt/schema": "^3.3.3",
     "@vitejs/plugin-vue": "^4.1.0",
+    "nuxt": "^3.3.3",
     "typescript": "^5.0.3",
     "vite": "^4.2.1",
     "vite-plugin-dts": "^2.2.0",

@@ -5,15 +5,13 @@ export default plugin;
 
 export * from "../index";
 
-// @ts-ignore
-declare module 'vuetify-notifier';
-
 declare module "vue" {
   interface ComponentCustomProperties {
     $notifier: Notifier;
   }
 }
 
+// @ts-ignore
 declare module '#app' {
   interface NuxtApp {
     $notifier: Notifier;
@@ -70,7 +68,7 @@ export interface NotifierDialogOptions {
 
   handleCancel?: 'resolve' | 'reject' | 'silent',
   inputProps?: Record<string, any>,
-  
+
   prompt?: boolean,
   alert?: boolean,
 }
@@ -101,19 +99,19 @@ export interface Notifier {
   confirmInfo(content: string | NotifierContent, options?: NotifierDialogOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
   confirmWarning(content: string | NotifierContent, options?: NotifierDialogOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
   confirmError(content: string | NotifierContent, options?: NotifierDialogOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
-  
+
   toast(content: string | NotifierContent, status?: string, options?: NotifierToastOptions): void;
   toastSuccess(content: string | NotifierContent, options?: NotifierToastOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
   toastInfo(content: string | NotifierContent, options?: NotifierToastOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
   toastWarning(content: string | NotifierContent, options?: NotifierToastOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
   toastError(content: string | NotifierContent, options?: NotifierToastOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
-  
+
   alert(content: string | NotifierContent, status?: string, options?: NotifierDialogOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
   alertSuccess(content: string | NotifierContent, options?: NotifierDialogOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
   alertInfo(content: string | NotifierContent, options?: NotifierDialogOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
   alertWarning(content: string | NotifierContent, options?: NotifierDialogOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
   alertError(content: string | NotifierContent, options?: NotifierDialogOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
-  
+
   prompt(content: string | NotifierContent, status?: string, options?: NotifierDialogOptions): Promise<ConfirmResult> | { success: Promise<ConfirmResult> };
 
   component(content: string | NotifierContent | Component, options?: NotifierComponentOptions): void;

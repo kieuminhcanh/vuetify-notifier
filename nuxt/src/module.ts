@@ -18,23 +18,15 @@ export default defineNuxtModule({
   hooks: {},
   // The function holding your module logic, it can be asynchronous
   setup(moduleOptions, nuxt) {
+    // @ts-ignore
     const { resolve } = createResolver(import.meta.url)
 
     addImports({
       name: 'useNotifier', // name of the composable to be used
       as: 'useNotifier',
-      from: resolve('./composables') // path of composable 
+      from: resolve('./runtime/composables') // path of composable 
     })
 
-    addPlugin(resolve('./plugin'))
+    addPlugin(resolve('./runtime/plugin'))
   }
 })
-
-
-// @ts-ignore
-// export default defineNuxtPlugin((nuxtApp: any) => {
-//   nuxtApp.vueApp.use(VuetifyNotifier)
-//   return {
-//     provide: { notifier: createNotifier(nuxtApp.vueApp) },
-//   };
-// });

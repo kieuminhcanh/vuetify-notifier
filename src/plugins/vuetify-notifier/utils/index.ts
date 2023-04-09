@@ -1,5 +1,5 @@
-import { App, createApp, getCurrentInstance, inject, InjectionKey, Component } from 'vue';
-import { NotifierDialogOptions, NotifierMountComponent, ConfirmResult, Notifier, NotifierContent, NotifierToastOptions, NotifierComponentOptions, NotifierComponent, NotifierOptions } from '../types';
+import { App, createApp } from 'vue';
+import type { NotifierDialogOptions, NotifierMountComponent, ConfirmResult } from '../types';
 
 
 export const getVAppRoot = () => document.querySelector('[data-v-app]') as HTMLElement;

@@ -11,19 +11,21 @@ export default defineConfig({
     })
   ],
   build: {
+    outDir: 'dist/nuxt',
+    emptyOutDir: false,
     lib: {
-      entry: 'src/plugins/vuetify-notifier/index.ts',
-      name: 'VuetifyNotifier',
-      fileName: 'vuetify-notifier',
+      entry: 'src/plugins/vuetify-notifier/nuxt/module.ts',
+      name: 'VuetifyNotifierNuxt',
+      fileName: 'module',
     },
     rollupOptions: {
       external: ['vue'],
       output: {
-        exports: 'named',
         globals: {
           vue: 'Vue',
         },
       },
     },
   },
+
 })
