@@ -1,5 +1,8 @@
 # Vuetify Notifier
 
+![image](https://user-images.githubusercontent.com/136077/230705147-849714e2-a50b-4118-9100-f14d6a82d2e9.png)
+
+
 Vuetify Notifier is a Vue 3 plugin that simplifies the process of displaying notifications, alerts, confirmations, and prompts in your Vue or Nuxt applications. It uses Vuetify components to provide a beautiful and customizable user experience.
 
 
