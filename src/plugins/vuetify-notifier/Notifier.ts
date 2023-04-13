@@ -12,9 +12,12 @@ import { mountComponent } from "./utils";
 
 export function createNotifier(app: App, globalOptions: NotifierOptions = {}): Notifier {
 
+  console.log({ globalOptions });
+
+
   const confirm = (content: string | NotifierContent, status = 'default', opts?: NotifierDialogOptions): Promise<ConfirmResult> => {
 
-    const options = { ...defaultOptions.default, ...defaultOptions.dialogOptions, ...globalOptions?.default, ...globalOptions?.dialogOptions, ...opts }    
+    const options = { ...defaultOptions.default, ...defaultOptions.dialogOptions, ...globalOptions?.default, ...globalOptions?.dialogOptions, ...opts }
 
     return mountComponent({
       component: NotifierDialogComponentVue,
@@ -26,6 +29,8 @@ export function createNotifier(app: App, globalOptions: NotifierOptions = {}): N
   }
 
   const toast = (content: string | NotifierContent, status = 'default', opts: NotifierToastOptions = {}): Promise<ConfirmResult> => {
+
+    console.log({ defaultOptions, globalOptions, opts });
 
     const options = { ...defaultOptions.default, ...defaultOptions.toastOptions, ...globalOptions?.default, ...globalOptions?.toastOptions, ...opts }
 
@@ -83,7 +88,7 @@ export function createNotifier(app: App, globalOptions: NotifierOptions = {}): N
   const toastError = (content: string | NotifierContent, options: NotifierToastOptions = {}): Promise<ConfirmResult> => {
     return toast(content, 'error', options);
   }
-  
+
   const alert = (content: string | NotifierContent, status = 'default', options: NotifierDialogOptions = {}): Promise<ConfirmResult> => {
     return confirm(content, status, { ...options, ...{ secondaryButtonProps: { style: "display:none" } } });
   }
@@ -120,7 +125,7 @@ export function createNotifier(app: App, globalOptions: NotifierOptions = {}): N
     toastInfo,
     toastWarning,
     toastError,
-    
+
     alert,
     alertSuccess,
     alertInfo,
@@ -128,7 +133,7 @@ export function createNotifier(app: App, globalOptions: NotifierOptions = {}): N
     alertError,
 
     prompt,
-    
+
     component
   };
 

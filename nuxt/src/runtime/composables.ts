@@ -1,9 +1,6 @@
-// // @ts-ignore
-// import { useNotifier } from "../vuetify-notifier";
-
-// export { useNotifier };
-
 // @ts-ignore
 import { useNuxtApp } from '#app'
 
-export const useNotifier = () => useNuxtApp().$notifier
+import type { Notifier } from "../../types";
+
+export const useNotifier = (): Notifier => useNuxtApp().$notifier;

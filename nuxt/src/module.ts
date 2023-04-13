@@ -13,20 +13,24 @@ export default defineNuxtModule({
     }
   },
   // Default configuration options for your module, can also be a function returning those
-  defaults: {},
+  defaults: {
+  },
   // Shorthand sugar to register Nuxt hooks
   hooks: {},
   // The function holding your module logic, it can be asynchronous
   setup(moduleOptions, nuxt) {
     // @ts-ignore
     const { resolve } = createResolver(import.meta.url)
+    console.log({ moduleOptions });
 
     addImports({
       name: 'useNotifier', // name of the composable to be used
       as: 'useNotifier',
-      from: resolve('./runtime/composables') // path of composable 
+      from: resolve('./runtime/composables'), // path of composable       
     })
 
-    addPlugin(resolve('./runtime/plugin'))
+    nuxt.options.runtimeConfig.public.notifier = moduleOptions
+
+    addPlugin(resolve('./runtime/plugin'), moduleOptions)
   }
 })
