@@ -18,6 +18,13 @@ declare module '#app' {
   }
 }
 
+// @ts-ignore
+declare module 'vuetify-notifier' {
+  interface NuxtApp {
+    $notifier: Notifier;
+  }
+}
+
 export interface NotifierOptions {
   default?: NotifierDefaultOptions,
   dialogOptions?: NotifierDialogOptions,
