@@ -12,9 +12,6 @@ import { mountComponent } from "./utils";
 
 export function createNotifier(app: App, globalOptions: NotifierOptions = {}): Notifier {
 
-  console.log({ globalOptions });
-
-
   const confirm = (content: string | NotifierContent, status = 'default', opts?: NotifierDialogOptions): Promise<ConfirmResult> => {
 
     const options = { ...defaultOptions.default, ...defaultOptions.dialogOptions, ...globalOptions?.default, ...globalOptions?.dialogOptions, ...opts }
@@ -29,8 +26,6 @@ export function createNotifier(app: App, globalOptions: NotifierOptions = {}): N
   }
 
   const toast = (content: string | NotifierContent, status = 'default', opts: NotifierToastOptions = {}): Promise<ConfirmResult> => {
-
-    console.log({ defaultOptions, globalOptions, opts });
 
     const options = { ...defaultOptions.default, ...defaultOptions.toastOptions, ...globalOptions?.default, ...globalOptions?.toastOptions, ...opts }
 

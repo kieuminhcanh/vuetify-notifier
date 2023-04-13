@@ -10,7 +10,6 @@ export default defineNuxtPlugin((nuxtApp: any) => {
 
   const config = useRuntimeConfig()
 
-
   nuxtApp.vueApp.use(VuetifyNotifier, config.public.notifier)
 
   return {
