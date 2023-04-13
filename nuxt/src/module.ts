@@ -21,7 +21,6 @@ export default defineNuxtModule({
   setup(moduleOptions, nuxt) {
     // @ts-ignore
     const { resolve } = createResolver(import.meta.url)
-    console.log({ moduleOptions });
 
     addImports({
       name: 'useNotifier', // name of the composable to be used
