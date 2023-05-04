@@ -6,7 +6,7 @@
         <div class="font-weight-bold mb-2" v-if="title">{{ title }}</div>
         <p>{{ text }}</p>
         <template #actions>
-          <VBtn :icon="'mdi-close-circle'" size="small" @click="onCancel" />
+          <VBtn :icon="options.closeIcon" size="x-small" variant="tonal" @click="onCancel" />
         </template>
       </VSnackbar>
     </VDefaultsProvider>

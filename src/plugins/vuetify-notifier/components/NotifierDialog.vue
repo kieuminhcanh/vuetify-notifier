@@ -35,6 +35,9 @@
 </template>
 
 <script setup lang="ts">
+import deepmerge from "deepmerge";
+import { defaultOptions } from "../utils/options";
+
 import { NotifierDialogOptions } from "../types";
 import { PropType, computed, ref } from "vue";
 
@@ -65,11 +68,12 @@ const props = defineProps({
 const show = ref(true);
 const input = ref<string>('');
 
+
 const title = computed(() => typeof props.content === 'object' ? props.content?.title : undefined);
 const text = computed(() => typeof props.content === 'object' ? props.content?.text : props.content);
 
 
-const onSubmit = async (event: any) => {  
+const onSubmit = async (event: any) => {
   const { valid } = await event
   if (!valid) return
 

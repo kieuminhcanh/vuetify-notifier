@@ -32,6 +32,7 @@ export interface NotifierDefaultOptions {
   infoIcon?: string,
   warningIcon?: string,
   errorIcon?: string,
+  closeIcon?: string,
 }
 
 export interface NotifierMountComponent {
@@ -42,7 +43,7 @@ export interface NotifierMountComponent {
   options: NotifierDialogOptions | NotifierToastOptions | NotifierComponentOptions
 }
 
-export interface NotifierDialogOptions {
+export interface NotifierDialogOptions extends NotifierDefaultOptions {
   transition?: string;
   width?: number | string;
   minWidth?: number | string;
@@ -73,18 +74,19 @@ export interface NotifierDialogOptions {
   alert?: boolean,
 }
 
-export interface NotifierToastOptions {
+export interface NotifierToastOptions extends NotifierDefaultOptions {
   defaultColor?: string,
   defaultIcon?: string,
   successIcon?: string,
   infoIcon?: string,
   warningIcon?: string,
   errorIcon?: string,
+  closeIcon?: string,
 
   toastProps?: Record<string, string | number | boolean>,
 }
 
-export interface NotifierComponentOptions {
+export interface NotifierComponentOptions extends NotifierDefaultOptions {
   transition?: string;
   width?: number | string;
   height?: number | string;

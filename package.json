@@ -8,6 +8,7 @@
   "type": "module",
   "main": "./dist/vuetify-notifier.umd.cjs",
   "module": "./dist/vuetify-notifier.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/vuetify-notifier.js",
@@ -19,7 +20,6 @@
       "require": "./dist/nuxt/module.cjs"
     }
   },
-  "types": "./dist/types/index.d.ts",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
@@ -37,6 +37,7 @@
     "@nuxt/module-builder": "^0.2.1",
     "@nuxt/schema": "^3.3.3",
     "@vitejs/plugin-vue": "^4.1.0",
+    "deepmerge": "^4.3.1",
     "nuxt": "^3.3.3",
     "typescript": "^5.0.3",
     "vite": "^4.2.1",

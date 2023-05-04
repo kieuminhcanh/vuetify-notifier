@@ -1,5 +1,7 @@
+import { computed } from "vue";
 import { NotifierOptions } from "../types";
 import { NotifierComponentOptions, NotifierDefaultOptions, NotifierDialogOptions, NotifierToastOptions } from "../types";
+import deepmerge from "deepmerge";
 
 export const defaultOptions: NotifierOptions = {
   default: {
@@ -9,6 +11,7 @@ export const defaultOptions: NotifierOptions = {
     infoIcon: 'mdi-information',
     warningIcon: 'mdi-alert',
     errorIcon: 'mdi-alert-circle',
+    closeIcon: 'mdi-close',
   },
   dialogOptions: {
     transition: 'dialog-bottom-transition',

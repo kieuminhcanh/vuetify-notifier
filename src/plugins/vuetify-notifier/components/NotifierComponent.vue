@@ -6,7 +6,7 @@
         <VCard v-if="title">
           <VToolbar :title="title">
             <v-btn v-if="options.existsButton" icon @click="onCancel" variant="text">
-              <v-icon>mdi-close</v-icon>
+              <v-icon>{{ options.closeIcon }}</v-icon>
             </v-btn>
           </VToolbar>
           <component :is="component" v-bind="componentProps" @onSubmit="onSubmit" @onCancel="onCancel" />
@@ -14,7 +14,7 @@
         <template v-else>
           <component :is="content" v-bind="componentProps" @onSubmit="onSubmit" @onCancel="onCancel" />
           <v-btn v-if="options.existsButton" position="fixed" location="top right" icon @click="onCancel" variant="text">
-            <v-icon>mdi-close</v-icon>
+            <v-icon>{{ options.closeIcon }}</v-icon>
           </v-btn>
         </template>
       </VDialog>
