@@ -37,6 +37,23 @@ const vuetify = createVuetify({
   directives,
 })
 
+/**
+ * You can do manually import the components you are using.
+ * https://vuetifyjs.com/en/features/treeshaking/#manual-imports
+ */
+
+// const vuetify = createVuetify({
+//   components: {
+//     VDefaultsProvider,
+//     VDialog,
+//     VCard,content.
+//     VToolbar,
+//     VBtn,
+//     VIcon,
+//   },
+//   ...
+// })
+
 const app = createApp(App)
 app.use(vuetify)
 
