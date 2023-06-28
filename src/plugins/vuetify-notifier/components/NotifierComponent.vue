@@ -1,7 +1,7 @@
 <template>
   <div class="vuetify-notifier">
     <VDefaultsProvider>
-      <VDialog v-model="show" persistent :transition="options?.transition" :width="options?.width" scrollable
+      <VDialog v-model="show" persistent scrollable
         v-bind="options.dialogProps">
         <VCard v-if="title">
           <VToolbar :title="title">
