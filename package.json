@@ -1,16 +1,21 @@
 {
   "name": "vuetify-notifier",
-  "version": "0.0.10",
+  "private": true,
+  "version": "0.0.12",
   "license": "MIT",
+  "keywords": [
+    "vite-plugin-vue-vuetify-notifier"
+  ],
   "files": [
     "dist"
   ],
   "type": "module",
   "main": "./dist/vuetify-notifier.umd.cjs",
   "module": "./dist/vuetify-notifier.js",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/vuetify-notifier.js",
       "require": "./dist/vuetify-notifier.umd.cjs"
     },
@@ -22,27 +27,43 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build",
+    "build": "vue-tsc && vite build && npm run build:nuxt",
     "build:nuxt": "nuxt-module-build nuxt --outDir ../dist/nuxt",
     "build:web": "vue-tsc && vite build --config vite.web.config.ts",
     "build:all": "npm run build && npm run build:nuxt",
     "preview": "vite preview",
-    "copy-nuxt": "cp -r src/plugins/vuetify-notifier/nuxt dist"
+    "lint": "eslint src",
+    "copy-nuxt": "cp -r src/plugins/vuetify-notifier/nuxt dist",
+    "publish:github": "gh-pages -d dist-web"
   },
   "dependencies": {
-    "vue": "^3.4.21"
+    "D": "^1.0.0",
+    "unplugin-vue-components": "^0.26.0",
+    "vue": "^3.4.21",
+    "vuetify-notifier": "file:./src/plugins/vuetify-notifier"
   },
   "devDependencies": {
-    "@nuxt/kit": "^3.11.1",
+    "@eslint/js": "^9.0.0",
+    "@mdi/font": "^7.4.47",
+    "@nuxt/kit": "^3.11.2",
     "@nuxt/module-builder": "^0.5.5",
-    "@nuxt/schema": "^3.11.1",
+    "@stylistic/eslint-plugin": "^1.7.0",
+    "@types/node": "^20.12.7",
+    "@typescript-eslint/parser": "^7.6.0",
     "@vitejs/plugin-vue": "^5.0.4",
-    "deepmerge": "^4.3.1",
-    "nuxt": "^3.11.1",
-    "typescript": "^5.4.2",
-    "vite": "^5.1.6",
-    "vite-plugin-dts": "^3.7.3",
+    "eslint": "^9.0.0",
+    "eslint-config-vuetify": "^1.0.0",
+    "eslint-plugin-vue": "^9.24.1",
+    "gh-pages": "^6.1.1",
+    "typescript": "^5.2.2",
+    "typescript-eslint": "^7.6.0",
+    "unplugin-auto-import": "^0.17.5",
+    "vite": "^5.2.0",
+    "vite-plugin-dts": "^3.8.1",
+    "vite-plugin-inspect": "^0.8.3",
+    "vite-plugin-vuetify": "^2.0.3",
+    "vue-eslint-parser": "^9.4.2",
     "vue-tsc": "^2.0.6",
-    "vuetify": "^3.5.9"
+    "vuetify": "^3.5.15"
   }
 }

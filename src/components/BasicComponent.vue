@@ -15,6 +15,7 @@
 
 <script setup lang="ts">
 
+  defineEmits(['onSubmit'])
 
 </script>
 

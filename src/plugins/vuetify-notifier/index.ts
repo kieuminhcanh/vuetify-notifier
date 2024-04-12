@@ -1,6 +1,11 @@
-import { App } from 'vue';
-import { NotifierSymbol, createNotifier, useNotifier } from './Notifier';
+ 
+/* prettier-ignore */
+// @ts-nocheck
+// noinspection JSUnusedGlobalSymbols
 
+
+import { App } from 'vue';
+import { createNotifier, NotifierSymbol, useNotifier } from './Notifier';
 
 export default {
   install: (app: App, options?: any) => {

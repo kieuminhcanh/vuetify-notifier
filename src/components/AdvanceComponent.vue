@@ -1,22 +1,84 @@
-
-
 <template>
-  <v-card>
+  <VCard>
     <VCardTitle>Advance Component dialog</VCardTitle>
-    <VImg src="https://cdn.vuetifyjs.com/images/cards/desert.jpg" />
-    <VCardText>
-      This is advance component dialog. User need to design title, content and action buttons.
-    </VCardText>
+    <VImg
+      src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
+      :aspectRatio="16 / 9"
+      maxHeight='500'
+      cover
+    />
+    <VCardText>  
+    <v-list
+      lines="two"
+      subheader
+    >
+      <v-list-subheader>User Controls</v-list-subheader>
+
+      <v-list-item
+        subtitle="Set the content filtering level to restrict apps that can be downloaded"
+        title="Content filtering"
+        link
+      ></v-list-item>
+
+      <v-list-item
+        subtitle="Require password for purchase or use password to restrict purchase"
+        title="Password"
+        link
+      ></v-list-item>
+
+      <v-divider></v-divider>
+
+      <v-list-subheader>General</v-list-subheader>
+
+      <v-list-item
+        subtitle="Notify me about updates to apps or games that I downloaded"
+        title="Notifications"
+      >
+        <template v-slot:prepend>
+          <v-list-item-action start>
+            <v-checkbox-btn color="primary"></v-checkbox-btn>
+          </v-list-item-action>
+        </template>
+      </v-list-item>
+
+      <v-list-item
+        subtitle="Auto-update apps at any time. Data charges may apply"
+        title="Sound"
+      >
+        <template v-slot:prepend>
+          <v-list-item-action start>
+            <v-checkbox-btn color="primary"></v-checkbox-btn>
+          </v-list-item-action>
+        </template>
+      </v-list-item>
+
+      <v-list-item
+        subtitle="Automatically add home screen widgets"
+        title="Auto-add widgets"
+      >
+        <template v-slot:prepend>
+          <v-list-item-action start>
+            <v-checkbox-btn color="primary"></v-checkbox-btn>
+          </v-list-item-action>
+        </template>
+      </v-list-item>
+    </v-list></VCardText>
+   
     <VCardActions>
       <VSpacer />
-      <v-btn color="primary" @click="$emit('onSubmit', 'The value of submit')">Submit</v-btn>
-      <v-btn @click="$emit('onSubmit', 'The value of cancel')">Cancel</v-btn>
+      <VBtn
+        color="primary"
+        @click="$emit('onSubmit', 'The value of submit')"
+        text="Submit"
+      />
+      <VBtn
+        @click="$emit('onSubmit', 'The value of cancel')"
+        text="Cancel"
+      />
     </VCardActions>
-  </v-card>
+  </VCard>
 </template>
 
 <script setup lang="ts">
-
-
+  defineEmits(['onSubmit'])
 </script>
-

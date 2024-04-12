@@ -1,96 +1,125 @@
 <template>
-  <div class="vuetify-notifier">
-    <VDefaultsProvider>
-      <VDialog v-model="show" persistent :transition="options?.transition" :width="options?.width" scrollable
-        v-bind="options.dialogProps">
-        <VForm validate-on="submit" @submit.prevent="onSubmit">
-          <VCard v-bind="options.cardProps" :min-width="options?.minWidth" :min-height="options?.minHeight">
-            <VToolbar v-if="title" :title="title" density="compact"
-              :color="status === 'default' ? options.defaultColor : status">
-              <VIcon :icon="options[`${status}Icon`]" class="mr-2"></VIcon>
-            </VToolbar>
-            <VCardText>
-              <v-row align="center" :justify="options.textAlign" class="h-100">
-                <v-col cols="12" class="text-center">
-                  {{ text }}
-                </v-col>
-                <v-col cols="12" v-if="options.prompt">
-                  <VTextField v-model="input" v-bind="options.inputProps" />
-                </v-col>
-              </v-row>
-            </VCardText>
-            <VDivider v-if="options.showDivider" />
-            <VCardActions>
-              <VSpacer />
-              <VBtn v-bind="options.secondaryButtonProps || options.buttonProps" @click="onCancel">{{
-                options.secondaryButtonText }}</VBtn>
-              <VBtn variant="tonal" v-bind="options.primaryButtonProps || options.buttonProps" color="primary"
-                type="submit">{{ options.primaryButtonText }}</VBtn>
-            </VCardActions>
-          </VCard>
-        </VForm>
-      </VDialog>
-    </VDefaultsProvider>
-  </div>
+  <VDefaultsProvider root>
+    <VDialog
+      v-model="show"
+      persistent
+      scrollable
+      :transition="options?.transition"
+      width="auto"
+      v-bind="options.dialogProps"
+    >
+      <VForm
+        validateOn="submit"
+        @submit.prevent="onSubmit"
+      >
+        <VCard
+          v-bind="options.cardProps"
+          :minHeight="options?.minHeight"
+          :minWidth="options?.minWidth"
+        >
+          <VToolbar
+            v-if="title"
+            :color="status === 'default' ? options.defaultColor : status"
+            density="compact"
+            :title="title"
+          >
+            <VIcon
+              class="mr-2"
+              :icon="options[`${status}Icon`]"
+            />
+          </VToolbar>
+          <v-row
+            align="center"
+            class="px-10 py-7"
+            dense
+            :justify="options.textAlign"
+          >
+            <v-col
+              class="text-center"
+              cols="12"
+            >
+              {{ text }}
+            </v-col>
+            <v-col
+              v-if="options.prompt"
+              cols="12"
+            >
+              <VTextField
+                v-model="input"
+                v-bind="options.inputProps"
+              />
+            </v-col>
+          </v-row>
+          <VDivider v-if="options.showDivider" />
+          <VCardActions>
+            <VSpacer />
+            <VBtn
+              v-bind="options.secondaryButtonProps || options.buttonProps"
+              @click="onCancel"
+            >{{ options.secondaryButtonText }}</VBtn>
+            <VBtn
+              v-bind="options.primaryButtonProps || options.buttonProps"
+              color="primary"
+              type="submit"
+              variant="tonal"
+            >{{ options.primaryButtonText }}</VBtn>
+          </VCardActions>
+        </VCard>
+      </VForm>
+    </VDialog>
+  </VDefaultsProvider>
 </template>
 
 <script setup lang="ts">
-import deepmerge from "deepmerge";
-import { defaultOptions } from "../utils/options";
+  import { NotifierDialogOptions } from '../types'  
 
-import { NotifierDialogOptions } from "../types";
-import { PropType, computed, ref } from "vue";
+  const theme = useTheme()
+  console.log(theme)
 
-const props = defineProps({
-  content: {
-    type: [String, Object],
-    required: true,
-    default: 'Are you sure?',
-  },
-  options: {
-    type: Object as PropType<NotifierDialogOptions>,
-    required: true,
-  },
-  status: {
-    type: String as PropType<'default' | 'success' | 'error' | 'warning' | 'info'>,
-    required: true,
-  },
-  onSubmit: {
-    type: Function,
-    required: true,
-  },
-  onCancel: {
-    type: Function,
-    required: true,
-  },
-});
+  const props = defineProps({
+    content: {
+      type: [String, Object],
+      required: true,
+      default: 'Are you sure?',
+    },
+    options: {
+      type: Object as PropType<NotifierDialogOptions>,
+      required: true,
+    },
+    status: {
+      type: String as PropType<'default' | 'success' | 'error' | 'warning' | 'info'>,
+      required: true,
+    },
+    onSubmit: {
+      type: Function,
+      required: true,
+    },
+    onCancel: {
+      type: Function,
+      required: true,
+    },
+  })
 
-const show = ref(true);
-const input = ref<string>('');
+  const show = ref(true)
+  const input = ref<string>('')
 
+  const title = computed(() => (typeof props.content === 'object' ? props.content?.title : undefined))
+  const text = computed(() => (typeof props.content === 'object' ? props.content?.text : props.content))
 
-const title = computed(() => typeof props.content === 'object' ? props.content?.title : undefined);
-const text = computed(() => typeof props.content === 'object' ? props.content?.text : props.content);
+  const onSubmit = async (event: any) => {
+    const { valid } = await event
+    if (!valid) return
 
-
-const onSubmit = async (event: any) => {
-  const { valid } = await event
-  if (!valid) return
-
-
-  show.value = false;
-  if (!props.options.prompt) {
-    props.onSubmit(true);
-  } else {
-    props.onSubmit(input.value);
+    show.value = false
+    if (!props.options.prompt) {
+      props.onSubmit(true)
+    } else {
+      props.onSubmit(input.value)
+    }
   }
-}
 
-const onCancel = () => {
-  show.value = false;
-  props.onCancel();
-}
-
-
+  const onCancel = () => {
+    show.value = false
+    props.onCancel()
+  }
 </script>
-

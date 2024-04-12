@@ -1,13 +1,14 @@
-import { App, createApp } from 'vue';
-import type { NotifierDialogOptions, NotifierMountComponent, ConfirmResult } from '../types';
+import { App, createApp } from 'vue'
+import type { ConfirmResult, NotifierDialogOptions, NotifierMountComponent } from '../types'
 
+export const getVAppRoot = () => {
+  return document.body  
+}
+export const createContainer = () => document.createElement('div')
 
-export const getVAppRoot = () => document.querySelector('[data-v-app]') as HTMLElement;
-export const createContainer = () => document.createElement('div');
-
-export const mountComponent = ({ component, app, content, status = "default", options }: NotifierMountComponent): Promise<ConfirmResult> => {
-  const rootElement = getVAppRoot();
-  const container = createContainer();
+export const mountComponent = ({ component, app, content, status = 'default', options }: NotifierMountComponent): Promise<ConfirmResult> => {
+  const rootElement = getVAppRoot()
+  const container = createContainer()
 
   return new Promise((resolve, reject) => {
     const componentApp = createApp(component, {
@@ -15,32 +16,32 @@ export const mountComponent = ({ component, app, content, status = "default", op
       status,
       options,
       onSubmit: (value: any) => {
-        resolve(value);
+        resolve(value)
         onUnmounted(componentApp, rootElement, container)
       },
       onCancel: (value: any) => {
         switch ((options as NotifierDialogOptions)?.handleCancel) {
           case 'resolve':
-            resolve(value);
-            break;
+            resolve(value)
+            break
           case 'reject':
-            reject(value);
-            break;
+            reject(value)
+            break
         }
         onUnmounted(componentApp, rootElement, container)
       },
-    });
+    })
 
     Object.assign(componentApp._context, app._context)
 
-    rootElement.appendChild(container);
-    componentApp.mount(container);
+    rootElement.appendChild(container)
+    componentApp.mount(container)
   })
 }
 
-const onUnmounted = (componentApp: App, rootElement: HTMLElement, container: HTMLDivElement) => {
+const onUnmounted = (componentApp: App, rootElement: Element, container: HTMLDivElement) => {
   setTimeout(() => {
-    componentApp.unmount();
+    componentApp.unmount()
     rootElement.removeChild(container)
-  }, 500);
+  }, 500)
 }
