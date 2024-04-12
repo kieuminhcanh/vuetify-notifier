@@ -1,14 +1,27 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import VuetifyImport from 'vite-plugin-vuetify'
+import VuetifyImport, { transformAssetUrls } from 'vite-plugin-vuetify'
+import { fileURLToPath, URL } from 'url'
 
 export default defineConfig({
+  base: '/vuetify-studio/',
   plugins: [
-    vue(),
+    vue({
+      template: {
+        transformAssetUrls,
+      },
+    }),
     VuetifyImport({
       autoImport: true,
     }),
   ],
+  define: { 'process.env': {} },
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+    extensions: ['.js', '.json', '.jsx', '.mjs', '.ts', '.tsx', '.vue'],
+  },
   build: {
     outDir: 'dist-web',
     rollupOptions: {
@@ -20,5 +33,9 @@ export default defineConfig({
         },
       },
     },
+  },
+  optimizeDeps: {
+    exclude: ['vuetify'],
+    entries: ['./src/**/*.vue'],
   },
 })

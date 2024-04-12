@@ -1,6 +1,5 @@
 {
-  "name": "vuetify-notifier",
-  "private": true,
+  "name": "vuetify-notifier",  
   "version": "0.0.12",
   "license": "MIT",
   "keywords": [
