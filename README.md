@@ -27,9 +27,9 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import { createVuetify } from 'vuetify'
 
-import { VOverlay, VDialog } from 'vuetify/components'  
-
 import VuetifyNotifier from 'vuetify-notifier'
+
+import { VOverlay, VDialog } from 'vuetify/components'  
 
 const vuetify = createVuetify({
   components: { VOverlay, VDialog },
