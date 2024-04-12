@@ -1,15 +1,33 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import AutoImport from 'unplugin-auto-import/vite'
+import ComponentImport from 'unplugin-vue-components/vite'
 import VuetifyImport, { transformAssetUrls } from 'vite-plugin-vuetify'
-import { fileURLToPath, URL } from 'url'
+import { fileURLToPath, URL } from 'node:url'
+import dts from 'vite-plugin-dts'
 
 export default defineConfig({
-  base: '/vuetify-studio/',
+  base: '/vuetify-notifier/',
   plugins: [
     vue({
       template: {
         transformAssetUrls,
       },
+    }),    
+    AutoImport({
+      dts: true,
+      imports: [
+        'vue',
+        {
+          vuetify: ['useTheme', 'useDisplay'],
+        },
+      ],      
+      injectAtEnd: true,
+      dirs: ['src/composables', 'src/plugins/vuetify-notifier/composables'],
+    }),
+    ComponentImport({
+      dts: true,
+      dirs: ['src/components', 'src/plugins/vuetify-notifier/components', 'src/plugins/vuetify-notifier/utils', 'src/plugins/vuetify-notifier/types'],      
     }),
     VuetifyImport({
       autoImport: true,
@@ -24,18 +42,5 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist-web',
-    rollupOptions: {
-      external: ['vue'],
-      output: {
-        exports: 'named',
-        globals: {
-          vue: 'Vue',
-        },
-      },
-    },
-  },
-  optimizeDeps: {
-    exclude: ['vuetify'],
-    entries: ['./src/**/*.vue'],
   },
 })

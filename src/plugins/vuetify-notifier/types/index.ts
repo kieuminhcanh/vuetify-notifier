@@ -1,4 +1,5 @@
 import { App } from 'vue'
+import type { Component } from 'vue'
 import plugin from '../index'
 export default plugin
 

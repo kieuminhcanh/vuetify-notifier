@@ -73,9 +73,6 @@
 <script setup lang="ts">
   import { NotifierDialogOptions } from '../types'  
 
-  const theme = useTheme()
-  console.log(theme)
-
   const props = defineProps({
     content: {
       type: [String, Object],

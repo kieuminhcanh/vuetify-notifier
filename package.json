@@ -1,6 +1,6 @@
 {
   "name": "vuetify-notifier",  
-  "version": "0.0.12",
+  "version": "0.0.13",
   "license": "MIT",
   "keywords": [
     "vite-plugin-vue-vuetify-notifier"
