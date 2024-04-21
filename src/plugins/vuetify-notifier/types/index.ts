@@ -48,7 +48,7 @@ export interface NotifierDialogOptions extends NotifierDefaultOptions {
   width?: number | string
   minWidth?: number | string
   minHeight?: number | string
-  textAlign?: 'start' | 'center' | 'end'
+  textAlign?: 'left' | 'center' | 'right'
   duration?: number
   defaultColor?: string
   defaultIcon?: string

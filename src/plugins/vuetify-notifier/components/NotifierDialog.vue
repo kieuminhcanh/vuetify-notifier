@@ -32,10 +32,10 @@
             align="center"
             class="px-10 py-7"
             dense
-            :justify="options.textAlign"
+            
           >
             <v-col
-              class="text-center"
+              :class="`text-${options.textAlign}`"
               cols="12"
             >
               {{ text }}
