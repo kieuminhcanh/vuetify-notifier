@@ -6,7 +6,7 @@
     "infoIcon": "mdi-information",
     "warningIcon": "mdi-alert",
     "errorIcon": "mdi-alert-circle",
-    "closeIcon": "X"
+    "closeIcon": "mdi-close"
   },
   "dialogOptions": {
     "transition": "dialog-bottom-transition",

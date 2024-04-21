@@ -2,11 +2,11 @@
   <VDefaultsProvider root>
     <VDialog
       v-model="show"
+      :maxHeight="$vuetify.display.height"
+      :maxWidth="$vuetify.display.width"
       persistent
       scrollable
       :width="!options.dialogProps?.fullscreen ? 'auto' : '100%'"
-      :maxHeight='$vuetify.display.height'
-      :maxWidth='$vuetify.display.width'
       v-bind="options.dialogProps"
     >
       <VCard
@@ -17,11 +17,11 @@
           <v-btn
             v-if="options.existsButton"
             icon
+            size="small"
             variant="tonal"
-            size='small'
             @click="onCancel"
           >
-            X
+            <v-icon>{{ options.closeIcon }}</v-icon>
           </v-btn>
         </VToolbar>
         <component
@@ -43,6 +43,7 @@
           icon
           location="top right"
           position="fixed"
+          :style="{ top: '5px', right:'10px' }"
           variant="text"
           @click="onCancel"
         >

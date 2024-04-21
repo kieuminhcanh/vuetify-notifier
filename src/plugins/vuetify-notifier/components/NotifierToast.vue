@@ -15,18 +15,20 @@
       <p>{{ text }}</p>
       <template #actions>
         <VBtn
-          icon 
+          icon
           size="x-small"
           variant="tonal"
           @click="onCancel"
-        >X</VBtn>
+        >
+          <VIcon>{{ options.closeIcon }}</VIcon>
+        </VBtn>
       </template>
     </VSnackbar>
   </VDefaultsProvider>
 </template>
 
 <script setup lang="ts">
-  import { NotifierToastOptions } from '../types'  
+  import { NotifierToastOptions } from '../types'
 
   const props = defineProps({
     content: {

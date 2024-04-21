@@ -2,78 +2,78 @@
   <VCard>
     <VCardTitle>Advance Component dialog</VCardTitle>
     <VImg
-      src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
       :aspectRatio="16 / 9"
-      maxHeight='500'
       cover
+      maxHeight="500"
+      src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
     />
     <VCardText>  
-    <v-list
-      lines="two"
-      subheader
-    >
-      <v-list-subheader>User Controls</v-list-subheader>
-
-      <v-list-item
-        subtitle="Set the content filtering level to restrict apps that can be downloaded"
-        title="Content filtering"
-        link
-      ></v-list-item>
-
-      <v-list-item
-        subtitle="Require password for purchase or use password to restrict purchase"
-        title="Password"
-        link
-      ></v-list-item>
-
-      <v-divider></v-divider>
-
-      <v-list-subheader>General</v-list-subheader>
-
-      <v-list-item
-        subtitle="Notify me about updates to apps or games that I downloaded"
-        title="Notifications"
+      <v-list
+        lines="two"
+        subheader
       >
-        <template v-slot:prepend>
-          <v-list-item-action start>
-            <v-checkbox-btn color="primary"></v-checkbox-btn>
-          </v-list-item-action>
-        </template>
-      </v-list-item>
+        <v-list-subheader>User Controls</v-list-subheader>
 
-      <v-list-item
-        subtitle="Auto-update apps at any time. Data charges may apply"
-        title="Sound"
-      >
-        <template v-slot:prepend>
-          <v-list-item-action start>
-            <v-checkbox-btn color="primary"></v-checkbox-btn>
-          </v-list-item-action>
-        </template>
-      </v-list-item>
+        <v-list-item
+          link
+          subtitle="Set the content filtering level to restrict apps that can be downloaded"
+          title="Content filtering"
+        />
 
-      <v-list-item
-        subtitle="Automatically add home screen widgets"
-        title="Auto-add widgets"
-      >
-        <template v-slot:prepend>
-          <v-list-item-action start>
-            <v-checkbox-btn color="primary"></v-checkbox-btn>
-          </v-list-item-action>
-        </template>
-      </v-list-item>
-    </v-list></VCardText>
+        <v-list-item
+          link
+          subtitle="Require password for purchase or use password to restrict purchase"
+          title="Password"
+        />
+
+        <v-divider />
+
+        <v-list-subheader>General</v-list-subheader>
+
+        <v-list-item
+          subtitle="Notify me about updates to apps or games that I downloaded"
+          title="Notifications"
+        >
+          <template #prepend>
+            <v-list-item-action start>
+              <v-checkbox-btn color="primary" />
+            </v-list-item-action>
+          </template>
+        </v-list-item>
+
+        <v-list-item
+          subtitle="Auto-update apps at any time. Data charges may apply"
+          title="Sound"
+        >
+          <template #prepend>
+            <v-list-item-action start>
+              <v-checkbox-btn color="primary" />
+            </v-list-item-action>
+          </template>
+        </v-list-item>
+
+        <v-list-item
+          subtitle="Automatically add home screen widgets"
+          title="Auto-add widgets"
+        >
+          <template #prepend>
+            <v-list-item-action start>
+              <v-checkbox-btn color="primary" />
+            </v-list-item-action>
+          </template>
+        </v-list-item>
+      </v-list></VCardText>
    
     <VCardActions>
       <VSpacer />
       <VBtn
         color="primary"
-        @click="$emit('onSubmit', 'The value of submit')"
         text="Submit"
+        @click="$emit('onSubmit', 'The value of submit')"
       />
       <VBtn
-        @click="$emit('onSubmit', 'The value of cancel')"
         text="Cancel"
+        @click="$emit('onSubmit', 'The value of cancel')"
       />
     </VCardActions>
   </VCard>

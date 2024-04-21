@@ -6,8 +6,7 @@
         icon="mdi-github"
         target="_blank"
         variant="text"
-      >
-      </VBtn>
+      />
       <VBtn
         href="https://github.com/kieuminhcanh/vuetify-notifier/blob/master/src/App.vue"
         icon="mdi-code-tags"
@@ -319,7 +318,9 @@
   const $notifier = useNotifier()
 
   const notifierConfirm = async (status?: string) => {
-    $notifier.confirm({ text: 'Are you sure?' }, status)
+    $notifier.confirm({ text: 'Are you sure?' }, status, {
+        textAlign: 'center',
+      })
   }
 
   const notifierAlert = async (status?: string) => {
@@ -328,7 +329,10 @@
         title: 'Confirm',
         text: 'Are you sure?',
       },
-      status
+      status,
+      {
+        textAlign: 'right',
+      }
     )
   }
 
