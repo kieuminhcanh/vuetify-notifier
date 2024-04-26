@@ -62,21 +62,12 @@ export interface NotifierComponentInput {
 }
 
 export interface NotifierOptions {
-  default?: NotifierDefaultOptions
-  dialogOptions?: NotifierDialogOptions
-  toastOptions?: NotifierToastOptions
-  componentOptions?: NotifierComponentOptions
+  default?: Record<string, any>
+  dialogOptions?: Record<string, any>
+  toastOptions?: Record<string, any>
+  componentOptions?: Record<string, any>
 }
 
-export interface NotifierDefaultOptions {
-  defaultColor?: string
-  defaultIcon?: string
-  successIcon?: string
-  infoIcon?: string
-  warningIcon?: string
-  errorIcon?: string
-  closeIcon?: string
-}
 
 export interface NotifierMountComponent {
   app: App

@@ -14,7 +14,9 @@
     "vuetify": "^3.5.17"
   },
   "devDependencies": {
+    "@typescript-eslint/parser": "^7.7.1",
     "@vitejs/plugin-vue": "^5.0.4",
+    "@vue/eslint-config-typescript": "^13.0.0",
     "eslint": "^9.1.1",
     "eslint-plugin-vue": "^9.25.0",
     "eslint-plugin-vuetify": "https://github.com/corbinu/eslint-plugin-vuetify.git",
@@ -24,6 +26,7 @@
     "unplugin-vue-components": "^0.26.0",
     "vite": "^5.2.0",
     "vite-plugin-vuetify": "^2.0.3",
+    "vue-eslint-parser": "^9.4.2",
     "vue-tsc": "^2.0.6"
   }
 }

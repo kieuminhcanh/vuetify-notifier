@@ -5,13 +5,14 @@
 // noinspection JSUnusedGlobalSymbols
 
 import { createNotifier, NotifierSymbol, useNotifier } from './Notifier';
-import { vNotifierMenu } from './directives'
+import { vNotifierMenu, vNotifierMenuInput } from './directives'
 import { NotifierSymbol } from './Notifier'
 
 export default {
   install: (app: App, options?: any) => {
     app.provide(NotifierSymbol, createNotifier(app, options))
     app.directive('notifier', vNotifierMenu)
+    app.directive('notifier-promt', vNotifierMenuInput)
   },
 }
 

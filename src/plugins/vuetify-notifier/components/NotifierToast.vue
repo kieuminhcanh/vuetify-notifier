@@ -16,7 +16,7 @@
         <p>{{ text }}</p>
         <template #actions>
           <VBtn
-            v-if="props.onSubmit"
+            v-if="!options.hideSubmit"
             icon            
             @click="onSubmitClick"
           >
@@ -66,8 +66,6 @@
     },
   })
 
-  console.log('props', props);
-  
   const show = defineModel({ default: false, type: Boolean})
 
 

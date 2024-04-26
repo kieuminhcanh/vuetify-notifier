@@ -8,8 +8,6 @@ export const mountComponent = ({ component, app, input }: NotifierMountComponent
   const rootElement = getVAppRoot()
   const container = createContainer()
 
-  console.log(input)
-
   return new Promise((resolve) => {
     const componentApp = createApp(
       component,

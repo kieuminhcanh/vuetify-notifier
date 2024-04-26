@@ -63,7 +63,10 @@
                       :color="status"
                     />
                   </VCol>
-                </VRow>
+                  <VCol cols="12">
+                    <pre>{{ `<VBtn @click="notifier.toast({ text: 'This is simple toast' })" />` }}</pre>
+                  </VCol>
+                </VRow>                
               </VCardText>
             </VCard>
           </VCol>
@@ -79,6 +82,9 @@
                       :text="status"
                       :color="status"
                   /></VCol>
+                  <VCol cols="12">
+                    <pre>{{ `<VBtn @click="notifier.confirm({title: 'Confirm',text: 'Are you sure?'})" />` }}</pre>
+                  </VCol>
                 </VRow>
                 <VListSubheader>Input dialogs</VListSubheader>
                 <VRow>
@@ -89,6 +95,9 @@
                       :text="status"
                       :color="status"
                   /></VCol>
+                  <VCol cols="12">
+                    <pre>{{ `<VBtn @click="notifier.prompt({title: 'Change name',text: 'Your name?'})" />` }}</pre>
+                  </VCol>
                 </VRow>
                 <VListSubheader>Alert Dialog</VListSubheader>
                 <VRow>
@@ -99,7 +108,10 @@
                       :text="status"
                       :color="status"
                   /></VCol>
-                </VRow>               
+                  <VCol cols="12">
+                    <pre>{{ `<VBtn @click="notifier.alert({title: 'Alert',text: 'This is alert message'})" />` }}</pre>
+                  </VCol>
+                </VRow>
               </VCardText>
             </VCard>
           </VCol>
@@ -108,15 +120,33 @@
               <VCardText>
                 <VListSubheader>Menu confirm </VListSubheader>
                 <VRow>
-                  <VCol v-for="status in items"
->
+                  <VCol v-for="status in items">
                     <VBtn
                       prependIcon="mdi-alert-circle"
                       v-notifier="{text: 'Are you sure?', status, type:'menu'  , onSubmit: ($event:any) => console.log($event)}"
                       :text="status"
-                      :color="status">Menu</VBtn
+                      :color="status"
+                      >Menu</VBtn
                     ></VCol
                   >
+                  <VCol cols="12">
+                    <pre>{{ `<VBtn v-notifier="{text: 'Remove this record?'" text="Delete" />` }}</pre>
+                  </VCol>
+                </VRow>
+                <VListSubheader>Menu input </VListSubheader>
+                <VRow>
+                  <VCol v-for="status in items">
+                    <VBtn
+                      prependIcon="mdi-alert-circle"
+                      v-notifier-promt="{text: 'Are you sure?', status, onSubmit: ($event:any) => console.log($event)}"
+                      :text="status"
+                      :color="status"
+                      >Menu</VBtn
+                    ></VCol
+                  >
+                  <VCol cols="12">
+                    <pre>{{ `<VBtn v-notifier-promt="{text: 'Name'" text="Button" />` }}</pre>
+                  </VCol>
                 </VRow>
               </VCardText>
             </VCard>
@@ -147,6 +177,9 @@
                       >Global component</VBtn
                     ></VCol
                   >
+                  <VCol cols="12">
+                    <pre>{{ `<VBtn @click="notifier.component({component: ComponentName})" />` }}</pre>
+                  </VCol>
                 </VRow>
               </VCardText>
             </VCard>
@@ -167,11 +200,11 @@
 
   const items = ['', 'info', 'success', 'warning', 'error']
 
-  function notifierToast(status: string) {
+  function notifierToast(status: any) {
     notifier.toast({ text: 'This is simple toast', status, options: { location: 'top right' } })
   }
-
-  const notifierConfirm = async (status?: string) => {
+  
+  function notifierConfirm(status?: string) {
     notifier
       .confirm({
         title: 'Confirm',
@@ -183,7 +216,7 @@
       })
   }
 
-  const notifierInput = async (status?: string) => {
+  function notifierInput(status?: string) {
     notifier
       .prompt({
         title: 'Confirm',
@@ -195,7 +228,7 @@
       })
   }
 
-  const notifierAlert = async (status?: string) => {
+  function notifierAlert(status?: string) {
     notifier
       .alert({
         title: 'Alert',
@@ -207,20 +240,20 @@
       })
   }
 
-
-  const notifierComponentBasic = async () => {
+  function notifierComponentBasic() {
     notifier.component({
       title: 'Title component',
       component: BasicComponent,
     })
   }
 
-  const notifierComponentAdvance = async () => {
+  function notifierComponentAdvance() {
     notifier.component({
       component: AdvanceComponent,
     })
   }
-  const notifierComponentGlobal = async () => {
+
+  function notifierComponentGlobal() {
     notifier.component({
       component: GlobalComponent,
     })

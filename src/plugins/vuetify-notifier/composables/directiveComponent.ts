@@ -12,11 +12,7 @@ export const useDirectiveComponent = (
 
   return {
     mounted (el: HTMLElement, binding: DirectiveBinding, vnode: VNode) {
-      // console.log({component, props, binding, vnode});
-      
-      
       const { value } = binding
-
       
       // Get the children from the props or directive value, or the element's children
       const children = props?.text || value?.text || el.innerHTML
@@ -27,8 +23,6 @@ export const useDirectiveComponent = (
         ? findComponentParent(vnode, binding.instance!.$)?.provides
         : vnode.ctx?.provides) ?? binding.instance!.$.provides
 
-        console.log(mergeProps(props, value));
-        
       const node = h(concreteComponent, mergeProps(props, value), { default: () => children })
       node.appContext = Object.assign(
         Object.create(null),

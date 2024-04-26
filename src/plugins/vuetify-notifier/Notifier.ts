@@ -12,7 +12,7 @@ import { NotifierInstance } from '../../types'
 
 export function createNotifier(app: App, globalOptions: NotifierOptions = {}) {
   const toast = (input: NotifierToastInput): Promise<ConfirmResult> => {
-    input.options = mergeProps(defaultOptions.default, defaultOptions.toastOptions, globalOptions?.default, globalOptions?.toastOptions, input.options)
+    input.options = mergeProps(defaultOptions.default, defaultOptions.toastOptions, globalOptions?.default as any, globalOptions?.toastOptions as any, input.options as any, { hideSubmit: true })
 
     return mountComponent({
       component: NotifierToast,
@@ -22,7 +22,7 @@ export function createNotifier(app: App, globalOptions: NotifierOptions = {}) {
   }
 
   const confirm = (input: NotifierConfirmInput): Promise<ConfirmResult> => {
-    input.options = mergeProps(defaultOptions.default, defaultOptions.dialogOptions, globalOptions?.default, globalOptions?.dialogOptions, input.options)
+    input.options = mergeProps(defaultOptions.default, defaultOptions.dialogOptions, globalOptions?.default as any, globalOptions?.dialogOptions as any, input.options as any)
 
     return mountComponent({
       component: NotifierDialog,
@@ -32,7 +32,7 @@ export function createNotifier(app: App, globalOptions: NotifierOptions = {}) {
   }
 
   const prompt = (input: NotifierConfirmInput): Promise<ConfirmResult> => {
-    input.options = mergeProps(defaultOptions.default, defaultOptions.dialogOptions, globalOptions?.default, globalOptions?.dialogOptions, input.options, { showInput: true })
+    input.options = mergeProps(defaultOptions.default, defaultOptions.dialogOptions, globalOptions?.default as any, globalOptions?.dialogOptions as any, input.options as any, { showInput: true })
     
     return mountComponent({
       component: NotifierDialog,
@@ -42,7 +42,7 @@ export function createNotifier(app: App, globalOptions: NotifierOptions = {}) {
   }
 
   const alert = (input: NotifierConfirmInput): Promise<ConfirmResult> => {
-    input.options = mergeProps(defaultOptions.default, defaultOptions.dialogOptions, globalOptions?.default, globalOptions?.dialogOptions, input.options, { hideCancel: true })
+    input.options = mergeProps(defaultOptions.default, defaultOptions.dialogOptions, globalOptions?.default as any, globalOptions?.dialogOptions as any, input.options as any, { hideCancel: true })
     
     return mountComponent({
       component: NotifierDialog,
@@ -52,7 +52,7 @@ export function createNotifier(app: App, globalOptions: NotifierOptions = {}) {
   }
 
   const component = (input: NotifierConfirmInput): Promise<ConfirmResult> => {    
-    input.options = mergeProps(defaultOptions.default, defaultOptions.componentOptions, globalOptions?.default, globalOptions?.componentOptions, input.options)
+    input.options = mergeProps(defaultOptions.default, defaultOptions.componentOptions, globalOptions?.default as any, globalOptions?.componentOptions as any, input.options as any)
     
     return mountComponent({
       component: NotifierComponent,

@@ -2,29 +2,33 @@
   <VDefaultsProvider root>
     <v-menu
       activator="parent"
-      v-bind="$attrs"
+      v-bind="options"      
+      :close-on-content-click="!options.showInput"
+      v-model="show"
     >
       <v-list>
-        <v-list-item :title="text">
+        <v-list-item lines="one">
+          <VListItemTitle v-if="!options.showInput">{{text}}</VListItemTitle>
+          <VListItemTitle v-else><VTextField variant="solo-filled" clearable v-model="input" hideDetails :label="text"/></VListItemTitle>
           <template #append>
             <VListItemAction>
               <v-btn
                 v-if="$props.onSubmit"
                 :color="status"
-                @click="onSubmit"              
-              >
-                Yes
-              </v-btn>
+                @click="onSubmit"                              
+                icon="$success"
+                variant="text"                
+              />
+                
               <v-btn
                 v-if="$props.onCancel"
                 color="grey"
                 @click="onCancel"
-              >
-                No
-              </v-btn>
+                icon="$close"
+              />
             </VListItemAction>
           </template>
-        </v-list-item>
+        </v-list-item>        
       </v-list>
     </v-menu>
   </VDefaultsProvider>
@@ -40,6 +44,10 @@
       type: String,
       default: 'default',
     },
+    options: {
+      type: Object,
+      default: () => ({}),
+    },
     onSubmit: {
       type: Function,
       default: undefined,
@@ -49,14 +57,18 @@
       default: undefined,
     },
   })
-  const show = ref(true)
+
+  const show = ref(false)
+  const input = ref('')
 
   defineOptions({inheritAttrs: false})
+
+  watch( show, () => input.value = '')
 
   const onSubmit = async () => {
     show.value = false
     if (props.onSubmit) {      
-      props.onSubmit(true)
+      !props.options.showInput ? props.onSubmit(true) : props.onSubmit(input.value)
     }
   }
 
