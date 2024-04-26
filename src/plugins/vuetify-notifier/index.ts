@@ -4,9 +4,8 @@
 // eslint-disable @typescript-eslint/ban-ts-comment
 // noinspection JSUnusedGlobalSymbols
 
-import { createNotifier, NotifierSymbol, useNotifier } from './Notifier';
-import { vNotifierMenu, vNotifierMenuInput } from './directives'
-import { NotifierSymbol } from './Notifier'
+import { createNotifier, NotifierSymbol, useNotifier } from '@/plugins/vuetify-notifier/Notifier';
+import { vNotifierMenu, vNotifierMenuInput } from '@/plugins/vuetify-notifier/directives'
 
 export default {
   install: (app: App, options?: any) => {
@@ -17,3 +16,4 @@ export default {
 }
 
 export { createNotifier, useNotifier, NotifierSymbol }
+export * from '@/types'

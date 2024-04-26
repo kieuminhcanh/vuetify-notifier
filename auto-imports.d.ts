@@ -55,7 +55,9 @@ declare global {
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
   const useDirectiveComponent: typeof import('./src/plugins/vuetify-notifier/composables/directiveComponent')['useDirectiveComponent']
+  const useDisplay: typeof import('vuetify')['useDisplay']
   const useSlots: typeof import('vue')['useSlots']
+  const useTheme: typeof import('vuetify')['useTheme']
   const watch: typeof import('vue')['watch']
   const watchEffect: typeof import('vue')['watchEffect']
   const watchPostEffect: typeof import('vue')['watchPostEffect']
@@ -64,9 +66,6 @@ declare global {
 // for type re-export
 declare global {
   // @ts-ignore
-  export type { Component, ComponentPublicInstance, ComputedRef, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, VNode, WritableComputedRef, App, ObjectDirective, ComponentInternalInstance, ConcreteComponent, DirectiveBinding } from 'vue'
+  export type { Component, ComponentPublicInstance, ComputedRef, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, VNode, WritableComputedRef } from 'vue'
   import('vue')
-  // @ts-ignore
-  export type { NotifierToastInput, NotifierConfirmInput, NotifierComponentProps, ConfirmResult, NotifierDialogOptions, NotifierMountComponent, NotifierComponentOptions, NotifierOptions, NotifierContent, NotifierToastOptions, NotifierComponent } from 'src/types.d.ts'
-  import('src/types.d.ts')
 }

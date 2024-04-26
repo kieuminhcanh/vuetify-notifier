@@ -3,12 +3,13 @@ import vue from '@vitejs/plugin-vue'
 import viteComponentsImport from 'unplugin-vue-components/vite'
 import viteAutoImport from 'unplugin-auto-import/vite'
 import viteVuetifyImport from 'vite-plugin-vuetify'
+
 // @ts-ignore
 import { fileURLToPath, URL } from 'node:url'
 
 export default defineConfig({
   plugins: [
-    vue(),
+    vue(),    
     viteComponentsImport({
       dts: true,
     }),
@@ -37,7 +38,20 @@ export default defineConfig({
     },
     extensions: ['.js', '.json', '.jsx', '.mjs', '.ts', '.tsx', '.vue'],
   },
-  optimizeDeps: {
-    entries: [],
+  build: {
+    lib: {
+      entry: 'src/plugins/vuetify-notifier/index.ts',
+      name: 'VuetifyNotifier',
+      fileName: 'vuetify-notifier',
+    },
+    rollupOptions: {
+      external: ['vue'],
+      output: {
+        exports: 'named',
+        globals: {
+          vue: 'Vue',
+        },
+      },
+    },
   },
 })
