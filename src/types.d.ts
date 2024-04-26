@@ -1,9 +1,4 @@
-import { App, Component } from 'vue'
-
-import plugin from '../index'
-export default plugin
-
-export * from '../index'
+import type { Component } from "vue"
 
 declare module 'vue' {
   interface ComponentCustomProperties {
@@ -11,11 +6,59 @@ declare module 'vue' {
   }
 }
 
-// @ts-ignore
 declare module '#app' {
   interface NuxtApp {
     $notifier: Notifier
   }
+}
+
+export interface VNode {
+  ctx: ComponentInternalInstance | null
+}
+
+export interface NotifierInstance {
+  toast(input: NotifierToastInput): Promise<ConfirmResult>
+  
+  confirm(input: NotifierConfirmInput): Promise<ConfirmResult>
+
+  prompt(input: NotifierConfirmInput): Promise<ConfirmResult>
+
+  alert(input: NotifierConfirmInput): Promise<ConfirmResult>
+
+  component(input: NotifierComponentInput): Promise<any>
+}
+
+export interface NotifierToastInput {
+  title?: string
+  text?: string
+  status?: string
+  options?: Record<string, any>
+  onSubmit?: Function
+  onCancel?: Function
+  [key: string]: any
+}
+
+export interface NotifierConfirmInput {
+  title?: string
+  text?: string
+  status?: string
+  options?: Record<string, any>
+  contentOptions?: Record<string, any>
+  primaryButtonText?: string
+  secondaryButtonText?: string
+  onSubmit?: Function
+  onCancel?: Function
+  [key: string]: any
+}
+
+export interface NotifierComponentInput {
+  title?: string  
+  component?: string | Component
+  options?: Record<string, any>    
+  status?: string
+  onSubmit?: Function
+  onCancel?: Function
+  [key: string]: any
 }
 
 export interface NotifierOptions {
@@ -36,11 +79,9 @@ export interface NotifierDefaultOptions {
 }
 
 export interface NotifierMountComponent {
-  component: Component
   app: App
-  content: string | Component | NotifierContent
-  status: string
-  options: NotifierDialogOptions | NotifierToastOptions | NotifierComponentOptions
+  component: Component
+  input: Record<string, any>
 }
 
 export interface NotifierDialogOptions extends NotifierDefaultOptions {
@@ -94,36 +135,7 @@ export interface NotifierComponentOptions extends NotifierDefaultOptions {
   dialogProps?: Record<string, string | number | boolean>
   componentProps?: Record<string, string | number | boolean | object>
   existsButton?: boolean
-  [key:string]: any
-}
-
-export interface Notifier {
-  confirm(content: string | NotifierContent, status?: string, options?: NotifierDialogOptions): Promise<ConfirmResult> 
-  confirmSuccess(content: string | NotifierContent, options?: NotifierDialogOptions): Promise<ConfirmResult>
-  confirmInfo(content: string | NotifierContent, options?: NotifierDialogOptions): Promise<ConfirmResult> 
-  confirmWarning(content: string | NotifierContent, options?: NotifierDialogOptions): Promise<ConfirmResult> 
-  confirmError(content: string | NotifierContent, options?: NotifierDialogOptions): Promise<ConfirmResult> 
-
-  toast(content: string | NotifierContent, status?: string, options?: NotifierToastOptions): void
-  toastSuccess(content: string | NotifierContent, options?: NotifierToastOptions): Promise<ConfirmResult> 
-  toastInfo(content: string | NotifierContent, options?: NotifierToastOptions): Promise<ConfirmResult> 
-  toastWarning(content: string | NotifierContent, options?: NotifierToastOptions): Promise<ConfirmResult>
-  toastError(content: string | NotifierContent, options?: NotifierToastOptions): Promise<ConfirmResult>
-
-  alert(content: string | NotifierContent, status?: string, options?: NotifierDialogOptions): Promise<ConfirmResult> 
-  alertSuccess(content: string | NotifierContent, options?: NotifierDialogOptions): Promise<ConfirmResult>
-  alertInfo(content: string | NotifierContent, options?: NotifierDialogOptions): Promise<ConfirmResult>
-  alertWarning(content: string | NotifierContent, options?: NotifierDialogOptions): Promise<ConfirmResult> 
-  alertError(content: string | NotifierContent, options?: NotifierDialogOptions): Promise<ConfirmResult> 
-
-  prompt(content: string | NotifierContent, status?: string, options?: NotifierDialogOptions): Promise<ConfirmResult> 
-
-  component(content: string | NotifierContent | Component, options?: NotifierComponentOptions): Promise<any>
-}
-
-export interface NotifierContent {
-  title?: string
-  text?: string
+  [key: string]: any
 }
 
 export interface NotifierComponent {

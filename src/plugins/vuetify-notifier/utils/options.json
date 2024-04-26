@@ -1,27 +1,21 @@
 {
   "default": {
     "defaultColor": "",
-    "defaultIcon": "mdi-alert-circle",
-    "successIcon": "mdi-check-circle",
-    "infoIcon": "mdi-information",
-    "warningIcon": "mdi-alert",
-    "errorIcon": "mdi-alert-circle",
-    "closeIcon": "mdi-close"
+    "defaultIcon": "",
+    "successIcon": "$success",
+    "infoIcon": "$info",
+    "warningIcon": "$warning",
+    "errorIcon": "$warning",
+    "closeIcon": "$close"    
   },
   "dialogOptions": {
-    "transition": "dialog-bottom-transition",
-    "width": 500,
+    "width":"auto",
     "minWidth": 300,
     "minHeight": 200,
-    "textAlign": "center",
     "primaryButtonText": "OK",
-    "secondaryButtonText": "Cancel",
-    "showDivider": true,
-    "buttonProps": {
-      "width": 100
-    },
-    "handleCancel": "silent",
-    "inputProps": {
+    "secondaryButtonText": "Cancel",   
+    "contentOptions": {},
+    "inputOptions": {
       "label": "Input"
     }
   },
@@ -32,6 +26,7 @@
     }
   },
   "componentOptions": {
-    "existsButton": true
+    "width": "auto",
+    "hideExistsButton": false
   }
 }

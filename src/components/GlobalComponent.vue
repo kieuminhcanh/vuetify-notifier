@@ -8,14 +8,20 @@
     </VCardText>
     <VCardActions>
       <VSpacer />
-      <v-btn color="primary" @click="$emit('onSubmit', 'The value of submit')">Submit</v-btn>
-      <v-btn @click="$emit('onSubmit', 'The value of cancel')">Cancel</v-btn>
+      <v-btn
+        color="primary"
+        @click="$emit('onSubmit', 'The value of submit')"
+      >
+        Submit
+      </v-btn>
+      <v-btn @click="$emit('onCancel')">
+        Cancel
+      </v-btn>
     </VCardActions>
   </v-card>
 </template>
 
 <script setup lang="ts">
-  defineEmits(['onSubmit'])
-
+  defineEmits(['onSubmit', 'onCancel'])
 </script>
 

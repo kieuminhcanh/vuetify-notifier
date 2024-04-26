@@ -2,105 +2,74 @@
   <VDefaultsProvider root>
     <VDialog
       v-model="show"
-      :maxHeight="$vuetify.display.height"
-      :maxWidth="$vuetify.display.width"
-      persistent
-      scrollable
-      :width="!options.dialogProps?.fullscreen ? 'auto' : '100%'"
-      v-bind="options.dialogProps"
+      v-bind="options"      
+      activator="parent"
     >
-      <VCard
-        v-if="title"
-        :minWidth="options?.minWidth"
-      >
-        <VToolbar :title="title">
-          <v-btn
-            v-if="options.existsButton"
-            icon
-            size="small"
-            variant="tonal"
-            @click="onCancel"
-          >
-            <v-icon>{{ options.closeIcon }}</v-icon>
-          </v-btn>
-        </VToolbar>
+      <VCard :title="title">
         <component
           :is="component"
-          v-bind="componentProps"
-          @on-cancel="onCancel"
-          @on-submit="onSubmit"
-        />
-      </VCard>
-      <template v-else>
-        <component
-          :is="content"
-          v-bind="componentProps"
-          @on-cancel="onCancel"
-          @on-submit="onSubmit"
+          @on-cancel="onCancelClick"
+          @on-submit="onSubmitClick"
         />
         <v-btn
-          v-if="options.existsButton"
+          v-if="!options.hideExistsButton"
           icon
           location="top right"
           position="fixed"
-          :style="{ top: '5px', right:'10px' }"
+          :style="{ top: '5px', right: '10px' }"
           variant="text"
-          @click="onCancel"
+          @click="onCancelClick"
         >
           <v-icon>{{ options.closeIcon }}</v-icon>
         </v-btn>
-      </template>
+      </VCard>
     </VDialog>
   </VDefaultsProvider>
 </template>
 
 <script setup lang="ts">
-  import { NotifierComponentOptions } from '../types'
+  defineOptions({ inheritAttrs: false })
 
   const props = defineProps({
-    content: {
+    title: {
+      type: String,
+      default: null,
+    },
+    component: {
       type: [String, Object],
-      required: true,
-      default: 'Are you sure?',
+      default: null,
     },
     options: {
-      type: Object as PropType<NotifierComponentOptions>,
-      required: true,
+      type: Object,
+      default: () => ({}),
     },
     status: {
-      type: String as PropType<'default' | 'success' | 'error' | 'warning' | 'info'>,
-      required: true,
+      type: String,
+      default: 'default',
     },
     onSubmit: {
       type: Function,
-      required: true,
+      default: undefined,
     },
     onCancel: {
       type: Function,
-      required: true,
+      default: undefined,
     },
   })
 
-  const show = ref(true)
+  const show = defineModel({ default: false, type: Boolean })
 
-  const title = computed(() => (typeof props.content === 'object' ? props.content?.title : undefined))
-  const component = computed(() => (typeof props.content === 'object' ? props.content?.component : props.content))
-
-  const componentProps = computed(() => {
-    return {
-      ...props.options.componentProps,
-      onSubmit,
-      onCancel,
-    }
-  })
-
-  const onSubmit = async (value: any) => {
+  function onSubmitClick() {
     show.value = false
-    props.onSubmit(value)
+    if (props.onSubmit) {
+      props.onSubmit(true)
+    }
   }
 
-  const onCancel = (value: any) => {
+  function onCancelClick() {
     show.value = false
-    props.onCancel(value)
+    if (props.onCancel) {
+      props.onCancel()
+    }
   }
 </script>

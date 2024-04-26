@@ -1,70 +1,87 @@
 <template>
-  <VDefaultsProvider root>
-    <VSnackbar
-      v-model="show"
-      :color="status === 'default' ? options.defaultColor : status"
-      v-bind="options.toastProps"
-      @update:model-value="onCancel"
-    >
-      <div
-        v-if="title"
-        class="font-weight-bold mb-2"
+  <VLayout>
+    <VDefaultsProvider root>
+      <VSnackbar        
+        v-bind="options"        
+        v-model="show"
+        :color="status"
+        timeout="10000"
       >
-        {{ title }}
-      </div>
-      <p>{{ text }}</p>
-      <template #actions>
-        <VBtn
-          icon
-          size="x-small"
-          variant="tonal"
-          @click="onCancel"
+        <div
+          v-if="title"
+          class="font-weight-bold mb-2"
         >
-          <VIcon>{{ options.closeIcon }}</VIcon>
-        </VBtn>
-      </template>
-    </VSnackbar>
-  </VDefaultsProvider>
+          {{ title }}
+        </div>
+        <p>{{ text }}</p>
+        <template #actions>
+          <VBtn
+            v-if="props.onSubmit"
+            icon            
+            @click="onSubmitClick"
+          >
+            <VIcon>{{ options.successIcon }}</VIcon>
+          </VBtn>
+
+          <VBtn
+            icon
+            @click="onCancelClick"
+          >
+            <VIcon :icon="options.closeIcon" />
+          </VBtn>
+        </template>
+      </VSnackbar>
+    </VDefaultsProvider>
+  </VLayout>
 </template>
 
 <script setup lang="ts">
-  import { NotifierToastOptions } from '../types'
+  
+  defineOptions({ inheritAttrs: false })
 
   const props = defineProps({
-    content: {
-      type: [String, Object],
-      required: true,
-      default: 'Are you sure?',
+    title: {
+      type: String,
+      default: null,
     },
+    text: {
+      type: String,
+      default: null,
+    },    
     options: {
-      type: Object as PropType<NotifierToastOptions>,
-      required: true,
+      type: Object,
+      default: () => ({}),
     },
     status: {
-      type: String as PropType<'default' | 'success' | 'error' | 'warning' | 'info'>,
-      required: true,
+      type: String,
+      default: 'default',
     },
     onSubmit: {
       type: Function,
-      required: true,
+      default: undefined,
     },
     onCancel: {
       type: Function,
-      required: true,
+      default: undefined,
     },
   })
-  const show = ref(true)
 
-  const title = computed(() => (typeof props.content === 'object' ? props.content?.title : undefined))
-  const text = computed(() => (typeof props.content === 'object' ? props.content?.text : props.content))
+  console.log('props', props);
+  
+  const show = defineModel({ default: false, type: Boolean})
 
-  // const onSubmit = async () => {
-  //   show.value = false;
-  //   props.onSubmit(true);
-  // }
 
-  const onCancel = () => {
+  function onSubmitClick() {
     show.value = false
-    props.onCancel()
+    if (props.onSubmit) {
+      props.onSubmit(true)
+    }
+  }
+
+  function onCancelClick() {
+    show.value = false
+    if (props.onCancel) {
+      props.onCancel()
+    }
   }
 </script>

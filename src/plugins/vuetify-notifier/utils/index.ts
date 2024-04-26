@@ -1,36 +1,33 @@
-import { App, createApp } from 'vue'
-import type { ConfirmResult, NotifierDialogOptions, NotifierMountComponent } from '../types'
+import { App, mergeProps } from 'vue'
 
-export const getVAppRoot = () => {
-  return document.body  
-}
+export const getVAppRoot = () => document.body
+
 export const createContainer = () => document.createElement('div')
 
-export const mountComponent = ({ component, app, content, status = 'default', options }: NotifierMountComponent): Promise<ConfirmResult> => {
+export const mountComponent = ({ component, app, input }: NotifierMountComponent): Promise<ConfirmResult> => {
   const rootElement = getVAppRoot()
   const container = createContainer()
 
-  return new Promise((resolve, reject) => {
-    const componentApp = createApp(component, {
-      content,
-      status,
-      options,
-      onSubmit: (value: any) => {
-        resolve(value)
-        onUnmounted(componentApp, rootElement, container)
-      },
-      onCancel: (value: any) => {
-        switch ((options as NotifierDialogOptions)?.handleCancel) {
-          case 'resolve':
+  console.log(input)
+
+  return new Promise((resolve) => {
+    const componentApp = createApp(
+      component,
+      mergeProps(
+        input,
+        { modelValue: true },
+        {
+          onSubmit(value: any) {
             resolve(value)
-            break
-          case 'reject':
-            reject(value)
-            break
+            onUnmounted(componentApp, rootElement, container)
+          },
+          onCancel(value: any) {
+            resolve(value)
+            onUnmounted(componentApp, rootElement, container)
+          },
         }
-        onUnmounted(componentApp, rootElement, container)
-      },
-    })
+      )
+    )
 
     Object.assign(componentApp._context, app._context)
 

@@ -1,21 +1,21 @@
-
-
 <template>
-  <v-card>    
-    <VCardText>
-      Hello world
-    </VCardText>
+  <VCard flat>
+    <VCardText> Hello world </VCardText>
     <VCardActions>
       <VSpacer />
-      <v-btn color="primary" @click="$emit('onSubmit', 'The value of submit')">Submit</v-btn>
-      <v-btn @click="$emit('onSubmit', 'The value of cancel')">Cancel</v-btn>
+      <VBtn
+        text="Cancel"
+        @click="$emit('onSubmit', 'The value of cancel')"
+      />
+      <VBtn
+        color="primary"
+        text="Submit"
+        @click="$emit('onSubmit', 'The value of submit')"
+      />
     </VCardActions>
-  </v-card>
+  </VCard>
 </template>
 
 <script setup lang="ts">
-
   defineEmits(['onSubmit'])
-
 </script>
-

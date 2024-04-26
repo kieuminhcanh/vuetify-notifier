@@ -54,89 +54,15 @@
           <VCol cols="12">
             <VCard title="Toast">
               <VCardText>
-                <VListSubheader>Simple Toast</VListSubheader>
                 <VRow>
-                  <VCol
-                    ><VBtn
+                  <VCol v-for="status in items">
+                    <VBtn
                       prependIcon="mdi-bell-outline"
-                      @click="notifierToast()"
-                      >Default</VBtn
-                    ></VCol
-                  >
-                  <VCol
-                    ><VBtn
-                      color="success"
-                      prependIcon="mdi-bell-outline"
-                      @click="notifierToast('success')"
-                      >Success</VBtn
-                    ></VCol
-                  >
-                  <VCol
-                    ><VBtn
-                      color="info"
-                      prependIcon="mdi-bell-outline"
-                      @click="notifierToast('info')"
-                      >Into</VBtn
-                    ></VCol
-                  >
-                  <VCol
-                    ><VBtn
-                      color="warning"
-                      prependIcon="mdi-bell-outline"
-                      @click="notifierToast('warning')"
-                      >Warning</VBtn
-                    ></VCol
-                  >
-                  <VCol
-                    ><VBtn
-                      color="error"
-                      prependIcon="mdi-bell-outline"
-                      @click="notifierToast('error')"
-                      >Error</VBtn
-                    ></VCol
-                  >
-                </VRow>
-                <VListSubheader>Advanced Toast</VListSubheader>
-                <VRow>
-                  <VCol
-                    ><VBtn
-                      prependIcon="mdi-bell-plus"
-                      @click="notifierToastWithTitle()"
-                      >Default</VBtn
-                    ></VCol
-                  >
-                  <VCol
-                    ><VBtn
-                      color="success"
-                      prependIcon="mdi-bell-plus"
-                      @click="notifierToastWithTitle('success')"
-                      >Success</VBtn
-                    ></VCol
-                  >
-                  <VCol
-                    ><VBtn
-                      color="info"
-                      prependIcon="mdi-bell-plus"
-                      @click="notifierToastWithTitle('info')"
-                      >Into</VBtn
-                    ></VCol
-                  >
-                  <VCol
-                    ><VBtn
-                      color="warning"
-                      prependIcon="mdi-bell-plus"
-                      @click="notifierToastWithTitle('warning')"
-                      >Warning</VBtn
-                    ></VCol
-                  >
-                  <VCol
-                    ><VBtn
-                      color="error"
-                      prependIcon="mdi-bell-plus"
-                      @click="notifierToastWithTitle('error')"
-                      >Error</VBtn
-                    ></VCol
-                  >
+                      @click="notifierToast(status)"
+                      text="Default"
+                      :color="status"
+                    />
+                  </VCol>
                 </VRow>
               </VCardText>
             </VCard>
@@ -146,127 +72,49 @@
               <VCardText>
                 <VListSubheader>Confirm dialogs</VListSubheader>
                 <VRow>
-                  <VCol
-                    ><VBtn
+                  <VCol v-for="status in items">
+                    <VBtn
                       prependIcon="mdi-help-circle"
-                      @click="notifierConfirm()"
-                      >Default</VBtn
-                    ></VCol
-                  >
-                  <VCol
-                    ><VBtn
-                      color="success"
-                      prependIcon="mdi-help-circle"
-                      @click="notifierConfirm('success')"
-                      >Success</VBtn
-                    ></VCol
-                  >
-                  <VCol
-                    ><VBtn
-                      color="info"
-                      prependIcon="mdi-help-circle"
-                      @click="notifierConfirm('info')"
-                      >Into</VBtn
-                    ></VCol
-                  >
-                  <VCol
-                    ><VBtn
-                      color="warning"
-                      prependIcon="mdi-help-circle"
-                      @click="notifierConfirm('warning')"
-                      >Warning</VBtn
-                    ></VCol
-                  >
-                  <VCol
-                    ><VBtn
-                      color="error"
-                      prependIcon="mdi-help-circle"
-                      @click="notifierConfirm('error')"
-                      >Error</VBtn
-                    ></VCol
-                  >
+                      @click="notifierConfirm(status)"
+                      :text="status"
+                      :color="status"
+                  /></VCol>
                 </VRow>
                 <VListSubheader>Input dialogs</VListSubheader>
                 <VRow>
-                  <VCol
-                    ><VBtn
+                  <VCol v-for="status in items">
+                    <VBtn
                       prependIcon="mdi-account-edit"
-                      @click="notifierPrompt()"
-                      >Default</VBtn
-                    ></VCol
-                  >
-                  <VCol
-                    ><VBtn
-                      color="success"
-                      prependIcon="mdi-account-edit"
-                      @click="notifierPrompt('success')"
-                      >Success</VBtn
-                    ></VCol
-                  >
-                  <VCol
-                    ><VBtn
-                      color="info"
-                      prependIcon="mdi-account-edit"
-                      @click="notifierPrompt('info')"
-                      >Into</VBtn
-                    ></VCol
-                  >
-                  <VCol
-                    ><VBtn
-                      color="warning"
-                      prependIcon="mdi-account-edit"
-                      @click="notifierPrompt('warning')"
-                      >Warning</VBtn
-                    ></VCol
-                  >
-                  <VCol
-                    ><VBtn
-                      color="error"
-                      prependIcon="mdi-account-edit"
-                      @click="notifierPrompt('error')"
-                      >Error</VBtn
-                    ></VCol
-                  >
+                      @click="notifierInput(status)"
+                      :text="status"
+                      :color="status"
+                  /></VCol>
                 </VRow>
                 <VListSubheader>Alert Dialog</VListSubheader>
                 <VRow>
-                  <VCol
+                  <VCol v-for="status in items"
                     ><VBtn
                       prependIcon="mdi-alert-circle"
-                      @click="notifierAlert()"
-                      >Default</VBtn
-                    ></VCol
-                  >
-                  <VCol
-                    ><VBtn
-                      color="success"
+                      @click="notifierAlert(status)"
+                      :text="status"
+                      :color="status"
+                  /></VCol>
+                </VRow>               
+              </VCardText>
+            </VCard>
+          </VCol>
+          <VCol cols="12">
+            <VCard title="Directives">
+              <VCardText>
+                <VListSubheader>Menu confirm </VListSubheader>
+                <VRow>
+                  <VCol v-for="status in items"
+>
+                    <VBtn
                       prependIcon="mdi-alert-circle"
-                      @click="notifierAlert('success')"
-                      >Success</VBtn
-                    ></VCol
-                  >
-                  <VCol
-                    ><VBtn
-                      color="info"
-                      prependIcon="mdi-alert-circle"
-                      @click="notifierAlert('info')"
-                      >Into</VBtn
-                    ></VCol
-                  >
-                  <VCol
-                    ><VBtn
-                      color="warning"
-                      prependIcon="mdi-alert-circle"
-                      @click="notifierAlert('warning')"
-                      >Warning</VBtn
-                    ></VCol
-                  >
-                  <VCol
-                    ><VBtn
-                      color="error"
-                      prependIcon="mdi-alert-circle"
-                      @click="notifierAlert('error')"
-                      >Error</VBtn
+                      v-notifier="{text: 'Are you sure?', status, type:'menu'  , onSubmit: ($event:any) => console.log($event)}"
+                      :text="status"
+                      :color="status">Menu</VBtn
                     ></VCol
                   >
                 </VRow>
@@ -315,69 +163,66 @@
   import GlobalComponent from './components/GlobalComponent.vue'
   import { useNotifier } from './plugins/vuetify-notifier'
 
-  const $notifier = useNotifier()
+  const notifier = useNotifier()
+
+  const items = ['', 'info', 'success', 'warning', 'error']
+
+  function notifierToast(status: string) {
+    notifier.toast({ text: 'This is simple toast', status, options: { location: 'top right' } })
+  }
 
   const notifierConfirm = async (status?: string) => {
-    $notifier.confirm({ text: 'Are you sure?' }, status, {
-        textAlign: 'center',
+    notifier
+      .confirm({
+        title: 'Confirm',
+        text: 'Are you sure?',
+        status,
+      })
+      .then((value) => {
+        console.log('value', value)
+      })
+  }
+
+  const notifierInput = async (status?: string) => {
+    notifier
+      .prompt({
+        title: 'Confirm',
+        text: 'Are you sure?',
+        status,
+      })
+      .then((value) => {
+        console.log('value', value)
       })
   }
 
   const notifierAlert = async (status?: string) => {
-    $notifier.alert(
-      {
-        title: 'Confirm',
-        text: 'Are you sure?',
-      },
-      status,
-      {
-        textAlign: 'right',
-      }
-    )
+    notifier
+      .alert({
+        title: 'Alert',
+        text: 'You do not have permission to access this page',
+        status,
+      })
+      .then((value) => {
+        console.log('value', value)
+      })
   }
 
-  const notifierPrompt = async (status?: string) => {
-    const result = await $notifier.prompt('Are you sure?', status)
-    console.log(result)
-  }
-
-  const notifierToast = async (status?: string) => {
-    const result = await $notifier.toast('This is simple toast', status)
-    console.log(result)
-  }
-
-  const notifierToastWithTitle = async (status?: string) => {
-    $notifier.toast(
-      {
-        title: 'Title',
-        text: 'This is simple toast',
-      },
-      status
-    )
-  }
 
   const notifierComponentBasic = async () => {
-    $notifier.component(
-      {
-        title: 'Title component',
-        component: BasicComponent,
-      },
-      {
-        width: 500,
-      }
-    )
+    notifier.component({
+      title: 'Title component',
+      component: BasicComponent,
+    })
   }
 
   const notifierComponentAdvance = async () => {
-    $notifier.component(AdvanceComponent, {
-      dialogProps: {
-        fullscreen: true,
-      },
+    notifier.component({
+      component: AdvanceComponent,
     })
   }
   const notifierComponentGlobal = async () => {
-    $notifier.component(GlobalComponent, {
-      width: 500,
+    notifier.component({
+      component: GlobalComponent,
     })
   }
 </script>

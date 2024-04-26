@@ -2,9 +2,9 @@
   <VCard>
     <VCardTitle>Advance Component dialog</VCardTitle>
     <VImg
-      :aspectRatio="16 / 9"
+      :aspect-ratio="16 / 9"
       cover
-      maxHeight="500"
+      max-height="500"
       src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
     />
     <VCardText>  
@@ -62,18 +62,19 @@
             </v-list-item-action>
           </template>
         </v-list-item>
-      </v-list></VCardText>
+      </v-list>
+    </VCardText>
    
     <VCardActions>
       <VSpacer />
       <VBtn
+        text="Cancel"
+        @click="$emit('onSubmit', 'The value of cancel')"
+      />
+      <VBtn
         color="primary"
         text="Submit"
         @click="$emit('onSubmit', 'The value of submit')"
-      />
-      <VBtn
-        text="Cancel"
-        @click="$emit('onSubmit', 'The value of cancel')"
       />
     </VCardActions>
   </VCard>

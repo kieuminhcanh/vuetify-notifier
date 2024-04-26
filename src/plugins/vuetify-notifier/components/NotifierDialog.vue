@@ -2,21 +2,14 @@
   <VDefaultsProvider root>
     <VDialog
       v-model="show"
-      persistent
-      scrollable
-      :transition="options?.transition"
-      width="auto"
-      v-bind="options.dialogProps"
+      v-bind="options"      
+      activator="parent"
     >
       <VForm
-        validateOn="submit"
-        @submit.prevent="onSubmit"
+        validate-on="submit"
+        @submit.prevent="onSubmitClick"
       >
-        <VCard
-          v-bind="options.cardProps"
-          :minHeight="options?.minHeight"
-          :minWidth="options?.minWidth"
-        >
+        <VCard v-bind="options?.contentOptions">
           <VToolbar
             v-if="title"
             :color="status === 'default' ? options.defaultColor : status"
@@ -28,41 +21,30 @@
               :icon="options[`${status}Icon`]"
             />
           </VToolbar>
-          <v-row
-            align="center"
-            class="px-10 py-7"
-            dense
-            
-          >
-            <v-col
-              :class="`text-${options.textAlign}`"
-              cols="12"
-            >
-              {{ text }}
-            </v-col>
-            <v-col
-              v-if="options.prompt"
-              cols="12"
-            >
-              <VTextField
-                v-model="input"
-                v-bind="options.inputProps"
-              />
-            </v-col>
-          </v-row>
-          <VDivider v-if="options.showDivider" />
+          <VCardText>
+            {{ text }}
+          </VCardText>
+          <VCardItem v-if="options.showInput">
+            <VTextField
+              
+              v-model="input"
+              :label="options.inputOptions?.label"
+            />
+          </VCardItem>
+
           <VCardActions>
             <VSpacer />
             <VBtn
-              v-bind="options.secondaryButtonProps || options.buttonProps"
-              @click="onCancel"
-            >{{ options.secondaryButtonText }}</VBtn>
+              v-if="!options.hideCancel"
+              v-bind="options?.secondaryButtonProps || options?.buttonProps"
+              :text="options.secondaryButtonText"
+              @click="onCancelClick"
+            />
             <VBtn
-              v-bind="options.primaryButtonProps || options.buttonProps"
-              color="primary"
+              :color="status || 'primary'"
               type="submit"
-              variant="tonal"
-            >{{ options.primaryButtonText }}</VBtn>
+              :text="options.primaryButtonText"
+            />
           </VCardActions>
         </VCard>
       </VForm>
@@ -71,52 +53,50 @@
 </template>
 
 <script setup lang="ts">
-  import { NotifierDialogOptions } from '../types'  
+  defineOptions({ inheritAttrs: false })
 
   const props = defineProps({
-    content: {
-      type: [String, Object],
-      required: true,
-      default: 'Are you sure?',
+    title: {
+      type: String,
+      default: null,
+    },
+    text: {
+      type: String,
+      default: null,
     },
     options: {
-      type: Object as PropType<NotifierDialogOptions>,
-      required: true,
+      type: Object,
+      default: () => ({}),
     },
     status: {
-      type: String as PropType<'default' | 'success' | 'error' | 'warning' | 'info'>,
-      required: true,
+      type: String,
+      default: 'default',
     },
     onSubmit: {
       type: Function,
-      required: true,
+      default: undefined,
     },
     onCancel: {
       type: Function,
-      required: true,
+      default: undefined,
     },
   })
 
-  const show = ref(true)
-  const input = ref<string>('')
+  const show = defineModel({ default: false, type: Boolean })
 
-  const title = computed(() => (typeof props.content === 'object' ? props.content?.title : undefined))
-  const text = computed(() => (typeof props.content === 'object' ? props.content?.text : props.content))
+  const input = ref('')
 
-  const onSubmit = async (event: any) => {
-    const { valid } = await event
-    if (!valid) return
-
+  function onSubmitClick() {
     show.value = false
-    if (!props.options.prompt) {
-      props.onSubmit(true)
-    } else {
-      props.onSubmit(input.value)
+    if (props.onSubmit) {
+      props.onSubmit(props.options.showInput ? input.value : true)
     }
   }
 
-  const onCancel = () => {
+  function onCancelClick() {
     show.value = false
-    props.onCancel()
+    if (props.onCancel) {
+      props.onCancel()
+    }
   }
 </script>
