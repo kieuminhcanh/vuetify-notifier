@@ -1,19 +1,21 @@
 {
   "name": "vuetify-notifier",
   "license": "MIT",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "type": "module",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
     "preview": "vite preview",
     "lint": "eslint src",
-    "build": "vue-tsc && vite build && npm run build:typescript",
+    "build": "vite build && npm run build:typescript",
     "build:nuxt": "nuxt-module-build nuxt --skipLibCheck --outDir ../dist/nuxt",
     "build:web": "vue-tsc && vite build --config vite.web.config.ts",
     "build:all": "npm run build && npm run build:nuxt",
-    "build:typescript": "tsc src/types.ts --declaration --emitDeclarationOnly --skipLibCheck --outDir dist",
+    "build:typescript": "tsc src/plugins/vuetify-notifier/types.ts --declaration --emitDeclarationOnly --skipLibCheck --outDir dist",
     "github": "gh-pages -d dist-web"
-
   },
   "main": "./dist/vuetify-notifier.umd.cjs",
   "module": "./dist/vuetify-notifier.js",
@@ -37,6 +39,7 @@
   "devDependencies": {
     "@nuxt/kit": "^3.11.2",
     "@nuxt/module-builder": "^0.6.0",
+    "@types/node": "^20.12.7",
     "@typescript-eslint/parser": "^7.7.1",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/eslint-config-typescript": "^13.0.0",
@@ -44,6 +47,7 @@
     "eslint-plugin-vue": "^9.25.0",
     "eslint-plugin-vuetify": "https://github.com/corbinu/eslint-plugin-vuetify.git",
     "gh-pages": "^6.1.1",
+    "requireindex": "^1.2.0",
     "rollup-plugin-typescript2": "^0.36.0",
     "typescript": "^5.2.2",
     "typescript-eslint": "^7.7.1",
@@ -53,6 +57,7 @@
     "vite-plugin-dts": "^3.9.0",
     "vite-plugin-vuetify": "^2.0.3",
     "vue-eslint-parser": "^9.4.2",
-    "vue-tsc": "^2.0.6"
+    "vue-tsc": "^2.0.6",
+    "vuetify-notifier": "link:dist"
   }
 }

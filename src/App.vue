@@ -66,7 +66,7 @@
                   <VCol cols="12">
                     <pre>{{ `<VBtn @click="notifier.toast({ text: 'This is simple toast' })" />` }}</pre>
                   </VCol>
-                </VRow>                
+                </VRow>
               </VCardText>
             </VCard>
           </VCol>
@@ -123,7 +123,7 @@
                   <VCol v-for="status in items">
                     <VBtn
                       prependIcon="mdi-alert-circle"
-                      v-notifier="{text: 'Are you sure?', status, type:'menu'  , onSubmit: ($event:any) => console.log($event)}"
+                      v-notifier-confirm="{text: 'Are you sure?', status, type:'menu'  , onSubmit: ($event:any) => console.log($event)}"
                       :text="status"
                       :color="status"
                       >Menu</VBtn
@@ -138,7 +138,7 @@
                   <VCol v-for="status in items">
                     <VBtn
                       prependIcon="mdi-alert-circle"
-                      v-notifier-promt="{text: 'Are you sure?', status, onSubmit: ($event:any) => console.log($event)}"
+                      v-notifier-input="{text: 'Are you sure?', status, onSubmit: ($event:any) => console.log($event)}"
                       :text="status"
                       :color="status"
                       >Menu</VBtn
@@ -203,7 +203,7 @@
   function notifierToast(status: any) {
     notifier.toast({ text: 'This is simple toast', status, options: { location: 'top right' } })
   }
-  
+
   function notifierConfirm(status?: string) {
     notifier
       .confirm({

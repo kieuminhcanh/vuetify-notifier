@@ -3,6 +3,7 @@
     <VDialog
       v-model="show"
       v-bind="options"      
+      :width="options.fullscreen ? '100%' : 'auto'"
       activator="parent"
     >
       <VForm

@@ -4,8 +4,8 @@ import viteComponentsImport from 'unplugin-vue-components/vite'
 import viteAutoImport from 'unplugin-auto-import/vite'
 import viteVuetifyImport from 'vite-plugin-vuetify'
 
-// @ts-ignore
-import { fileURLToPath, URL } from 'node:url'
+import { fileURLToPath, URL } from 'url'
+import { resolve } from 'path';
 
 export default defineConfig({
   plugins: [
@@ -20,17 +20,12 @@ export default defineConfig({
           from: 'vue',
           imports: ['App', 'ObjectDirective', 'Component', 'ComponentInternalInstance', 'ComponentPublicInstance', 'ConcreteComponent', 'DirectiveBinding', 'VNode'],
           type: true,
-        },
-        {
-          from: 'src/types.d.ts',
-          imports: ['NotifierToastInput','NotifierConfirmInput','NotifierComponentProps', 'ConfirmResult', 'NotifierDialogOptions', 'NotifierMountComponent', 'NotifierComponentOptions', 'NotifierOptions', 'NotifierContent', 'NotifierToastOptions', 'NotifierComponent'],
-          type: true,
-        },
+        },        
       ],
       dts: true,
       dirs: ['src/plugins/vuetify-notifier/composables'],
     }),
-    viteVuetifyImport(),
+    viteVuetifyImport(),    
   ],
   resolve: {
     alias: {
@@ -38,11 +33,12 @@ export default defineConfig({
     },
     extensions: ['.js', '.json', '.jsx', '.mjs', '.ts', '.tsx', '.vue'],
   },
-  build: {
+  build: {    
     lib: {
-      entry: 'src/plugins/vuetify-notifier/index.ts',
+      entry: resolve(__dirname, 'src/plugins/vuetify-notifier/index.ts'),
       name: 'VuetifyNotifier',
       fileName: 'vuetify-notifier',
+      formats: ['es', 'umd', 'iife'],
     },
     rollupOptions: {
       external: ['vue'],

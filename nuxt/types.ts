@@ -1,1 +1,1 @@
-export * from "@/types";
+export * from "@/plugins/vuetify-notifier/types";

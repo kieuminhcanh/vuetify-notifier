@@ -1,10 +1,11 @@
 import { App, mergeProps } from 'vue'
+import { ConfirmResult } from '../types'
 
 export const getVAppRoot = () => document.body
 
 export const createContainer = () => document.createElement('div')
 
-export const mountComponent = ({ component, app, input }: NotifierMountComponent): Promise<ConfirmResult> => {
+export const mountComponent = ({ component, app, input }: any): Promise<ConfirmResult> => {
   const rootElement = getVAppRoot()
   const container = createContainer()
 
@@ -27,7 +28,7 @@ export const mountComponent = ({ component, app, input }: NotifierMountComponent
       )
     )
 
-    Object.assign(componentApp._context, app._context)
+    Object.assign(componentApp._context, app.appContext)
 
     rootElement.appendChild(container)
     componentApp.mount(container)

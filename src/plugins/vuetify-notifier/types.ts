@@ -1,19 +1,24 @@
 /* eslint-disable*/
 import type { App, Component, ComponentInternalInstance } from 'vue'
 
+
+
 export interface VNode {
   ctx: ComponentInternalInstance | null
 }
 
+
+import { VuetifyNotifier } from "./index";
+
+export { VuetifyNotifier, useNotifier } from './index'
+
+export default VuetifyNotifier
+
 export interface NotifierInstance {
-  toast(input: NotifierToastInput): Promise<ConfirmResult>
-
-  confirm(input: NotifierConfirmInput): Promise<ConfirmResult>
-
-  prompt(input: NotifierConfirmInput): Promise<ConfirmResult>
-
-  alert(input: NotifierConfirmInput): Promise<ConfirmResult>
-
+  toast(input: NotifierToastInput): Promise<boolean>
+  confirm(input: NotifierConfirmInput): Promise<boolean>
+  prompt(input: NotifierConfirmInput): Promise<string>
+  alert(input: NotifierConfirmInput): Promise<boolean>
   component(input: NotifierComponentInput): Promise<any>
 }
 

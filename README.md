@@ -27,7 +27,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import { createVuetify } from 'vuetify'
 
-import VuetifyNotifier from 'vuetify-notifier'
+import { VuetifyNotifier } from 'vuetify-notifier'
 
 import { VOverlay, VDialog } from 'vuetify/components'
 
@@ -109,9 +109,9 @@ const notifier = useNotifier();
 //or
 const notifier = useNuxtApp();
 
-const onLogin = async () => {  
+const onLogin = async () => {
   await login();
-  notifier.toast({text: "Login Success", status: "success" });  
+  notifier.toast({text: "Login Success", status: "success" });
 };
 </script>
 ```
@@ -128,7 +128,7 @@ The plugin adds notifier to the Vue instance, which provides the following metho
 
 - toast
 - confirm
-- promt
+- prompt
 - alert
 - component
 
@@ -191,19 +191,20 @@ export const defaultOptions: NotifierOptions = {
 **Basic Examples**
 
 ```javascript
-notifier.confirm({
-  text:'Are you sure you want to delete this item?'
-}).then((result) => {
-  if (result) {
-    // Delete the item
-  }
-})
+notifier
+  .confirm({
+    text: 'Are you sure you want to delete this item?',
+  })
+  .then((result) => {
+    if (result) {
+      // Delete the item
+    }
+  })
 
-notifier.prompt({text: 'Input your name'}).then((name) => {
+notifier.prompt({ text: 'Input your name' }).then((name) => {
   console.log('User entered name:', name)
 })
 ```
-
 
 **Super Advance Examples**
 
@@ -215,7 +216,7 @@ notifier.component({title: "Component Title", component: HelloWorld}).then((resu
 });
 
 notifier.component({
-  title: "Component Title", 
+  title: "Component Title",
   component:'global-component-name'
 }).then((result) => {
   console.log(result);

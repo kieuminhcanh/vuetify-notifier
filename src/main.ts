@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import vuetify from "@/plugins/vuetify";
-import vuetifyNotifier from "@/plugins/vuetify-notifier";
+import vuetify from '@/plugins/vuetify'
+import { VuetifyNotifier } from 'vuetify-notifier'
 
-createApp(App).use(vuetify).use(vuetifyNotifier).mount('#app')
+createApp(App).use(vuetify).use(VuetifyNotifier).mount('#app')

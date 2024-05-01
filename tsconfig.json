@@ -12,7 +12,7 @@
       "@/*": ["src/*"]
     },
 
-    "types":[],
+    "types":["node"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",

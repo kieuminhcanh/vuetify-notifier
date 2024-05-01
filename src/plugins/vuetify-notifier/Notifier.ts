@@ -1,16 +1,15 @@
-import type { App, InjectionKey } from 'vue'
-import { mergeProps, getCurrentInstance, inject } from 'vue'
+import type { ComponentInternalInstance, InjectionKey } from 'vue'
+import { mergeProps } from 'vue'
 import defaultOptions from '@/plugins/vuetify-notifier/utils/options.json'
 import NotifierDialog from '@/plugins/vuetify-notifier/components/NotifierDialog.vue'
 import NotifierToast from '@/plugins/vuetify-notifier/components/NotifierToast.vue'
 import NotifierComponent from '@/plugins/vuetify-notifier/components/NotifierComponent.vue'
-import { NotifierInstance } from '@/types'
+import { ConfirmResult, NotifierConfirmInput, NotifierInstance, NotifierToastInput } from '@/plugins/vuetify-notifier/types'
 import { mountComponent } from '@/plugins/vuetify-notifier/utils'
 
 export const NotifierSymbol: InjectionKey<NotifierInstance> = Symbol.for('vuetify:notifier')
 
-
-export function createNotifier(app: App, globalOptions: any = {}) {
+export function createNotifier(app: ComponentInternalInstance, globalOptions: any = {}): NotifierInstance {
   const toast = (input: NotifierToastInput): Promise<ConfirmResult> => {
     input.options = mergeProps(defaultOptions.default, defaultOptions.toastOptions, globalOptions?.default as any, globalOptions?.toastOptions as any, input.options as any, { hideSubmit: true })
 
@@ -74,15 +73,3 @@ export function createNotifier(app: App, globalOptions: any = {}) {
   }
 }
 
-export function useNotifier(): NotifierInstance {
-  const vm = getCurrentInstance()
-  if (!vm) {
-    throw new Error(`[Vuetify Notifier] useNotifier() must be called from inside a setup function`)
-  }
-
-  const notifier = inject(NotifierSymbol)
-
-  if (!notifier) throw new Error('[Vuetify Notifier] Could not find Notifier injection')
-
-  return notifier
-}

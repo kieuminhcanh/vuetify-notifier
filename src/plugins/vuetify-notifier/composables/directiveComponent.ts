@@ -1,44 +1,31 @@
-// Utilities
-import { h, mergeProps, render, resolveComponent } from 'vue'
+import { DirectiveBinding, ComponentInternalInstance, ConcreteComponent, h, mergeProps, render, resolveComponent } from 'vue'
 
-export const useDirectiveComponent = (
-  component: string | Component,
-  props?: any
-): ObjectDirective => {
-  
-  const concreteComponent = (typeof component === 'string'
-    ? resolveComponent(component)
-    : component) as ConcreteComponent
+export const useDirectiveComponent = (component: string | Component, props?: any) => {
+  const concreteComponent = (typeof component === 'string' ? resolveComponent(component) : component) as ConcreteComponent
 
   return {
-    mounted (el: HTMLElement, binding: DirectiveBinding, vnode: VNode) {
+    mounted(el: HTMLElement, binding: DirectiveBinding, vnode: VNode) {
       const { value } = binding
-      
+
       // Get the children from the props or directive value, or the element's children
       const children = props?.text || value?.text || el.innerHTML
 
       // If vnode.ctx is the same as the instance, then we're bound to a plain element
       // and need to find the nearest parent component instance to inherit provides from
-      const provides = (vnode.ctx === binding.instance!.$
-        ? findComponentParent(vnode, binding.instance!.$)?.provides
-        : vnode.ctx?.provides) ?? binding.instance!.$.provides
+      const provides = (vnode.ctx === binding.instance!.$ ? findComponentParent(vnode, binding.instance!.$)?.provides : vnode.ctx?.provides) ?? binding.instance!.$.provides
 
       const node = h(concreteComponent, mergeProps(props, value), { default: () => children })
-      node.appContext = Object.assign(
-        Object.create(null),
-        (binding.instance as ComponentPublicInstance).$.appContext,
-        { provides }
-      )
+      node.appContext = Object.assign(Object.create(null), (binding.instance as ComponentPublicInstance).$.appContext, { provides })
 
       render(node, el)
     },
-    unmounted (el: HTMLElement) {
+    unmounted(el: HTMLElement) {
       render(null, el)
     },
   }
 }
 
-function findComponentParent (vnode: VNode, root: ComponentInternalInstance): ComponentInternalInstance | null {
+function findComponentParent(vnode: VNode, root: ComponentInternalInstance): ComponentInternalInstance | null {
   // Walk the tree from root until we find the child vnode
   const stack = new Set<VNode>()
   const walk = (children: VNode[]): boolean => {
