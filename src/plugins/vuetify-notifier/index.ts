@@ -28,4 +28,4 @@ export function useNotifier(): NotifierInstance {
 }
 
 
-export { VuetifyNotifier, vNotifierConfirm, vNotifierInput, NotifierInstance }
+export { VuetifyNotifier, vNotifierConfirm, vNotifierInput, NotifierInstance, createNotifier }

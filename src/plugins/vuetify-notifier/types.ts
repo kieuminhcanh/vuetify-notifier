@@ -10,7 +10,7 @@ export interface VNode {
 
 import { VuetifyNotifier } from "./index";
 
-export { VuetifyNotifier, useNotifier } from './index'
+export { VuetifyNotifier, useNotifier, createNotifier } from './index'
 
 export default VuetifyNotifier
 
