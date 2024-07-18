@@ -3,7 +3,7 @@
 import { defineNuxtPlugin, useRuntimeConfig } from '#app';
 
 // @ts-ignore
-import VuetifyNotifier, { createNotifier } from "vuetify-notifier";
+import { VuetifyNotifier, createNotifier } from "vuetify-notifier";
 
 
 export default defineNuxtPlugin((nuxtApp: any) => {
