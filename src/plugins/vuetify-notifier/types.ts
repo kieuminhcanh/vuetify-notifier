@@ -8,11 +8,7 @@ export interface VNode {
 }
 
 
-import { VuetifyNotifier } from "./index";
-
 export { VuetifyNotifier, useNotifier, createNotifier } from './index'
-
-export default VuetifyNotifier
 
 export interface NotifierInstance {
   toast(input: NotifierToastInput): Promise<boolean>
