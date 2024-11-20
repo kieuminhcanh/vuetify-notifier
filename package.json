@@ -1,0 +1,49 @@
+{
+  "name": "my-module",
+  "version": "1.0.0",
+  "description": "My new Nuxt module",
+  "repository": "your-org/my-module",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    }
+  },
+  "main": "./dist/module.cjs",
+  "types": "./dist/types.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepack": "nuxt-module-build build",
+    "dev": "nuxi dev playground",
+    "dev:build": "nuxi build playground",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
+    "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "@nuxt/kit": "^3.14.159"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "^1.6.0",
+    "@nuxt/eslint-config": "^0.7.0",
+    "@nuxt/module-builder": "^0.8.4",
+    "@nuxt/schema": "^3.14.159",
+    "@nuxt/test-utils": "^3.14.4",
+    "@types/node": "latest",
+    "changelogen": "^0.5.7",
+    "eslint": "^9.15.0",
+    "nuxt": "^3.14.159",
+    "typescript": "latest",
+    "vitest": "^2.1.5",
+    "vue-tsc": "^2.1.10"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+}
