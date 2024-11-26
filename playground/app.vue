@@ -2,7 +2,7 @@
   <VApp>
     <VMain>
       <VContainer class="d-flex flex-column ga-4">
-        <VExpansionPanels :model-value="[4]">
+        <VExpansionPanels :model-value="[0]">
           <VExpansionPanel title="Dialog">
             <VExpansionPanelText>
               <VRow>
@@ -138,6 +138,8 @@
 
   function onOpenDialog() {
     notifier.dialog(Test, {
+      width: 400,
+      title: 'Dialog Custom',
       onSubmit(data: any) {
         console.log('Submit', data)
       },

@@ -1,75 +1,59 @@
 <template>
-  <VDefaultsProvider root>
-    <VDialog
-      v-model="show"
-      v-bind="options"      
-      activator="parent"
-    >
-      <VCard :title="title">
-        <component
-          :is="component"
-          @on-cancel="onCancelClick"
-          @on-submit="onSubmitClick"
-        />
-        <v-btn
-          v-if="!options.hideExistsButton"
-          icon
-          location="top right"
-          position="fixed"
-          :style="{ top: '5px', right: '10px' }"
-          variant="text"
-          @click="onCancelClick"
-        >
-          <v-icon>{{ options.closeIcon }}</v-icon>
-        </v-btn>
-      </VCard>
-    </VDialog>
-  </VDefaultsProvider>
+  <VDialog v-model="active" v-bind="attrs">
+    <VSheet>
+      <VToolbar v-if="title" :title="title">
+        <v-btn icon="$close" @click="onCancel" />
+      </VToolbar>
+      <component :is="attrs.component" v-if="attrs.component" @submit="onSubmit" @cancel="onCancel" />
+    </VSheet>
+  </VDialog>
 </template>
 
 <script setup lang="ts">
-  defineOptions({ inheritAttrs: false })
+  import { ref, useAttrs, type Component } from 'vue'
+  import { useLocale } from 'vuetify'
+  import type { VDialog } from "vuetify/components"
+  const { t } = useLocale()
 
-  const props = defineProps({
-    title: {
-      type: String,
-      default: null,
-    },
-    component: {
-      type: [String, Object],
-      default: null,
-    },
-    options: {
-      type: Object,
-      default: () => ({}),
-    },
-    status: {
-      type: String,
-      default: 'default',
-    },
-    onSubmit: {
-      type: Function,
-      default: undefined,
-    },
-    onCancel: {
-      type: Function,
-      default: undefined,
-    },
+  const active = ref(true)
+  const emit = defineEmits(['submit', 'cancel'])
+
+  defineOptions({
+    inheritAttrs: false
   })
 
-  const show = defineModel({ default: false, type: Boolean })
+  const attrs: Partial<{
+    width?: string
+    title?: string
+    text?: string
+    isConfirm?: boolean
+    persistent: boolean
+    submitButton?: {
+      color: string
+    },
+    textAlign?: string,
+    buttonAlign?: string,
+    divider?: boolean,
+    color?: string,
+    component: Component
+  }> = useAttrs()
 
-  function onSubmitClick() {
-    show.value = false
-    if (props.onSubmit) {
-      props.onSubmit(true)
+  defineProps({
+    title: String,
+    text: String,
+    isConfirm: {
+      type: Boolean,
+      default: true
     }
+  })
+
+  function onSubmit(data: any) {
+    active.value = false
+    emit('submit', data)
   }
 
-  function onCancelClick() {
-    show.value = false
-    if (props.onCancel) {
-      props.onCancel()
-    }
+  function onCancel() {
+    active.value = false
+    emit('cancel')
   }
 </script>

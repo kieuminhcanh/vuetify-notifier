@@ -1,6 +1,7 @@
 import { createApp, getCurrentInstance, h, ref, render, resolveComponent, useId, type Component, type InjectionKey, mergeProps } from 'vue'
 import NotifierToast from "../components/NotifierToast.vue"
 import NotifierConfirm from "../components/NotifierConfirm.vue"
+import NotifierComponent from "../components/NotifierComponent.vue"
 
 import type { VDialog } from "vuetify/components/VDialog"
 import { useRuntimeConfig } from '#app'
@@ -10,6 +11,7 @@ interface Notifier {
   onCancel: () => void
 }
 interface ComponentOptions extends VDialog, Notifier {
+  title?: string
   to: string
 }
 
@@ -34,7 +36,7 @@ const defaultOptions = {
     }
   },
   alert: {
-    
+
     color: 'transparent',
     width: 400,
     submitButton: {
@@ -64,7 +66,8 @@ export const useNotifier = () => {
 
   function dialog(component: string | Component, options: Partial<ComponentOptions>) {
     const concreteComponent = typeof component === 'string' ? resolveComponent(component) : component
-    return show(concreteComponent as Component, {
+    return show(NotifierComponent, {
+      component: concreteComponent as Component,
       ...options,
     })
   }
