@@ -1,6 +1,6 @@
 <template>
-  <VMenu v-model="active" activator="parent" :close-on-content-click="false">
-    <VList min-width="300">
+  <VMenu v-model="active" activator="parent" :close-on-content-click="false" v-bind="$attrs">
+    <VSheet class="py-4" min-width="300" :color="attrs.color">
       <VListItem :title="title" :subtitle="text">
         <template #append>
           <VListItemAction>
@@ -8,17 +8,25 @@
           </VListItemAction>
         </template>
       </VListItem>
-    </VList>
+    </VSheet>
   </VMenu>
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { ref, useAttrs } from 'vue'
   import { useLocale } from 'vuetify'
   const { t } = useLocale()
 
   const active = ref(false)
   const emit = defineEmits(['submit', 'cancel'])
+
+  const attrs: Partial<{
+    title: string,
+    text: string,
+    color: string,
+  }> = useAttrs()
+
+
 
   defineProps({
     title: String,

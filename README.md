@@ -1,84 +1,233 @@
-<!--
-Get your module up and running quickly.
+# Vuetify Notifier
 
-Find and replace all on all files (CMD+SHIFT+F):
-- Name: My Module
-- Package name: my-module
-- Description: My new Nuxt module
--->
+![image](https://user-images.githubusercontent.com/136077/230705147-849714e2-a50b-4118-9100-f14d6a82d2e9.png)
 
-# My Module
+Vuetify Notifier is a Vue 3 plugin that simplifies the process of displaying notifications, alerts, confirmations, and prompts in your Vue or Nuxt applications. It uses Vuetify components to provide a beautiful and customizable user experience.
 
-[![npm version][npm-version-src]][npm-version-href]
-[![npm downloads][npm-downloads-src]][npm-downloads-href]
-[![License][license-src]][license-href]
-[![Nuxt][nuxt-src]][nuxt-href]
+<h2 style="text-align: center;">
+➡️ <a href="https://kieuminhcanh.github.io/vuetify-notifier" target="_blank">Demo Online</a> 👌
+</h2>
 
-My new Nuxt module for doing amazing things.
+## Installation
 
-- [✨ &nbsp;Release Notes](/CHANGELOG.md)
-<!-- - [🏀 Online playground](https://stackblitz.com/github/your-org/my-module?file=playground%2Fapp.vue) -->
-<!-- - [📖 &nbsp;Documentation](https://example.com) -->
-
-## Features
-
-<!-- Highlight some of the features your module provide here -->
-- ⛰ &nbsp;Foo
-- 🚠 &nbsp;Bar
-- 🌲 &nbsp;Baz
-
-## Quick Setup
-
-Install the module to your Nuxt application with one command:
-
-```bash
-npx nuxi module add my-module
+```sh
+$ npm install -D vuetify-notifier
+or
+$ yarn add -D vuetify-notifier
 ```
 
-That's it! You can now use My Module in your Nuxt app ✨
+## Setup
 
+### Vue 3 | Vite
 
-## Contribution
+#### **`main.js|ts`**
 
-<details>
-  <summary>Local development</summary>
-  
-  ```bash
-  # Install dependencies
-  npm install
-  
-  # Generate type stubs
-  npm run dev:prepare
-  
-  # Develop with the playground
-  npm run dev
-  
-  # Build the playground
-  npm run dev:build
-  
-  # Run ESLint
-  npm run lint
-  
-  # Run Vitest
-  npm run test
-  npm run test:watch
-  
-  # Release new version
-  npm run release
-  ```
+```js
+import { createApp } from 'vue'
+import App from './App.vue'
+import { createVuetify } from 'vuetify'
 
-</details>
+import { VuetifyNotifier } from 'vuetify-notifier'
 
+import { VOverlay, VDialog } from 'vuetify/components'
 
-<!-- Badges -->
-[npm-version-src]: https://img.shields.io/npm/v/my-module/latest.svg?style=flat&colorA=020420&colorB=00DC82
-[npm-version-href]: https://npmjs.com/package/my-module
+const vuetify = createVuetify({
+  components: { VOverlay, VDialog },
+})
 
-[npm-downloads-src]: https://img.shields.io/npm/dm/my-module.svg?style=flat&colorA=020420&colorB=00DC82
-[npm-downloads-href]: https://npm.chart.dev/my-module
+/**
+ * You can do manually import the components you are using.
+ * https://vuetifyjs.com/en/features/treeshaking/#manual-imports
+ */
 
-[license-src]: https://img.shields.io/npm/l/my-module.svg?style=flat&colorA=020420&colorB=00DC82
-[license-href]: https://npmjs.com/package/my-module
+// const vuetify = createVuetify({
+//   components: {
+//     VDefaultsProvider,
+//     VDialog,
+//     VCard,content.
+//     VToolbar,
+//     VBtn,
+//     VIcon,
+//   },
+//   ...
+// })
 
-[nuxt-src]: https://img.shields.io/badge/Nuxt-020420?logo=nuxt.js
-[nuxt-href]: https://nuxt.com
+const app = createApp(App)
+app.use(vuetify)
+
+app.use(VuetifyNotifier, {
+  default: {
+    defaultColor: 'primary', //default color for all notifications
+    closeIcon: 'mdi-close', //default close icon for component
+  },
+})
+
+app.mount('#app')
+```
+
+## Nuxt
+
+#### **`nuxt.config.js|ts`**
+
+```javascript
+export default defineNuxtConfig({
+   ...
+   modules: [
+      'vuetify-notifier/nuxt'
+   ],
+   notifier:{
+      default:{
+         ...
+      }
+   }
+   ...
+})
+```
+
+## Usage
+
+### Vue 3 | Vite
+
+```javascript
+<script setup>
+import { useNotifier } from "vuetify-notifier";
+
+const notifier = useNotifier();
+
+const onLogin = async () => {
+  await login();
+  notifier.toast({text: "Login Success", status: "success" });
+};
+</script>
+```
+
+### Nuxt
+
+```javascript
+<script setup>
+const notifier = useNotifier();
+//or
+const notifier = useNuxtApp();
+
+const onLogin = async () => {
+  await login();
+  notifier.toast({text: "Login Success", status: "success" });
+};
+</script>
+```
+
+## API
+
+### Options
+
+### Methods
+
+The plugin adds notifier to the Vue instance, which provides the following methods:
+
+**Confirm**
+
+- toast
+- confirm
+- prompt
+- alert
+- component
+
+### Options
+
+Options for each method can be customized by providing an object as the last argument. You can configure default options globally for dialogs, toasts, and components
+** Options **
+
+```typescript
+export const defaultOptions: NotifierOptions = {
+  default: {
+    defaultColor: '',
+    defaultIcon: 'mdi-alert-circle',
+    successIcon: 'mdi-check-circle',
+    infoIcon: 'mdi-information',
+    warningIcon: 'mdi-alert',
+    errorIcon: 'mdi-alert-circle',
+    closeIcon: 'mdi-close',
+  },
+  dialogOptions: {
+    transition: 'dialog-bottom-transition',
+    width: 500,
+    minWidth: 300,
+    minHeight: 250,
+    textAlign: 'center',
+    primaryButtonText: 'OK',
+    secondaryButtonText: 'Cancel',
+    showDivider: true,
+    buttonProps: {
+      width: '100',
+    },
+
+    dialogProps: {}, // https://vuetifyjs.com/en/api/v-dialog)
+    cardProps: {}, // https://vuetifyjs.com/en/api/v-card)
+
+    buttonProps: {}, // https://vuetifyjs.com/en/api/v-btn)
+
+    primaryButtonProps: {}, // https://vuetifyjs.com/en/api/v-btn)
+    secondaryButtonProps: {}, // https://vuetifyjs.com/en/api/v-btn)
+
+    handleCancel: 'silent',
+    inputProps: {
+      // https://vuetifyjs.com/en/api/v-text-field/
+      label: 'Input',
+    },
+  },
+  toastOptions: {
+    toastProps: {
+      // https://vuetifyjs.com/en/api/v-snackbar/
+      transition: 'v-scroll-x-transition',
+      location: 'top right',
+    },
+  },
+  componentOptions: {
+    existsButton: true,
+  },
+}
+```
+
+**Basic Examples**
+
+```javascript
+notifier
+  .confirm({
+    text: 'Are you sure you want to delete this item?',
+  })
+  .then((result) => {
+    if (result) {
+      // Delete the item
+    }
+  })
+
+notifier.prompt({ text: 'Input your name' }).then((name) => {
+  console.log('User entered name:', name)
+})
+```
+
+**Super Advance Examples**
+
+```javascript
+import HelloWorld from './components/HelloWorld.vue';
+
+notifier.component({title: "Component Title", component: HelloWorld}).then((result) => {
+  console.log(result);
+});
+
+notifier.component({
+  title: "Component Title",
+  component:'global-component-name'
+}).then((result) => {
+  console.log(result);
+});
+
+// In your component. Please emit the event 'onSubmit' or 'onClose' to close the dialog
+<v-btn @click="$emit('onSubmit', 'Submit value')">Submit</v-btn>
+<v-btn @click="$emit('onCancel', 'Cancel value')">Cancel</v-btn>
+
+```
+
+## License
+
+### MIT License

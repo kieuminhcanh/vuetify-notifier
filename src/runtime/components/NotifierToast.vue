@@ -1,5 +1,5 @@
 <template>
-  <VSnackbar v-model="active">
+  <VSnackbar v-model="active" v-bind="$attrs">
 
   </VSnackbar>
 

@@ -1,4 +1,5 @@
-import { defineNuxtModule, addPlugin, createResolver, addComponentsDir, addImports, installModule, addTypeTemplate, addComponent } from '@nuxt/kit'
+import { defineNuxtModule, addPlugin, createResolver, addImports, installModule, addTypeTemplate, addComponent } from '@nuxt/kit'
+import { defu } from 'defu'
 
 // Module options TypeScript interface definition
 export interface ModuleOptions { }
@@ -12,13 +13,22 @@ export default defineNuxtModule<ModuleOptions>({
     }
   },
   // Default configuration options of the Nuxt module
-  defaults: {},
+  defaults: {
+    toast: {
+      position: 'fixed',
+      location: 'top right',
+    }
+  },
   async setup(_options, _nuxt) {
     const resolver = createResolver(import.meta.url)
 
-    await installModule('vuetify-nuxt-module', {
-      exposeConfig: true,
-    })
+    await installModule('vuetify-nuxt-module')
+
+    _nuxt.options.runtimeConfig.public.notifier = _options
+    // _nuxt.options.runtimeConfig.public.notifier = defu(_nuxt.options.runtimeConfig.public.notifier, {
+    //   foo: _options.foo
+    // })
+
 
     addComponent({
       filePath: resolver.resolve('runtime/components/NotifierContainer.vue'),

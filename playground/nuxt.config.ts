@@ -9,11 +9,14 @@ export default defineNuxtConfig({
       theme: {
         defaultTheme: 'dark'
       },
-      directives: true
+      directives: true,
+      labComponents: true,
     }
   },
 
-  vuetifier: {},
+  vuetifier: {
+  
+  },
   devtools: { enabled: true },
   compatibilityDate: '2024-11-17',
 })

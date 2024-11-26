@@ -1,7 +1,5 @@
 <template>
-  <div id="notifier">
-    Hello
-  </div>
+  <div id="notifier"></div>
 </template>
 
 <script lang="ts" setup>
