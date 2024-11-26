@@ -22,7 +22,10 @@ export default defineNuxtModule<ModuleOptions>({
   async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
 
-    await installModule('vuetify-nuxt-module')
+    await installModule('vuetify-nuxt-module', {
+      moduleOptions: {},
+      vuetifyOptions: {}
+    })
 
     nuxt.options.runtimeConfig.public.notifier = options
 
