@@ -6,8 +6,8 @@ export interface ModuleOptions { }
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: 'vuetifier',
-    configKey: 'vuetifier',
+    name: 'notifier',
+    configKey: 'notifier',
     compatibility: {
       nuxt: '>=3.0.0',
     }
@@ -19,31 +19,24 @@ export default defineNuxtModule<ModuleOptions>({
       location: 'top right',
     }
   },
-  async setup(_options, _nuxt) {
-    const resolver = createResolver(import.meta.url)
-
-    _nuxt.options.build.transpile.push('vuetify-nuxt-module');
+  async setup(options, nuxt) {
+    const { resolve } = createResolver(import.meta.url)
 
     await installModule('vuetify-nuxt-module')
 
-    _nuxt.options.runtimeConfig.public.notifier = _options
-    // _nuxt.options.runtimeConfig.public.notifier = defu(_nuxt.options.runtimeConfig.public.notifier, {
-    //   foo: _options.foo
-    // })
-
+    nuxt.options.runtimeConfig.public.notifier = options
 
     addComponent({
-      filePath: resolver.resolve('runtime/components/NotifierContainer.vue'),
       name: 'VNotifierContainer',
+      filePath: resolve('runtime/components/NotifierContainer.vue'),
     })
 
     addImports({
-      name: 'useNotifier', // name of the composable to be used
-      as: 'useNotifier',
-      from: resolver.resolve('runtime/composables/useNotifier') // path of composable
+      name: 'useNotifier',
+      from: resolve('runtime/composables/useNotifier')
     })
 
     // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
-    addPlugin(resolver.resolve('./runtime/plugin'))
+    addPlugin(resolve('./runtime/plugin'))
   },
 })
