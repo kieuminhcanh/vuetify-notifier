@@ -132,12 +132,17 @@
 </template>
 
 <script setup lang="ts">
-  import { Test } from "#components"
+  import Test from "./components/HelloWorld.vue"
+  import { reactive, watch } from 'vue'
+  import { useNotifier } from 'vuetify-notifier'
+  // @ts-ignore
+  // import { useNotifier } from '../../dist/notifier'
 
   const notifier = useNotifier()
 
   function onOpenDialog() {
     notifier.dialog(Test, {
+      msg: 'Hello World',
       options: {
         title: 'Test Dialog',
         width: 500,
@@ -189,7 +194,7 @@
   function onOpenConfirm() {
     notifier.confirm({
       ...confirmOptions,
-      onSubmit: (data) => {
+      onSubmit: (data: any) => {
         console.log('Submit', data)
       },
       onClose: () => console.log('Cancel')
@@ -224,6 +229,6 @@
   const confirmDirectyOptions = reactive(({
     title: 'Are you sure?',
     text: 'Do you want to continue?',
-    color: 'primary',
+    color: undefined
   }))
 </script>

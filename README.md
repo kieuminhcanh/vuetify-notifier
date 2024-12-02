@@ -8,15 +8,22 @@ Vuetify Notifier is a Vue 3 plugin that simplifies the process of displaying not
 ➡️ <a href="https://kieuminhcanh.github.io/vuetify-notifier" target="_blank">Demo Online</a> 👌
 </h2>
 
-## Installation
+## Nuxt Installation
 ```
 $ npx nuxi@latest module add vuetify-notifier-nuxt-module
 ```
 
 Please install vuetify-nuxt-module if you're not install.
+[Guide to install Vuetify with Nuxt](https://vuetifyjs.com/en/getting-started/installation/#using-nuxt-3)
+
+## Vue Installation
 ```
-$ npx nuxi@latest module add vuetify-nuxt-module 
+$ npm install vuetify-notifier
 ```
+
+Please install vuetify if you're not install.
+[Guide to install Vuetify with Vue](https://vuetifyjs.com/en/getting-started/installation/#using-laravel-mix)
+
 
 
 

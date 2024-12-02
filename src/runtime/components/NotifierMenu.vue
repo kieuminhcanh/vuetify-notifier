@@ -1,6 +1,6 @@
 <template>
   <VMenu v-model="active" activator="parent" :close-on-content-click="false" v-bind="$attrs">
-    <VSheet class="py-4" min-width="300" :color="attrs.color">
+    <VSheet class="py-4" min-width="300" :color="color">
       <VListItem :title="title" :subtitle="text">
         <template #append>
           <VListItemAction>
@@ -20,17 +20,10 @@
   const active = ref(false)
   const emit = defineEmits(['submit', 'cancel'])
 
-  const attrs: Partial<{
-    title: string,
-    text: string,
-    color: string,
-  }> = useAttrs()
-
-
-
   defineProps({
     title: String,
     text: String,
+    color: String,
     isConfirm: {
       type: Boolean,
       default: false
@@ -42,7 +35,7 @@
     emit('submit')
   }
 
-  function onCancel() {
+  function onClose() {
     active.value = false
     emit('cancel')
   }

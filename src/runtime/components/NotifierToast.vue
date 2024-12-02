@@ -1,22 +1,26 @@
 <template>
-  <VSnackbar v-model="active" v-bind="$attrs">
+  <VSnackbar v-model="active" v-bind="{ ...options, ...attrs }">
 
   </VSnackbar>
 
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { ref, useAttrs, type PropType } from 'vue'
+  import type { ToastOptions } from '../types'
 
-  const active = ref(true)
+  defineOptions({ inheritAttrs: false })
   const emit = defineEmits(['submit', 'cancel'])
+  const { options, ...attrs }: any = useAttrs()
+  
+  const active = ref(true)
 
   function onSubmit() {
     active.value = false
     emit('submit', 'hello')
   }
 
-  function onCancel() {
+  function onClose() {
     active.value = false
     emit('cancel')
   }

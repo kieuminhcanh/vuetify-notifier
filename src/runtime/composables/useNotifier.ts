@@ -1,59 +1,26 @@
-import { createApp, getCurrentInstance, h, ref, render, resolveComponent, useId, type Component, type InjectionKey, mergeProps } from 'vue'
+
+import { getCurrentInstance, h, render, resolveComponent } from 'vue'
+import { defu } from 'defu'
+
+import type { Component } from "vue"
+import type { AlertOptions, ComponentProps, ConfirmOptions, DialogOptions, ToastOptions } from '../types'
+
+import { defaultOptions } from '../utils'
 import NotifierToast from "../components/NotifierToast.vue"
 import NotifierConfirm from "../components/NotifierConfirm.vue"
 import NotifierComponent from "../components/NotifierComponent.vue"
-
-import type { VDialog } from "vuetify/components/VDialog"
-import { useRuntimeConfig } from '#app'
-
-interface Notifier {
-  onSubmit: (data: any) => void
-  onCancel: () => void
-}
-interface ComponentOptions extends VDialog, Notifier {
-  title?: string
-  to: string
-}
-
-interface ToastOptions extends Notifier {
-  title: string
-  text: string
-}
-
-type ConfirmOptions = ToastOptions
-type AlertOptions = Omit<ConfirmOptions, 'onCancel'> & {
-  isConfirm?: boolean
-}
-
-const defaultOptions = {
-  toast: {
-  },
-  confirm: {
-    color: 'transparent',
-    width: 400,
-    submitButton: {
-      color: 'primary',
-    }
-  },
-  alert: {
-
-    color: 'transparent',
-    width: 400,
-    submitButton: {
-      color: 'primary',
-    }
-  },
-}
-
-export const useNotifier = () => {
+export const useNotifier = (_options: any = {}) => {
   const v = getCurrentInstance()
-  // const config = useRuntimeConfig()
+  if (!v) {
+    throw new Error(`[Notifier] useNotifier() must be called from inside a setup function`)
+  }
 
   function show(component: Component, options: any) {
+
     const vnode = h(component, {
       ...options,
       onSubmit: options.onSubmit,
-      onCancel: options.onCancel,
+      onClose: options.onClose,
     })
     vnode.key = `${component.name}-${Math.random()}`
     const el = document.querySelector(options.to || '#notifier')
@@ -64,7 +31,7 @@ export const useNotifier = () => {
     }
   }
 
-  function dialog(component: string | Component, options: Partial<ComponentOptions>) {
+  function dialog<T extends Component | string>(component: T, options: Partial<ComponentProps<T> & DialogOptions> = {}) {
     const concreteComponent = typeof component === 'string' ? resolveComponent(component) : component
     return show(NotifierComponent, {
       component: concreteComponent as Component,
@@ -72,16 +39,16 @@ export const useNotifier = () => {
     })
   }
 
-  function toast(options: Partial<ToastOptions>) {
-    return show(NotifierToast, mergeProps(defaultOptions.toast, options))
+  function toast(options: Partial<ToastOptions> = {}) {
+    return show(NotifierToast, defu(defaultOptions.toast, options))
   }
 
-  function confirm(options: Partial<ConfirmOptions>) {
-    return show(NotifierConfirm, mergeProps(defaultOptions.confirm, options))
+  function confirm(options: Partial<ConfirmOptions> = {}) {
+    return show(NotifierConfirm, defu(defaultOptions.confirm, options))
   }
 
-  function alert(options: Partial<AlertOptions>) {
-    return show(NotifierConfirm, mergeProps(defaultOptions.alert, options, { isConfirm: false }))
+  function alert(options: Partial<AlertOptions> = {}) {
+    return show(NotifierConfirm, defu(defaultOptions.alert, options, { isConfirm: false }))
   }
 
   return {

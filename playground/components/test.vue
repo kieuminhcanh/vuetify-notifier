@@ -8,7 +8,7 @@
     <VCardActions>
       <VSpacer></VSpacer>
 
-      <VBtn @click="onCancel" text="Cancel"></VBtn>
+      <VBtn @click="onClose" text="Cancel"></VBtn>
       <VBtn @click="onSubmit" color="primary" text="Submit"></VBtn>
     </VCardActions>
   </VCard>
@@ -22,7 +22,7 @@
     emit('submit', 'hello')
   }
 
-  function onCancel() {
+  function onClose() {
     console.log('Cancel on component');
     
     emit('cancel')

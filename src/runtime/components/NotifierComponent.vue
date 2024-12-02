@@ -1,58 +1,41 @@
 <template>
-  <VDialog v-model="active" v-bind="attrs">
+  <VDialog v-model="active" v-bind="options">
     <VSheet>
-      <VToolbar v-if="title" :title="title">
-        <v-btn icon="$close" @click="onCancel" />
+      <VToolbar v-if="options?.title" :title="options?.title">
+        <v-btn icon="$close" @click="onClose" />
       </VToolbar>
-      <component :is="attrs.component" v-if="attrs.component" @submit="onSubmit" @cancel="onCancel" />
+      <component :is="component" v-if="component" v-bind="attrs" @submit="onSubmit" @cancel="onClose" />
     </VSheet>
   </VDialog>
 </template>
 
 <script setup lang="ts">
-  import { ref, useAttrs, type Component } from 'vue'
-  import { useLocale } from 'vuetify'
-  import type { VDialog } from "vuetify/components"
-  const { t } = useLocale()
+  import { ref, useAttrs, type Component, type PropType } from 'vue'
+  import type { DialogOptions } from "../types"
 
-  const active = ref(true)
+  defineOptions({ inheritAttrs: false })
   const emit = defineEmits(['submit', 'cancel'])
 
-  defineOptions({
-    inheritAttrs: false
-  })
+  const active = ref(true)
 
-  const attrs: Partial<{
-    width?: string
-    title?: string
-    text?: string
-    isConfirm?: boolean
-    persistent: boolean
-    submitButton?: {
-      color: string
-    },
-    textAlign?: string,
-    buttonAlign?: string,
-    divider?: boolean,
-    color?: string,
-    component: Component
-  }> = useAttrs()
+  const { options, ...attrs }: any = useAttrs()
+
 
   defineProps({
-    title: String,
-    text: String,
-    isConfirm: {
-      type: Boolean,
-      default: true
-    }
+    component: {
+      type: Object as PropType<Component>,
+      required: true
+    }    
   })
+
+
 
   function onSubmit(data: any) {
     active.value = false
     emit('submit', data)
   }
 
-  function onCancel() {
+  function onClose() {
     active.value = false
     emit('cancel')
   }
