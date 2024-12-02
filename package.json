@@ -1,6 +1,6 @@
 {
   "name": "vuetify-notifier",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "Vuetify Notifier is a Nuxt module that provides a simple way to display notifications in your Nuxt application using Vuetify.",
   "repository": {
     "url": "https://github.com/kieuminhcanh/vuetify-notifier",
