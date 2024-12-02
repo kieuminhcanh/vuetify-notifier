@@ -1,19 +1,24 @@
 {
-  "name": "vuetify-notifier-nuxt-module",
-  "version": "1.0.4",
+  "name": "vuetify-notifier",
+  "version": "1.0.1",
   "description": "Vuetify Notifier is a Nuxt module that provides a simple way to display notifications in your Nuxt application using Vuetify.",
   "repository": "https://github.com/kieuminhcanh/vuetify-notifier",
   "license": "MIT",
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/types.d.ts",
+      "types": "./dist/runtime/types.d.ts",
+      "import": "./dist/notifier.js",
+      "require": "./dist/notifier.umd.cjs"
+    },
+    "./nuxt": {
+      "types": "./dist/runtime/types.d.ts",
       "import": "./dist/module.mjs",
       "require": "./dist/module.cjs"
     }
   },
-  "main": "./dist/module.cjs",
-  "types": "./dist/types.d.ts",
+  "main": "./dist/notifier.umd.cjs",
+  "types": "./dist/runtime/types.d.ts",
   "files": [
     "dist"
   ],
@@ -25,7 +30,7 @@
     "docs": "nuxi dev docs",
     "docs:build": "nuxi build docs",
     "docs:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare docs",
-    "release": "npm run prepack && changelogen --release && npm publish && git push --follow-tags",
+    "release": "nuxt-module-build build && vite build && changelogen --release && npm publish && git push --follow-tags",
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest watch",
@@ -49,6 +54,9 @@
     "vitest": "^2.1.5",
     "vue-tsc": "^2.1.10",
     "vuetify-nuxt-module": "^0.18.3"
+  },
+  "unbuild": {
+    "failOnWarn": false
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
