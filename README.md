@@ -1,29 +1,26 @@
-# Vuetify Notifier Nuxt Module
+# Vuetify Notifier
 
-![image](https://user-images.githubusercontent.com/136077/230705147-849714e2-a50b-4118-9100-f14d6a82d2e9.png)
+**Simple yet fully customizable notifications, dialogs, and directives for your Vuetify applications.**
 
-Vuetify Notifier is a Vue 3 plugin that simplifies the process of displaying notifications, alerts, confirmations, and prompts in your Vue or Nuxt applications. It uses Vuetify components to provide a beautiful and customizable user experience.
+[![npm](https://img.shields.io/npm/v/vuetify-notifier.svg)](https://www.npmjs.com/package/vuetify-notifier)
 
-<h2 style="text-align: center;">
-➡️ <a href="https://kieuminhcanh.github.io/vuetify-notifier" target="_blank">Demo Online</a> 👌
-</h2>
+Vuetify Notifier is a Vue plugin that provides a seamless way to integrate notifications, dialogs, and directives into your Vuetify projects. It offers a simple API with extensive customization options, allowing you to create user-friendly and visually appealing interactions.
 
-## Nuxt Installation
-```
-$ npx nuxi@latest module add vuetify-notifier-nuxt-module
-```
+## Features
 
-Please install vuetify-nuxt-module if you're not install.
-[Guide to install Vuetify with Nuxt](https://vuetifyjs.com/en/getting-started/installation/#using-nuxt-3)
+* **Notifications:** Display customizable toast notifications with various types (success, error, warning, info).
+* **Dialogs:** Create engaging dialogs for alerts, confirmations, and prompts.
+* **Directives:** Enhance your elements with `v-confirm` and `v-input` directives.
+* **Component as Dialog:** Easily transform any Vue component into a modal dialog.
+* **Seamless Vuetify Integration:**  Maintain a consistent look and feel within your Vuetify applications.
 
-## Vue Installation
-```
-$ npm install vuetify-notifier
-```
+## Documentation
 
-Please install vuetify if you're not install.
-[Guide to install Vuetify with Vue](https://vuetifyjs.com/en/getting-started/installation/#using-laravel-mix)
+Explore the full documentation and examples on our website:
 
+[https://kieuminhcanh.github.io/vuetify-notifier/](https://kieuminhcanh.github.io/vuetify-notifier/)
 
+## Installation
 
-
+```bash
+npm install vuetify-notify
