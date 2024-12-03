@@ -3,6 +3,10 @@ export default defineNuxtConfig({
   extends: ['@nuxt-themes/docus'],
   devtools: { enabled: true },
 
+  app: {
+    baseURL: '/vuetify-notifier/'
+  },
+
   modules: [
     // Remove it if you don't use Plausible analytics
     // https://github.com/nuxt-modules/plausible
