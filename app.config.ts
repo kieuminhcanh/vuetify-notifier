@@ -8,10 +8,10 @@ export default defineAppConfig({
       github: 'kieuminhcanh/vuetify-notifier',      
     },
     github: {
-      dir: '.starters/default/content',
-      branch: 'main',
-      repo: 'docus',
-      owner: 'nuxt-themes',
+      dir: 'content',
+      branch: 'docs',
+      repo: 'vuetify-notifier',
+      owner: 'kieuminhcanh',
       edit: true
     },
     aside: {
