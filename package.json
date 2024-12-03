@@ -1,65 +1,22 @@
 {
-  "name": "vuetify-notifier",
-  "version": "2.0.1",
-  "description": "Vuetify Notifier is a simple way to display notifications in your Nuxt and Vue applications using Vuetify.",
-  "repository": {
-    "url": "https://github.com/kieuminhcanh/vuetify-notifier",
-    "type": "git"
-  },
-  "license": "MIT",
-  "type": "module",
-  "exports": {
-    ".": {
-      "types": "./dist/runtime/types.d.ts",
-      "import": "./dist/notifier.js",
-      "require": "./dist/notifier.umd.cjs"
-    },
-    "./nuxt": {
-      "types": "./dist/runtime/types.d.ts",
-      "import": "./dist/module.mjs",
-      "require": "./dist/module.cjs"
-    }
-  },
-  "main": "./dist/notifier.umd.cjs",
-  "types": "./dist/runtime/types.d.ts",
-  "files": [
-    "dist"
-  ],
+  "name": "docus-starter",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "prepack": "nuxt-module-build build && vite build",
-    "dev": "nuxi dev playground",
-    "dev:build": "nuxi build playground",
-    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
-    "docs": "nuxi dev docs",
-    "docs:build": "nuxi build docs",
-    "docs:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare docs",
-    "release": "npm run prepack && changelogen --release && npm publish && git push --follow-tags",
-    "lint": "eslint .",
-    "test": "vitest run",
-    "test:watch": "vitest watch",
-    "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
-  },
-  "dependencies": {
-    "@nuxt/kit": "^3.14.159"
+    "dev": "nuxi dev",
+    "build": "nuxi build",
+    "generate": "nuxi generate",
+    "preview": "nuxi preview",
+    "lint": "eslint ."
   },
   "devDependencies": {
+    "@nuxt-themes/docus": "latest",
     "@nuxt/devtools": "^1.6.0",
-    "@nuxt/eslint-config": "^0.7.0",
-    "@nuxt/module-builder": "^0.8.4",
-    "@nuxt/schema": "^3.14.159",
-    "@nuxt/test-utils": "^3.14.4",
-    "@types/node": "latest",
-    "changelogen": "^0.5.7",
-    "eslint": "^9.15.0",
-    "nuxt": "^3.14.159",
-    "sass": "^1.81.0",
-    "typescript": "latest",
-    "vitest": "^2.1.5",
-    "vue-tsc": "^2.1.10",
-    "vuetify-nuxt-module": "^0.18.3"
-  },
-  "unbuild": {
-    "failOnWarn": false
+    "@nuxt/eslint-config": "^0.6.1",
+    "@nuxtjs/plausible": "^1.0.3",
+    "@types/node": "^22.9.0",
+    "eslint": "^9.14.0",
+    "nuxt": "^3.14.159"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

@@ -1,29 +1,57 @@
-# Vuetify Notifier Nuxt Module
+# Docus Starter
 
-![image](https://user-images.githubusercontent.com/136077/230705147-849714e2-a50b-4118-9100-f14d6a82d2e9.png)
+Starter template for [Docus](https://docus.dev).
 
-Vuetify Notifier is a Vue 3 plugin that simplifies the process of displaying notifications, alerts, confirmations, and prompts in your Vue or Nuxt applications. It uses Vuetify components to provide a beautiful and customizable user experience.
+## Clone
 
-<h2 style="text-align: center;">
-➡️ <a href="https://kieuminhcanh.github.io/vuetify-notifier" target="_blank">Demo Online</a> 👌
-</h2>
+Clone the repository (using `nuxi`):
 
-## Nuxt Installation
-```
-$ npx nuxi@latest module add vuetify-notifier-nuxt-module
+```bash
+npx nuxi init -t themes/docus
 ```
 
-Please install vuetify-nuxt-module if you're not install.
-[Guide to install Vuetify with Nuxt](https://vuetifyjs.com/en/getting-started/installation/#using-nuxt-3)
+## Setup
 
-## Vue Installation
+Install dependencies:
+
+```bash
+yarn install
 ```
-$ npm install vuetify-notifier
+
+## Development
+
+```bash
+yarn dev
 ```
 
-Please install vuetify if you're not install.
-[Guide to install Vuetify with Vue](https://vuetifyjs.com/en/getting-started/installation/#using-laravel-mix)
+## Edge Side Rendering
 
+Can be deployed to Vercel Functions, Netlify Functions, AWS, and most Node-compatible environments.
 
+Look at all the available presets [here](https://v3.nuxtjs.org/guide/deploy/presets).
 
+```bash
+yarn build
+```
 
+## Static Generation
+
+Use the `generate` command to build your application.
+
+The HTML files will be generated in the .output/public directory and ready to be deployed to any static compatible hosting.
+
+```bash
+yarn generate
+```
+
+## Preview build
+
+You might want to preview the result of your build locally, to do so, run the following command:
+
+```bash
+yarn preview
+```
+
+---
+
+For a detailed explanation of how things work, check out [Docus](https://docus.dev).
