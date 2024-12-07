@@ -1,10 +1,7 @@
-import type { Component } from "vue"
-import type { VDialog, VSnackbar } from "vuetify/components"
-export { default } from "../notifier"
-export { useNotifier } from './composables/useNotifier'
+import type { VDialog, VSnackbar } from 'vuetify/components'
 
-type DialogProps = NonNullable<InstanceType<typeof VDialog>['$props']>
-type ToastProps = NonNullable<InstanceType<typeof VSnackbar>['$props']>
+export { default } from '../notifier'
+export { useNotifier } from './composables/useNotifier'
 
 interface NotifierContent {
   title: string
@@ -20,22 +17,21 @@ interface NotifierAction {
 interface Notifier extends NotifierContent, NotifierAction { }
 
 export type DialogOptions = NotifierAction & {
-  options: DialogProps & {
+  options: ComponentProps<VDialog> & {
     title?: string
     [key: string]: any
   }
 }
 
-
 export type ToastOptions = Notifier & {
-  options: ToastProps
+  options: ComponentProps<VSnackbar>
 }
 
 export interface ConfirmOptions extends Notifier {
-  options: DialogProps & Partial<{
-    divider: boolean,
-    textAlign: 'left' | 'center' | 'right',
-    buttonAlign: 'start' | 'center' | 'end',
+  options: ComponentProps<VDialog> & Partial<{
+    divider: boolean
+    textAlign: 'left' | 'center' | 'right'
+    buttonAlign: 'start' | 'center' | 'end'
   }>
 }
 
@@ -45,5 +41,4 @@ export type AlertOptions = Omit<ConfirmOptions, 'onClose'> & {
 
 export type ComponentProps<T> =
   T extends new () => { $props: infer P } ? NonNullable<P> :
-  T extends (props: infer P, ...args: any) => any ? P :
-  {}
+    T extends (props: infer P, ...args: any) => any ? P : {}
