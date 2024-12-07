@@ -1,8 +1,9 @@
 # Vuetify Notifier
 
-**Simple yet fully customizable notifications, dialogs, and directives for your Vuetify applications.**
+**Effortless Notifications & Dialogs for Vuetify**
 
-[![npm](https://img.shields.io/npm/v/vuetify-notifier.svg)](https://www.npmjs.com/package/vuetify-notifier)
+![Vuetify notifier](https://github.com/user-attachments/assets/6964387d-b685-4d8c-b5a3-e11d7ce9335b)
+
 
 Vuetify Notifier is a Vue plugin that provides a seamless way to integrate notifications, dialogs, and directives into your Vuetify projects. It offers a simple API with extensive customization options, allowing you to create user-friendly and visually appealing interactions.
 
@@ -18,9 +19,8 @@ Vuetify Notifier is a Vue plugin that provides a seamless way to integrate notif
 
 Explore the full documentation and examples on our website:
 
-[https://kieuminhcanh.github.io/vuetify-notifier/](https://kieuminhcanh.github.io/vuetify-notifier/)
+[Documents](https://kieuminhcanh.github.io/vuetify-notifier/)
 
 ## Installation
 
-```bash
-npm install vuetify-notify
+[Documents](https://kieuminhcanh.github.io/vuetify-notifier/)
