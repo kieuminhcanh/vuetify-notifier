@@ -21,7 +21,7 @@ export default defineAppConfig({
     },
     main: {
       padded: true,
-      fluid: true
+      fluid: false
     },
     header: {
       logo: false,

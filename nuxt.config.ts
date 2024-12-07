@@ -4,13 +4,12 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   app: {
-    baseURL: '/vuetify-notifier/'
+    baseURL: process.env.NODE_ENV === 'development' ? '' : '/vuetify-notifier/'
   },
 
-  modules: [
-    // Remove it if you don't use Plausible analytics
-    // https://github.com/nuxt-modules/plausible
-    '@nuxtjs/plausible',    
-  ],
+  modules: [// Remove it if you don't use Plausible analytics
+  // https://github.com/nuxt-modules/plausible
+  // '@nuxtjs/plausible',    
+  'vuetify-notifier/nuxt', 'vuetify-nuxt-module'],
   compatibilityDate: '2024-10-24'
 })
