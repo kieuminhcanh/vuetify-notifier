@@ -1,32 +1,39 @@
 <template>
-  <VCard title="Dialog">
-    <VCardText>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-      magna aliqua.
-    </VCardText>
+  <VCard title="Component title">
+    <VCardText>Component text</VCardText>
+    <VCardText>Hello: {{ msg }}</VCardText>
 
     <VCardActions>
-      <VSpacer></VSpacer>
-
-      <VBtn @click="onClose" text="Cancel"></VBtn>
-      <VBtn @click="onSubmit" color="primary" text="Submit"></VBtn>
+      <VSpacer />
+      <VBtn
+        text="Cancel"
+        @click="onClose"
+      />
+      <VBtn
+        color="primary"
+        text="Submit"
+        @click="onSubmit"
+      />
     </VCardActions>
   </VCard>
 </template>
 
 <script lang="ts" setup>
-  const active = ref(true)
-  const emit = defineEmits(['submit', 'cancel'])
+defineProps({
+  msg: String,
+})
 
-  function onSubmit() {
-    emit('submit', 'hello')
-  }
+const emit = defineEmits(['submit', 'cancel'])
 
-  function onClose() {
-    console.log('Cancel on component');
-    
-    emit('cancel')
-  }
+function onSubmit() {
+  emit('submit', 'hello')
+}
+
+function onClose() {
+  console.log('Cancel on component')
+
+  emit('cancel')
+}
 </script>
 
 <style lang="scss"></style>

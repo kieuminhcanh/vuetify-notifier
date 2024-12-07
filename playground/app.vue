@@ -27,19 +27,21 @@
           <VCardText>
             <VTabsWindow v-model="tab">
               <VTabsWindowItem value="toast">
-                <VRow>
+                <VRow
+                  align="center"
+                  justify="center"
+                >
                   <VCol
                     cols="8"
-                    align-self="center"
-                    class="text-center"
+                    class="d-flex justify-center"
                   >
-                    <VBtn
-                      text="Toast"
-                      variant="outlined"
-                      @click="onOpenToast"
-                    />
+                    <pre>
+                      {{ toastCode }}
+                    </pre>
                   </VCol>
-                  <VCol cols="4">
+                  <VCol
+                    cols="4"
+                  >
                     <VCard title="Props">
                       <VTextField
                         :model-value="toastOptions.text"
@@ -57,25 +59,36 @@
                         :items="['primary', 'secondary', 'success', 'error', 'purple']"
                         label="Color"
                       />
+                      <VCardActions>
+                        <VBtn
+                          block
+                          :color="toastOptions.options.color"
+                          text="Show Toast"
+                          variant="outlined"
+                          @click="onOpenToast"
+                        />
+                      </VCardActions>
                     </VCard>
                   </VCol>
                 </VRow>
               </VTabsWindowItem>
 
               <VTabsWindowItem value="alert">
-                <VRow>
+                <VRow
+                  align="center"
+                  justify="center"
+                >
                   <VCol
                     cols="8"
-                    align-self="center"
-                    class="text-center"
+                    class="d-flex justify-center"
                   >
-                    <VBtn
-                      text="Alert"
-                      variant="outlined"
-                      @click="onOpenAlert"
-                    />
+                    <pre>
+                      {{ alertCode }}
+                    </pre>
                   </VCol>
-                  <VCol cols="4">
+                  <VCol
+                    cols="4"
+                  >
                     <VCard title="Props">
                       <VTextField
                         :model-value="alertOptions.title"
@@ -115,25 +128,35 @@
                         v-model="alertOptions.options.persistent"
                         label="Persistent"
                       />
+                      <VCardActions>
+                        <VBtn
+                          block
+                          text="Alert"
+                          variant="outlined"
+                          @click="onOpenAlert"
+                        />
+                      </VCardActions>
                     </VCard>
                   </VCol>
                 </VRow>
               </VTabsWindowItem>
 
               <VTabsWindowItem value="confirm">
-                <VRow>
+                <VRow
+                  align="center"
+                  justify="center"
+                >
                   <VCol
                     cols="8"
-                    align-self="center"
-                    class="text-center"
+                    class="d-flex justify-center"
                   >
-                    <VBtn
-                      text="Confirm"
-                      variant="outlined"
-                      @click="onOpenConfirm"
-                    />
+                    <pre>
+                        {{ confirmCode }}
+                      </pre>
                   </VCol>
-                  <VCol cols="4">
+                  <VCol
+                    cols="4"
+                  >
                     <VCard title="Props">
                       <VTextField
                         :model-value="confirmOptions.title"
@@ -173,17 +196,25 @@
                         v-model="confirmOptions.options.persistent"
                         label="Persistent"
                       />
+                      <VCardActions>
+                        <VBtn
+                          block
+                          text="Confirm"
+                          variant="outlined"
+                          @click="onOpenConfirm"
+                        />
+                      </VCardActions>
                     </VCard>
                   </VCol>
                 </VRow>
               </VTabsWindowItem>
+
               <VTabsWindowItem value="input">
-                <VRow>
-                  <VCol
-                    cols="8"
-                    align-self="center"
-                    class="d-flex justify-center ga-4"
-                  >
+                <VRow
+                  align="center"
+                  justify="center"
+                >
+                  <VCol cols="4">
                     <VBtn
                       v-notifier-confirm="{
                         ...confirmDirectyOptions,
@@ -194,7 +225,11 @@
                       text="Quick confirm"
                       variant="outlined"
                     />
-
+                    <pre>
+                      {{ confirmDirectyCode }}
+                    </pre>
+                  </VCol>
+                  <VCol cols="4">
                     <VBtn
                       v-notifier-input="{
                         ...confirmDirectyOptions,
@@ -205,6 +240,9 @@
                       text="Input Inline"
                       variant="outlined"
                     />
+                    <pre>
+                      {{ inputDirectyCode }}
+                    </pre>
                   </VCol>
                   <VCol cols="4">
                     <VCard title="Props">
@@ -228,20 +266,46 @@
                 </VRow>
               </VTabsWindowItem>
               <VTabsWindowItem value="dialog">
-                <VRow>
+                <VRow
+                  align="center"
+                  justify="center"
+                >
                   <VCol
                     cols="8"
-                    align-self="center"
-                    class="text-center"
+                    class="d-flex justify-center"
                   >
-                    <VBtn
-                      text="Component"
-                      variant="outlined"
-                      @click="onOpenDialog"
-                    />
+                    <pre>
+                      {{ dialogCode }}
+                    </pre>
                   </VCol>
-                  <VCol cols="4">
-                    <VCard title="Props" />
+                  <VCol
+                    cols="4"
+                  >
+                    <VCard title="Props">
+                      <VTextField
+                        :model-value="dialogOptions.msg"
+                        label="Component prop"
+                        @change="dialogOptions.msg = $event.target.value"
+                      />
+                    </VCard>
+                    <VCard title="Options">
+                      <VTextField
+                        :model-value="dialogOptions.options.title"
+                        label="Title"
+                        @change="dialogOptions.options.title = $event.target.value"
+                      />
+                      <VTextField
+                        :model-value="dialogOptions.options.width"
+                        label="Width"
+                        @change="dialogOptions.options.width = $event.target.value"
+                      />
+                      <VBtn
+                        block
+                        text="Component"
+                        variant="outlined"
+                        @click="onOpenDialog"
+                      />
+                    </VCard>
                   </VCol>
                 </VRow>
               </VTabsWindowItem>
@@ -261,12 +325,17 @@ const tab = ref('toast')
 
 const notifier = useNotifier()
 
+const dialogOptions = reactive(({
+  msg: 'World',
+  options: {
+    title: '',
+    width: 500,
+  },
+}))
+
 function onOpenDialog() {
   notifier.dialog(Test, {
-    options: {
-      title: 'Test Dialog',
-      width: 500,
-    },
+    ...dialogOptions,
     onSubmit(data) {
       console.log('Submit', data)
     },
@@ -276,8 +345,29 @@ function onOpenDialog() {
   })
 }
 
+const dialogCode = computed(() => `
+//import { Test } from '#components' // Using Nuxt 
+import { Test } from './components/Test.vue' // Using Vue 3
+
+
+const notifier = useNotifier()
+
+notifier.dialog(Test, {
+  msg: ${dialogOptions.msg},
+  options: {
+    title: ${dialogOptions.options.title},
+    width: ${dialogOptions.options.width},
+  },
+  onSubmit(data) {
+    console.log('Submit', data)
+  },
+  onClose() {
+    console.log('Cancel')
+  },
+})
+`)
+
 const toastOptions = reactive(({
-  title: 'Toast',
   text: 'Hello World',
   options: {
     location: 'top right',
@@ -292,6 +382,17 @@ watch(toastOptions, () => {
 function onOpenToast() {
   notifier.toast(toastOptions)
 }
+
+const toastCode = computed(() => `
+const notifier = useNotifier()
+
+notifier.toast({  
+  text: '${toastOptions.text}',
+  options: {
+    location: '${toastOptions.options.location}',
+    color: '${toastOptions.options.color}',
+  },
+})`)
 
 const confirmOptions = reactive(({
   title: 'Are you sure?',
@@ -320,6 +421,21 @@ function onOpenConfirm() {
   })
 }
 
+const confirmCode = computed(() => `
+const notifier = useNotifier()
+
+notifier.confirm({  
+  title: '${confirmOptions.text}',
+  text: '${confirmOptions.text}',
+  color: '${toastOptions.options.color}',
+  onSubmit(data) {
+    console.log('Submit', data)
+  },
+  onClose() {
+    console.log('Cancel')
+  },
+})`)
+
 const alertOptions = reactive(({
   title: 'Are you sure?',
   text: 'Do you want to continue?',
@@ -337,6 +453,18 @@ watch(alertOptions, () => {
   onOpenAlert()
 })
 
+const alertCode = computed(() => `
+const notifier = useNotifier()
+
+notifier.alert({  
+  title: '${alertOptions.text}',
+  text: '${alertOptions.text}',
+  color: '${alertOptions.color}',  
+  onSubmit(data) {
+    console.log('Submit', data)
+  },  
+})`)
+
 function onOpenAlert() {
   notifier.alert({
     ...alertOptions,
@@ -349,4 +477,34 @@ const confirmDirectyOptions = reactive(({
   text: 'Do you want to continue?',
   color: 'primary',
 }))
+
+const confirmDirectyCode = computed(() => `
+<VBtn
+  v-notifier-confirm="{
+    title: '${confirmDirectyOptions.title}',
+    text: '${confirmDirectyOptions.text}',
+    color: '${confirmDirectyOptions.color}',
+    onSubmit() {
+      console.log('Submit')
+    },
+  }"
+  text="Quick confirm"
+  variant="outlined"
+/>
+`)
+
+const inputDirectyCode = computed(() => `
+<VBtn
+  v-notifier-input="{
+    title: '${confirmDirectyOptions.title}',
+    text: '${confirmDirectyOptions.text}',
+    color: '${confirmDirectyOptions.color}',
+    onSubmit(data: any) {
+      console.log('Submit', data)
+    },
+  }"
+  text="Input Inline"
+  variant="outlined"
+/>
+`)
 </script>
