@@ -14,5 +14,6 @@ export const defaults: NotifierOptions = {
     location: 'top right',
     timeout: 5000,
     max: 5,
+    width: 400,
   },
 }

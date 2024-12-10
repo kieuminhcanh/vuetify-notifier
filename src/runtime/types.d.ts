@@ -1,7 +1,9 @@
 import type { VDialog } from 'vuetify/components'
+import { useNotifier } from './composables/useNotifier'
 
 export { default } from '../plugin'
-export { useNotifier } from './composables/useNotifier'
+export { useNotifier }
+// export { useNotifier } from ' ./composables/useNotifier'
 
 interface NotifierContent {
   title: string
@@ -44,6 +46,7 @@ export type NotifierOptions = {
     location: 'top left' | 'top right' | 'bottom left' | 'bottom right'
     timeout: number
     max: number
+    width: number
   }
   alert: {
     width: number

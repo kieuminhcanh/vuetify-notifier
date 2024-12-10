@@ -18,12 +18,13 @@ export default defineNuxtModule({
 
     addComponent({
       name: 'VNotifierContainer',
-      filePath: resolve('runtime/components/NotifierContainer.vue'),
+      filePath: resolve('./runtime/components/NotifierContainer.vue'),
     })
 
     addImports({
       name: 'useNotifier',
-      from: resolve('runtime/composables/useNotifier.ts'),
+      as: 'useNotifier',
+      from: resolve('./runtime/composables/useNotifier'),
     })
 
     // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`

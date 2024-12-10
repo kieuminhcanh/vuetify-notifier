@@ -2,7 +2,7 @@
   <VHover v-slot="{ isHovering, props }">
     <VSheet
       color="transparent"
-      width="300"
+      :width="state.width"
       position="fixed"
       location="top right"
       class="d-flex flex-column"
@@ -40,6 +40,7 @@ const options = inject('notifier') as NotifierOptions
 const state = reactive({
   max: options.toast.max,
   timeout: options.toast.timeout,
+  width: options.toast.width || 400,
 })
 
 const toasters = computed(() => items.value.slice(0, state.max))
