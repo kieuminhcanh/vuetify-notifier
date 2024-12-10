@@ -11,5 +11,12 @@ export default defineNuxtConfig({
     'vuetify-nuxt-module',
     'vuetify-notifier/nuxt'
   ],
+  vuetify: {
+    vuetifyOptions: {
+      theme: {
+        defaultTheme: 'dark',
+      },
+    },
+  },
   compatibilityDate: '2024-10-24'
 })
