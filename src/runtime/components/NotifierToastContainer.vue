@@ -6,6 +6,7 @@
       position="fixed"
       location="top right"
       class="d-flex flex-column"
+      style="z-index: 99999;"
       v-bind="props"
     >
       <VNoSsr>
@@ -34,8 +35,7 @@ import NotifierAlert from './NotifierAlert.vue'
 
 const { items } = useToast()
 
-// @ts-expect-error This is use for runtime configuration
-const options: NotifierOptions = inject('notifier') || useRuntimeConfig().public.notifier as NotifierOptions
+const options = inject('notifier') as NotifierOptions
 
 const state = reactive({
   max: options.toast.max,

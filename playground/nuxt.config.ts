@@ -4,18 +4,18 @@ export default defineNuxtConfig({
     'vuetify-nuxt-module',
     // 'vuetify-notifier/nuxt'
   ],
+  devtools: { enabled: true },
+  compatibilityDate: '2024-11-17',
+  notifier: {
+  },
 
   vuetify: {
     vuetifyOptions: {
       theme: {
-        defaultTheme: 'dark'
+        defaultTheme: 'dark',
       },
       directives: true,
       labComponents: true,
-    }
+    },
   },
-  notifier: {  
-  },
-  devtools: { enabled: true },
-  compatibilityDate: '2024-11-17',
 })

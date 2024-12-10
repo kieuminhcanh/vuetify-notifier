@@ -1,22 +1,22 @@
-
-import { getCurrentInstance, h, render, resolveComponent } from 'vue'
 import { defu } from 'defu'
+import { getCurrentInstance, h, render, resolveComponent } from 'vue'
 
-import type { Component } from "vue"
-import type { AlertOptions, ComponentProps, ConfirmOptions, DialogOptions, ToastOptions } from '../types'
+import type { Component } from 'vue'
+import type { AlertOptions, ComponentProps, ConfirmOptions, DialogOptions } from '../types'
 
+import NotifierComponent from '../components/NotifierComponent.vue'
+import NotifierConfirm from '../components/NotifierConfirm.vue'
 import { defaultOptions } from '../utils'
-import NotifierToast from "../components/NotifierToast.vue"
-import NotifierConfirm from "../components/NotifierConfirm.vue"
-import NotifierComponent from "../components/NotifierComponent.vue"
+import useToast from './useToast'
+
 export const useNotifier = (_options: any = {}) => {
   const v = getCurrentInstance()
+
   if (!v) {
     throw new Error(`[Notifier] useNotifier() must be called from inside a setup function`)
   }
 
   function show(component: Component, options: any) {
-
     const vnode = h(component, {
       ...options,
       onSubmit: options.onSubmit,
@@ -39,8 +39,9 @@ export const useNotifier = (_options: any = {}) => {
     })
   }
 
-  function toast(options: Partial<ToastOptions> = {}) {
-    return show(NotifierToast, defu(defaultOptions.toast, options))
+  function toast(options: any = {}) {
+    // return show(NotifierToast, defu(defaultOptions.toast, options))
+    return useToast().add(options as any)
   }
 
   function confirm(options: Partial<ConfirmOptions> = {}) {

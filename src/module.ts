@@ -1,4 +1,6 @@
-import { defineNuxtModule, addPlugin, createResolver, addImports, installModule, addTypeTemplate, addComponent } from '@nuxt/kit'
+import { addComponent, addImports, addPlugin, createResolver, defineNuxtModule } from '@nuxt/kit'
+import { defu } from 'defu'
+import { defaults } from './options'
 
 export default defineNuxtModule({
   meta: {
@@ -6,17 +8,13 @@ export default defineNuxtModule({
     configKey: 'notifier',
     compatibility: {
       nuxt: '>=3.0.0',
-    }
+    },
   },
-  // Default configuration options of the Nuxt module
-  defaults: {
-    toast: {
-      position: 'fixed',
-      location: 'top right',
-    }
-  },
+  defaults,
   setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
+
+    nuxt.options.runtimeConfig.public.notifier = defu(nuxt.options.runtimeConfig.public.notifier || {}, options)
 
     addComponent({
       name: 'VNotifierContainer',
@@ -25,8 +23,7 @@ export default defineNuxtModule({
 
     addImports({
       name: 'useNotifier',
-      from: resolve('runtime/composables/useNotifier'),
-      meta: options
+      from: resolve('runtime/composables/useNotifier.ts'),
     })
 
     // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
@@ -34,9 +31,9 @@ export default defineNuxtModule({
   },
   hooks: {
     'prepare:types': ({ references }) => {
-      references.push({ 
+      references.push({
         path: 'runtime/types.d.ts',
-       })
-    }
-  }
+      })
+    },
+  },
 })

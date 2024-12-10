@@ -1,6 +1,6 @@
-import type { VDialog, VSnackbar } from 'vuetify/components'
+import type { VDialog } from 'vuetify/components'
 
-export { default } from '../notifier'
+export { default } from '../plugin'
 export { useNotifier } from './composables/useNotifier'
 
 interface NotifierContent {
@@ -14,7 +14,7 @@ interface NotifierAction {
   onClose?: () => void
 }
 
-interface Notifier extends NotifierContent, NotifierAction { }
+export interface Notifier extends NotifierContent, NotifierAction { }
 
 export type DialogOptions = NotifierAction & {
   options: ComponentProps<VDialog> & {
@@ -23,9 +23,9 @@ export type DialogOptions = NotifierAction & {
   }
 }
 
-export type ToastOptions = Notifier & {
-  options: ComponentProps<VSnackbar>
-}
+// export type ToastOptions = Notifier & {
+//   options: ComponentProps<VSnackbar>
+// }
 
 export interface ConfirmOptions extends Notifier {
   options: ComponentProps<VDialog> & Partial<{
@@ -37,6 +37,23 @@ export interface ConfirmOptions extends Notifier {
 
 export type AlertOptions = Omit<ConfirmOptions, 'onClose'> & {
   isConfirm?: boolean
+}
+
+export type NotifierOptions = {
+  toast: {
+    location: 'top left' | 'top right' | 'bottom left' | 'bottom right'
+    timeout: number
+    max: number
+  }
+  alert: {
+    width: number
+  }
+  confirm: {
+    width: number
+  }
+  dialog: {
+    width: number
+  }
 }
 
 export type ComponentProps<T> =

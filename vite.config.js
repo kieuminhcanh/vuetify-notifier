@@ -1,7 +1,7 @@
+import vue from '@vitejs/plugin-vue'
 import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
   plugins: [
@@ -16,7 +16,7 @@ export default defineConfig({
   build: {
     emptyOutDir: false,
     lib: {
-      entry: resolve(__dirname, 'src/notifier'),
+      entry: resolve(__dirname, 'src/plugin'),
       name: 'VuetifyNotifier',
       fileName: 'notifier',
     },

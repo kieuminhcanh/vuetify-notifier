@@ -1,40 +1,51 @@
 <template>
-  <VMenu v-model="active" activator="parent" :close-on-content-click="false" v-bind="$attrs">
-    <VSheet class="pa-4" min-width="300" :color="attrs.color">
-      <VTextField :label="text" v-model="input" hide-details="auto" append-icon="$success" @click:append="onSubmit" />
+  <VMenu
+    v-model="active"
+    activator="parent"
+    :close-on-content-click="false"
+    v-bind="$attrs"
+  >
+    <VSheet
+      class="pa-4"
+      min-width="300"
+      :color="attrs.color"
+    >
+      <VTextField
+        v-model="input"
+        :label="text"
+        hide-details="auto"
+        append-icon="$success"
+        @click:append="onSubmit"
+      />
     </VSheet>
-
   </VMenu>
 </template>
 
 <script setup lang="ts">
-  import { ref, useAttrs } from 'vue'
-  import { useLocale } from 'vuetify'
-  const { t } = useLocale()
+import { ref, useAttrs } from 'vue'
 
-  const active = ref(false)
-  const input = ref('')
-  const emit = defineEmits(['submit', 'cancel'])
+const active = ref(false)
+const input = ref('')
+const emit = defineEmits(['submit', 'cancel'])
 
-  const attrs: Partial<{
-    title: string,
-    text: string,
-    color: string,
-  }> = useAttrs()
+const attrs: Partial<{
+  title: string
+  text: string
+  color: string
+}> = useAttrs()
 
+defineProps({
+  title: String,
+  text: String,
+  isConfirm: {
+    type: Boolean,
+    default: false,
+  },
+})
 
-  defineProps({
-    title: String,
-    text: String,
-    isConfirm: {
-      type: Boolean,
-      default: false
-    }
-  })
-
-  function onSubmit() {
-    emit('submit', input.value)
-    active.value = false
-    input.value = ''
-  }
+function onSubmit() {
+  emit('submit', input.value)
+  active.value = false
+  input.value = ''
+}
 </script>

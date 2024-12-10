@@ -2,5 +2,5 @@
   "eslint.useFlatConfig": true,
   "eslint.enable": true,
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-  "prettier.enable": false
+  "prettier.enable": false,  
 }

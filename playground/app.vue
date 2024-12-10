@@ -39,30 +39,60 @@
                       {{ toastCode }}
                     </pre>
                   </VCol>
-                  <VCol
-                    cols="4"
-                  >
+                  <VCol cols="4">
                     <VCard title="Props">
+                      <VTextField
+                        :model-value="toastOptions.title"
+                        label="Title"
+                        @change="toastOptions.title = $event.target.value"
+                      />
                       <VTextField
                         :model-value="toastOptions.text"
                         label="Text"
                         @change="toastOptions.text = $event.target.value"
                       />
+                      <VTextField
+                        :model-value="toastOptions.icon"
+                        label="Icon"
+                        @change="toastOptions.icon = $event.target.value"
+                      />
+                      <VSelect
+                        v-model="toastOptions.color"
+                        clearable
+                        :items="['primary', 'secondary', 'success', 'error', 'purple']"
+                        label="Color"
+                      />
+                      <VSelect
+                        v-model="toastOptions.type"
+                        clearable
+                        :items="['success', 'info', 'warning', 'error']"
+                        label="Type"
+                      />
+                    </VCard>
+                    <VCard title="Options">
                       <VSelect
                         v-model="toastOptions.options.location"
                         :items="['top', 'bottom', 'top left', 'top right', 'bottom left', 'bottom right']"
                         label="Location"
                       />
-                      <VSelect
-                        v-model="toastOptions.options.color"
-                        clearable
-                        :items="['primary', 'secondary', 'success', 'error', 'purple']"
-                        label="Color"
-                      />
+
+                      <VSlider
+                        v-model.number="toastOptions.options.timeout"
+                        label="Timeout"
+                        min="3000"
+                        max="30000"
+                        step="1000"
+                        thumb-label="always"
+                        class="mt-5"
+                      >
+                        <template #thumb-label="{ modelValue }">
+                          {{ modelValue/1000 }}s
+                        </template>
+                      </VSlider>
                       <VCardActions>
                         <VBtn
                           block
-                          :color="toastOptions.options.color"
+                          :color="toastOptions.color"
                           text="Show Toast"
                           variant="outlined"
                           @click="onOpenToast"
@@ -83,12 +113,10 @@
                     class="d-flex justify-center"
                   >
                     <pre>
-                      {{ alertCode }}
-                    </pre>
+        {{ alertCode }}
+      </pre>
                   </VCol>
-                  <VCol
-                    cols="4"
-                  >
+                  <VCol cols="4">
                     <VCard title="Props">
                       <VTextField
                         :model-value="alertOptions.title"
@@ -151,12 +179,10 @@
                     class="d-flex justify-center"
                   >
                     <pre>
-                        {{ confirmCode }}
-                      </pre>
+        {{ confirmCode }}
+      </pre>
                   </VCol>
-                  <VCol
-                    cols="4"
-                  >
+                  <VCol cols="4">
                     <VCard title="Props">
                       <VTextField
                         :model-value="confirmOptions.title"
@@ -226,8 +252,8 @@
                       variant="outlined"
                     />
                     <pre>
-                      {{ confirmDirectyCode }}
-                    </pre>
+        {{ confirmDirectyCode }}
+      </pre>
                   </VCol>
                   <VCol cols="4">
                     <VBtn
@@ -241,8 +267,8 @@
                       variant="outlined"
                     />
                     <pre>
-                      {{ inputDirectyCode }}
-                    </pre>
+        {{ inputDirectyCode }}
+      </pre>
                   </VCol>
                   <VCol cols="4">
                     <VCard title="Props">
@@ -275,12 +301,10 @@
                     class="d-flex justify-center"
                   >
                     <pre>
-                      {{ dialogCode }}
-                    </pre>
+        {{ dialogCode }}
+      </pre>
                   </VCol>
-                  <VCol
-                    cols="4"
-                  >
+                  <VCol cols="4">
                     <VCard title="Props">
                       <VTextField
                         :model-value="dialogOptions.msg"
@@ -368,10 +392,14 @@ notifier.dialog(Test, {
 `)
 
 const toastOptions = reactive(({
-  text: 'Hello World',
+  title: '',
+  text: 'This is toast content',
+  icon: undefined,
+  color: undefined,
+  type: undefined,
   options: {
     location: 'top right',
-    color: 'primary',
+    timeout: 5000,
   },
 }))
 
@@ -387,10 +415,14 @@ const toastCode = computed(() => `
 const notifier = useNotifier()
 
 notifier.toast({  
+  ${toastOptions.title ? `title: '${toastOptions.title}',` : ''}
   text: '${toastOptions.text}',
+  ${toastOptions.icon ? `icon: '${toastOptions.icon}',` : ''}
+  ${toastOptions.color ? `color: '${toastOptions.color}',` : ''}
+  ${toastOptions.type ? `type: '${toastOptions.type}',` : ''}
   options: {
     location: '${toastOptions.options.location}',
-    color: '${toastOptions.options.color}',
+    timeout: ${toastOptions.options.timeout},
   },
 })`)
 
@@ -427,7 +459,7 @@ const notifier = useNotifier()
 notifier.confirm({  
   title: '${confirmOptions.text}',
   text: '${confirmOptions.text}',
-  color: '${toastOptions.options.color}',
+  color: '${confirmOptions.color}',
   onSubmit(data) {
     console.log('Submit', data)
   },
