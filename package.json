@@ -1,6 +1,6 @@
 {
   "name": "vuetify-notifier",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "Vuetify Notifier is a simple way to display notifications in your Nuxt and Vue applications using Vuetify.",
   "repository": {
     "url": "https://github.com/kieuminhcanh/vuetify-notifier",
@@ -38,7 +38,8 @@
     "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.14.1592"
+    "@nuxt/kit": "^3.14.1592",
+    "vuetify-notifier": "2.0.5"
   },
   "devDependencies": {
     "@nuxt/devtools": "^1.6.3",

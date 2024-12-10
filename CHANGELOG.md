@@ -1,6 +1,10 @@
 # Changelog
 
 
+## v2.0.6
+
+[compare changes](https://github.com/kieuminhcanh/vuetify-notifier/compare/v2.0.5...v2.0.6)
+
 ## v2.0.5
 
 [compare changes](https://github.com/kieuminhcanh/vuetify-notifier/compare/v2.0.4...v2.0.5)
