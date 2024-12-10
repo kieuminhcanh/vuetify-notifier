@@ -1,6 +1,6 @@
 {
   "name": "vuetify-notifier",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Vuetify Notifier is a simple way to display notifications in your Nuxt and Vue applications using Vuetify.",
   "repository": {
     "url": "https://github.com/kieuminhcanh/vuetify-notifier",
@@ -28,8 +28,9 @@
   "scripts": {
     "prepack": "nuxt-module-build build && vite build",
     "dev": "nuxi dev playground",
+    "dev:vite": "cd vite && vite",
     "dev:build": "nuxi build playground",
-    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground && vite build",
     "release": "npm run prepack && changelogen --release && npm publish && git push --follow-tags",
     "lint": "eslint .",
     "test": "vitest run",
@@ -37,21 +38,21 @@
     "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.14.159"
+    "@nuxt/kit": "^3.14.1592"
   },
   "devDependencies": {
-    "@nuxt/devtools": "^1.6.0",
-    "@nuxt/eslint-config": "^0.7.0",
+    "@nuxt/devtools": "^1.6.3",
+    "@nuxt/eslint-config": "^0.7.2",
     "@nuxt/module-builder": "^0.8.4",
-    "@nuxt/schema": "^3.14.159",
-    "@nuxt/test-utils": "^3.14.4",
+    "@nuxt/schema": "^3.14.1592",
+    "@nuxt/test-utils": "^3.15.1",
     "@types/node": "latest",
     "changelogen": "^0.5.7",
-    "eslint": "^9.15.0",
-    "nuxt": "^3.14.159",
-    "sass": "^1.81.0",
+    "eslint": "^9.16.0",
+    "nuxt": "^3.14.1592",
+    "sass": "^1.82.0",
     "typescript": "latest",
-    "vitest": "^2.1.5",
+    "vitest": "^2.1.8",
     "vue-tsc": "^2.1.10",
     "vuetify-nuxt-module": "^0.18.3"
   },
