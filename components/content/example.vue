@@ -349,9 +349,6 @@ const tab = ref('toast')
 
 const notifier = useNotifier()
 
-const options = useRuntimeConfig().public.notifier
-console.log(options)
-
 const dialogOptions = reactive(({
   msg: 'World',
   options: {

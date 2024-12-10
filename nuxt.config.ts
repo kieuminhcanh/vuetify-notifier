@@ -1,15 +1,15 @@
 export default defineNuxtConfig({
   // https://github.com/nuxt-themes/docus
   extends: ['@nuxt-themes/docus'],
-  devtools: { enabled: true },
+  devtools: { enabled: false },
 
   app: {
     baseURL: process.env.NODE_ENV === 'development' ? '' : '/vuetify-notifier/'
   },
 
-  modules: [// Remove it if you don't use Plausible analytics
-  // https://github.com/nuxt-modules/plausible
-  // '@nuxtjs/plausible',    
-  'vuetify-notifier/nuxt', 'vuetify-nuxt-module'],
+  modules: [
+    'vuetify-nuxt-module',
+    'vuetify-notifier/nuxt'
+  ],
   compatibilityDate: '2024-10-24'
 })
