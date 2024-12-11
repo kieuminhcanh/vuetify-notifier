@@ -1,6 +1,4 @@
 export const useObjectToString = (obj: any) => {
-  console.log('Convert')
-
   return JSON.stringify(obj, (key, value) => {
     if (value) {
       return typeof value === 'function' ? key : value
