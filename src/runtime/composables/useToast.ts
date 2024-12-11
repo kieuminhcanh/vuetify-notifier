@@ -1,11 +1,9 @@
 import { ref } from 'vue'
-import type { Notifier } from '../types'
+import type { ToastOptions } from '../types'
 
-const items = ref<(Notifier & { icon?: string, notifierId?: number })[]>([
-  { notifierId: new Date().getTime(), title: 'Hello', text: 'World', icon: 'mdi-account', color: 'success' },
-])
+const items = ref<(Partial<ToastOptions> & { icon?: string, notifierId?: number })[]>([])
 export default function useToast() {
-  const add = (item: Notifier) => {
+  const add = (item: Partial<ToastOptions>) => {
     items.value.push({ ...item, notifierId: new Date().getTime() })
   }
   const remove = (item?: any) => {

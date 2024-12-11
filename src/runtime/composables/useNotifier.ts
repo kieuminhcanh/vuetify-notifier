@@ -1,20 +1,24 @@
 import { defu } from 'defu'
-import { getCurrentInstance, h, render, resolveComponent } from 'vue'
+import { getCurrentInstance, h, inject, render, resolveComponent } from 'vue'
 
 import type { Component } from 'vue'
-import type { AlertOptions, ComponentProps, ConfirmOptions, DialogOptions } from '../types'
+import type { AlertOptions, ComponentProps, ConfirmOptions, DialogOptions, ToastOptions } from '../types'
 
+import type { NotifierOptions } from 'vuetify-notifier'
 import NotifierComponent from '../components/NotifierComponent.vue'
 import NotifierConfirm from '../components/NotifierConfirm.vue'
 import { defaultOptions } from '../utils'
 import useToast from './useToast'
 
+// export const NotifierSymbol: InjectionKey<ReturnType<typeof useNotifier>> = Symbol.for('vuetify:notifier')
+
 export const useNotifier = (_options: any = {}) => {
   const v = getCurrentInstance()
-
   if (!v) {
     throw new Error(`[Notifier] useNotifier() must be called from inside a setup function`)
   }
+
+  const config: NotifierOptions = inject('notifier')
 
   function show(component: Component, options: any) {
     const vnode = h(component, {
@@ -33,15 +37,11 @@ export const useNotifier = (_options: any = {}) => {
 
   function dialog<T extends Component | string>(component: T, options: Partial<ComponentProps<T> & DialogOptions> = {}) {
     const concreteComponent = typeof component === 'string' ? resolveComponent(component) : component
-    return show(NotifierComponent, {
-      component: concreteComponent as Component,
-      ...options,
-    })
+    return show(NotifierComponent, defu(config.dialog, options, { component: concreteComponent }))
   }
 
-  function toast(options: any = {}) {
-    // return show(NotifierToast, defu(defaultOptions.toast, options))
-    return useToast().add(options as any)
+  function toast(options: Partial<ToastOptions> = {}) {
+    return useToast().add(options)
   }
 
   function confirm(options: Partial<ConfirmOptions> = {}) {
@@ -57,5 +57,6 @@ export const useNotifier = (_options: any = {}) => {
     toast,
     confirm,
     alert,
+    config,
   }
 }

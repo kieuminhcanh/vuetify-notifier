@@ -1,14 +1,13 @@
-import type { VDialog } from 'vuetify/components'
+import type { VAlert, VDialog } from 'vuetify/components'
 import { useNotifier } from './composables/useNotifier'
 
 export { default } from '../plugin'
 export { useNotifier }
-// export { useNotifier } from ' ./composables/useNotifier'
-
 interface NotifierContent {
   title: string
   text: string
   color: string
+  icon: string
 }
 
 interface NotifierAction {
@@ -25,9 +24,10 @@ export type DialogOptions = NotifierAction & {
   }
 }
 
-// export type ToastOptions = Notifier & {
-//   options: ComponentProps<VSnackbar>
-// }
+export type ToastOptions = Notifier & {
+  type?: 'info' | 'success' | 'error' | 'warning'
+  options?: ComponentProps<VAlert>
+}
 
 export interface ConfirmOptions extends Notifier {
   options: ComponentProps<VDialog> & Partial<{
@@ -43,7 +43,7 @@ export type AlertOptions = Omit<ConfirmOptions, 'onClose'> & {
 
 export type NotifierOptions = {
   toast: {
-    location: 'top left' | 'top right' | 'bottom left' | 'bottom right'
+    location: 'top' | 'bottom' | 'top left' | 'top right' | 'bottom left' | 'bottom right'
     timeout: number
     max: number
     width: number

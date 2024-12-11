@@ -1,8 +1,8 @@
 export default defineNuxtConfig({
   modules: [
-    // '../src/module',
+    '../src/module',
     'vuetify-nuxt-module',
-    'vuetify-notifier/nuxt',
+    // 'vuetify-notifier/nuxt',
   ],
   devtools: { enabled: true },
   compatibilityDate: '2024-11-17',

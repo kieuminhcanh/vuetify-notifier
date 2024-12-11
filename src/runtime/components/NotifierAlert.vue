@@ -1,7 +1,6 @@
 <template>
   <VAlert
     v-bind="item"
-    class="mx-2 my-1"
     elevation="5"
   >
     <template #append>
