@@ -69,6 +69,7 @@ const alertOptions = reactive(({
   title: 'Are you sure?',
   text: 'Do you want to continue?',
   color: 'primary',
+  onSubmit: () => {},
   options: {
     divider: true,
     textAlign: undefined,

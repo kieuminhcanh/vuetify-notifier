@@ -24,8 +24,9 @@ export type DialogOptions = NotifierAction & {
   }
 }
 
-export type ToastOptions = Notifier & {
+export type ToastOptions = Omit<Notifier, 'onSubmit'> & {
   type?: 'info' | 'success' | 'error' | 'warning'
+  onClick?: () => void
   options?: ComponentProps<VAlert>
 }
 

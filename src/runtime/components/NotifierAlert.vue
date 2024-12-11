@@ -1,7 +1,8 @@
 <template>
   <VAlert
-    v-bind="item"
+    v-bind="{ ...item, onClick }"
     elevation="5"
+    :class="{ 'cursor-pointer': item.onClick }"
   >
     <template #append>
       <VProgressCircular
@@ -12,7 +13,7 @@
           icon="$close"
           variant="tonal"
           density="compact"
-          @click.stop="remove(item)"
+          @click.stop="onClose"
         />
       </VProgressCircular>
     </template>
@@ -22,10 +23,10 @@
 <script lang="ts" setup>
 import { onUnmounted, reactive } from 'vue'
 import useToast from '../composables/useToast'
-import type { Notifier } from '../types'
+import type { ToastOptions } from '../types'
 
 const { isPause = false, item, timeout = 5000 } = defineProps<{
-  item: Notifier
+  item: ToastOptions
   isPause: boolean | null
   timeout: number
 }>()
@@ -46,6 +47,20 @@ const interval = setInterval(() => {
 
 function calculatePercentage(total: number, value: number) {
   return (value / total) * 100
+}
+
+function onClick() {
+  if (item.onClick) {
+    item.onClick()
+  }
+  remove(item)
+}
+
+function onClose() {
+  if (item.onClose) {
+    item.onClose()
+  }
+  remove(item)
 }
 
 onUnmounted(() => {

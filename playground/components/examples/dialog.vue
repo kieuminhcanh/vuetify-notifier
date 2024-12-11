@@ -48,6 +48,8 @@ const notifier = useNotifier()
 
 const dialogOptions = reactive(({
   msg: 'World',
+  onSubmit: () => {},
+  onClose: () => {},
   options: {
     title: '',
     width: 500,

@@ -71,6 +71,8 @@ const confirmOptions = reactive(({
   title: 'Are you sure?',
   text: 'Do you want to continue?',
   color: 'primary',
+  onSubmit: () => {},
+  onClose: () => {},
   options: {
     divider: true,
     textAlign: undefined,

@@ -88,6 +88,8 @@ const state = reactive(({
   icon: undefined,
   color: undefined,
   type: undefined,
+  onClick: () => {},
+  onClose: () => {},
 }))
 
 watch(state, () => {
