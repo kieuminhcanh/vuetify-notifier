@@ -87,17 +87,40 @@ const state = reactive(({
   text: 'This is toast content',
   icon: undefined,
   color: undefined,
-  type: undefined,
-  onClick: () => {},
-  onClose: () => {},
+  type: 'info',
+  onClick: () => { },
+  onClose: () => { },
 }))
+
+const sample = reactive({
+  items: ['Hello there! 👋',
+    'I am a Vuetify Toast!',
+    'Integrated with Vuetify for seamless styling.',
+    'I will appear sequentially, one after another.',
+    'I will close automatically in 5 seconds...',
+    '...unless you close me first! 😉',
+    'Up to 5 toasts can be displayed at once.',
+    'Click me to trigger an event!',
+    'Closing me also triggers an event.',
+    'Customize me with icons, actions, and more!',
+  ],
+  types: ['success', 'info', 'warning', 'error'],
+  index: 0,
+  edit: false,
+})
 
 watch(state, () => {
   onOpenToast()
 })
 
 function onOpenToast() {
-  notifier.toast(state)
+  if (!sample.edit) {
+    notifier.toast({ text: sample.items[sample.index++] })
+    if (sample.index >= sample.items.length) sample.edit = true
+  }
+  else {
+    notifier.toast(state)
+  }
 }
 
 const toastCode = computed(() => {
