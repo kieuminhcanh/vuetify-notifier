@@ -48,6 +48,7 @@ export type NotifierOptions = {
     timeout: number
     max: number
     width: number
+    sequentialClosing: boolean
   }
   alert: {
     width: number

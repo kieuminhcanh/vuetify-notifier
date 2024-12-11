@@ -15,5 +15,6 @@ export const defaults: NotifierOptions = {
     timeout: 5000,
     max: 5,
     width: 400,
+    sequentialClosing: false,
   },
 }

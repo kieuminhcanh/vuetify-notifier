@@ -18,7 +18,7 @@ export const useNotifier = (_options: any = {}) => {
     throw new Error(`[Notifier] useNotifier() must be called from inside a setup function`)
   }
 
-  const config: NotifierOptions = inject('notifier')
+  const config = inject('notifier') as NotifierOptions
 
   function show(component: Component, options: any) {
     const vnode = h(component, {

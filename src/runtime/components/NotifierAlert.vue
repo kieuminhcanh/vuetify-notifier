@@ -2,7 +2,7 @@
   <VAlert
     v-bind="{ ...item, onClick }"
     elevation="5"
-    :class="{ 'cursor-pointer': item.onClick }"
+    :class="{ 'cursor-pointer': item?.onClick }"
   >
     <template #append>
       <VProgressCircular
@@ -22,13 +22,16 @@
 
 <script lang="ts" setup>
 import { onUnmounted, reactive } from 'vue'
+import type { ComponentProps } from 'vuetify-notifier'
+import { VAlert, VBtn, VProgressCircular } from 'vuetify/components'
 import useToast from '../composables/useToast'
 import type { ToastOptions } from '../types'
 
 const { isPause = false, item, timeout = 5000 } = defineProps<{
-  item: ToastOptions
+  item?: Partial<ToastOptions>
   isPause: boolean | null
   timeout: number
+  options?: ComponentProps<VAlert>
 }>()
 const state = reactive({
   progress: 0,
@@ -50,14 +53,14 @@ function calculatePercentage(total: number, value: number) {
 }
 
 function onClick() {
-  if (item.onClick) {
+  if (item?.onClick) {
     item.onClick()
   }
   remove(item)
 }
 
 function onClose() {
-  if (item.onClose) {
+  if (item?.onClose) {
     item.onClose()
   }
   remove(item)

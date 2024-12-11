@@ -65,6 +65,16 @@
             {{ modelValue / 1000 }}s
           </template>
         </VSlider>
+        <VListItem
+          title="Sequential Closing"
+        >
+          <template #append>
+            <VSwitch
+              v-model="notifier.config.toast.sequentialClosing"
+              hide-details
+            />
+          </template>
+        </VListItem>
         <VCardActions>
           <VBtn
             block

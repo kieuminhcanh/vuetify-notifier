@@ -16,9 +16,12 @@
           leave-absolute
         >
           <NotifierAlert
-            v-for="(item) in toasters"
+            v-for="(item, index) in toasters"
             :key="item.notifierId"
-            v-bind="{ item, isPause: isHovering, timeout: state.toast.timeout }"
+            v-bind="{ item,
+                      isPause: isHovering || (state.toast.sequentialClosing && index > 0),
+                      timeout: state.toast.timeout,
+            }"
             elevation="5"
           />
         </component>
