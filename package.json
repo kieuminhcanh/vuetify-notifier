@@ -30,6 +30,7 @@
     "dev": "nuxi dev playground",
     "docs": "nuxi dev docs",
     "docs:build": "nuxi build docs",
+    "docs:generate": "nuxi generate docs",
     "dev:vite": "cd vite && vite",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground && nuxi prepare docs",
