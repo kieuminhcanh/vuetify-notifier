@@ -3,26 +3,28 @@ name: Docs Deploy
 on:
   push:
     branches:
-      - main
+      - docs
+
+defaults:
+ run:
+  working-directory: ./docs
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest    
     steps:
       - uses: actions/checkout@v4
       - run: corepack enable
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '20'      
       # Pick your own package manager and build script
       - run: npm install
-      - run: npm run dev:prepare
-      - run: npm run docs:build --preset github_pages
-      - run: npm run docs:generate --preset github_pages
+      - run: npx nuxt build --preset github_pages
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./docs/.output/public
+          path: ./.output/public
   # Deployment job
   deploy:
     # Add a dependency to the build job
