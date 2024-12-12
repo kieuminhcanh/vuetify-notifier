@@ -2,7 +2,8 @@ export default defineNuxtConfig({
   extends: ['@nuxt-themes/docus'],
   modules: [
     'vuetify-nuxt-module',
-    '../src/module',
+    'vuetify-notifier/nuxt',
+    // '../src/module',
   ],
   ssr: false,
   app: {

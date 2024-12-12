@@ -17,6 +17,7 @@
     "@types/node": "^22.10.2",
     "eslint": "^9.16.0",
     "nuxt": "^3.14.1592",
+    "vuetify-notifier": "latest",
     "vuetify-nuxt-module": "0.18.3"
   }
 }
