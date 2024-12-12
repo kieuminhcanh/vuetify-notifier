@@ -28,6 +28,8 @@
   "scripts": {
     "prepack": "nuxt-module-build build && vite build",
     "dev": "nuxi dev playground",
+    "docs": "nuxi dev docs",
+    "docs:build": "nuxi build docs",
     "dev:vite": "cd vite && vite",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground && vite build",
@@ -38,8 +40,7 @@
     "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.14.1592",
-    "vuetify-notifier": "2.0.5"
+    "@nuxt/kit": "^3.14.1592"
   },
   "devDependencies": {
     "@nuxt/devtools": "^1.6.3",
