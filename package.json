@@ -58,7 +58,8 @@
     "typescript": "latest",
     "vitest": "^2.1.8",
     "vue-tsc": "^2.1.10",
-    "vuetify-nuxt-module": "^0.18.3"
+    "vuetify-nuxt-module": "^0.18.3",
+    "vuetify-notifier": "latest"
   },
   "unbuild": {
     "failOnWarn": false
