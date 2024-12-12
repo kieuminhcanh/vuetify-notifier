@@ -16,7 +16,8 @@ jobs:
       # Pick your own package manager and build script
       - run: npm install
       - run: npm run dev:prepare
-      - run: npx nuxt build docs --preset github_pages        
+      - run: npx nuxt build --preset github_pages
+        working-directory: ./docs
       - name: Upload artifact        
         uses: actions/upload-pages-artifact@v3
         with:
