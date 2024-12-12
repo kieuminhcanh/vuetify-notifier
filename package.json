@@ -33,7 +33,7 @@
     "docs:generate": "nuxi generate docs",
     "dev:vite": "cd vite && vite",
     "dev:build": "nuxi build playground",
-    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground && nuxi prepare docs",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare docs",
     "release": "npm run prepack && changelogen --release && npm publish && git push --follow-tags",
     "lint": "eslint .",
     "test": "vitest run",
