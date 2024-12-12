@@ -6,10 +6,7 @@ on:
       - main
 jobs:
   build:
-    runs-on: ubuntu-latest    
-    defaults: 
-      run:
-        working-directory: ./docs
+    runs-on: ubuntu-latest                
     steps:
       - uses: actions/checkout@v4
       - run: corepack enable
@@ -18,8 +15,11 @@ jobs:
           node-version: '20'      
       # Pick your own package manager and build script
       - run: npm install
+      - run: npm run dev:prepare
       - run: npx nuxt build --preset github_pages
+        working-directory: ./docs
       - name: Upload artifact
+        working-directory: ./docs
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./.output/public
