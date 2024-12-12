@@ -9282,6 +9282,21 @@ vue@^3.5.13:
     "@vue/server-renderer" "3.5.13"
     "@vue/shared" "3.5.13"
 
+vuetify-notifier@2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/vuetify-notifier/-/vuetify-notifier-2.0.5.tgz#110c3aafcb131392d2d112e2e05c8780e2210ab1"
+  integrity sha512-5O+xtmpoHwuJIR6ZsaRSfMUV1GpO6r2tTpQ2o2qWQ8XGbqSjk5f1upjjLdCw41p2zlWk2XTDr7vDA8fdebhQ2Q==
+  dependencies:
+    "@nuxt/kit" "^3.14.1592"
+
+vuetify-notifier@latest:
+  version "2.0.10"
+  resolved "https://registry.yarnpkg.com/vuetify-notifier/-/vuetify-notifier-2.0.10.tgz#4490410921b0ee5e31d8e13eda2a7938145d7d18"
+  integrity sha512-nZGDwidMqGmH9+fhjuWPwkcNj3Y/QFhJ4YsguMUBhrrOwu0PK9jTKdvK3wr2DgvftBv7oHJm0BziGigYzsiDEw==
+  dependencies:
+    "@nuxt/kit" "^3.14.1592"
+    vuetify-notifier "2.0.5"
+
 vuetify-nuxt-module@^0.18.3:
   version "0.18.3"
   resolved "https://registry.yarnpkg.com/vuetify-nuxt-module/-/vuetify-nuxt-module-0.18.3.tgz#7d397a561a7410ccfea289a32646498570542554"
