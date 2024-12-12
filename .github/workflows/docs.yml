@@ -6,8 +6,8 @@ on:
       - docs
 
 defaults:
- run:
-  working-directory: ./docs
+  run:
+    working-directory: ./docs
 
 jobs:
   build:
