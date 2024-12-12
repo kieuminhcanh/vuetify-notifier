@@ -4,14 +4,12 @@ on:
   push:
     branches:
       - docs
-
-defaults:
-  run:
-    working-directory: ./docs
-
 jobs:
   build:
     runs-on: ubuntu-latest    
+    defaults: 
+      run:
+        working-directory: ./docs
     steps:
       - uses: actions/checkout@v4
       - run: corepack enable
