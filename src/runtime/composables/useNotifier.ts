@@ -2,9 +2,8 @@ import { defu } from 'defu'
 import { getCurrentInstance, h, inject, render, resolveComponent } from 'vue'
 
 import type { Component } from 'vue'
-import type { AlertOptions, ComponentProps, ConfirmOptions, DialogOptions, ToastOptions } from '../types'
+import type { AlertOptions, ComponentProps, ConfirmOptions, DialogOptions, NotifierOptions, ToastOptions } from '../types'
 
-import type { NotifierOptions } from 'vuetify-notifier'
 import NotifierComponent from '../components/NotifierComponent.vue'
 import NotifierConfirm from '../components/NotifierConfirm.vue'
 import { defaultOptions } from '../utils'

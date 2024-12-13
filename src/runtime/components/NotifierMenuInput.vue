@@ -3,45 +3,55 @@
     v-model="active"
     activator="parent"
     :close-on-content-click="false"
-    v-bind="$attrs"
   >
     <VSheet
       class="pa-4"
-      min-width="300"
-      :color="attrs.color"
+      :color="color"
     >
       <VTextField
         v-model="input"
-        :label="text"
+        v-bind="itemOptions"
         hide-details="auto"
-        append-icon="$success"
-        @click:append="onSubmit"
-      />
+      >
+        <template #append>
+          <VBtn
+            v-bind="options?.submitButton || quick.submitButton"
+            @click="onSubmit"
+          />
+        </template>
+      </VTextField>
     </VSheet>
   </VMenu>
 </template>
 
 <script setup lang="ts">
-import { ref, useAttrs } from 'vue'
+import { defu } from 'defu'
+import { inject, ref } from 'vue'
+import type { VBtn, VTextField } from 'vuetify/components'
+import type { ComponentProps, NotifierOptions } from '../types'
+
+defineOptions({
+  inheritAttrs: false,
+})
 
 const active = ref(false)
 const input = ref('')
 const emit = defineEmits(['submit', 'cancel'])
 
-const attrs: Partial<{
-  title: string
-  text: string
-  color: string
-}> = useAttrs()
+const { quick } = inject('notifier') as NotifierOptions
 
-defineProps({
-  title: String,
-  text: String,
-  isConfirm: {
-    type: Boolean,
-    default: false,
-  },
-})
+const { options, color, ...item } = defineProps<{
+  label?: string
+  placeholder?: string
+  color?: string
+  options?: {
+    inputOptions?: Omit<ComponentProps<typeof VTextField>, 'label' | 'placeholder'>
+    submitButton?: ComponentProps<typeof VBtn>
+  }
+}>()
+
+const itemOptions = defu(item, options?.inputOptions, quick.input)
+console.log(itemOptions)
 
 function onSubmit() {
   emit('submit', input.value)

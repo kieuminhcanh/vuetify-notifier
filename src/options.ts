@@ -17,4 +17,16 @@ export const defaults: NotifierOptions = {
     width: 400,
     sequentialClosing: false,
   },
+  quick: {
+    input: {
+      width: 350,
+    },
+    confirm: {
+      width: 350,
+    },
+    submitButton: {
+      icon: '$success',
+      variant: 'text',
+    },
+  },
 }

@@ -22,16 +22,15 @@
 
 <script lang="ts" setup>
 import { onUnmounted, reactive } from 'vue'
-import type { ComponentProps } from 'vuetify-notifier'
 import { VAlert, VBtn, VProgressCircular } from 'vuetify/components'
 import useToast from '../composables/useToast'
-import type { ToastOptions } from '../types'
+import type { ComponentProps, ToastOptions } from '../types'
 
 const { isPause = false, item, timeout = 5000 } = defineProps<{
   item?: Partial<ToastOptions>
   isPause: boolean | null
   timeout: number
-  options?: ComponentProps<VAlert>
+  options?: ComponentProps<typeof VAlert>
 }>()
 const state = reactive({
   progress: 0,

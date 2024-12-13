@@ -1,4 +1,4 @@
-import type { VAlert, VDialog } from 'vuetify/components'
+import type { VAlert, VBtn, VDialog, VListItem, VTextField } from 'vuetify/components'
 import { useNotifier } from './composables/useNotifier'
 
 export { default } from '../plugin'
@@ -18,7 +18,7 @@ interface NotifierAction {
 export interface Notifier extends NotifierContent, NotifierAction { }
 
 export type DialogOptions = NotifierAction & {
-  options: ComponentProps<VDialog> & {
+  options: ComponentProps<typeof VDialog> & {
     title?: string
     [key: string]: any
   }
@@ -27,11 +27,11 @@ export type DialogOptions = NotifierAction & {
 export type ToastOptions = Omit<Notifier, 'onSubmit'> & {
   type?: 'info' | 'success' | 'error' | 'warning'
   onClick?: () => void
-  options?: ComponentProps<VAlert>
+  options?: ComponentProps<typeof VAlert>
 }
 
 export interface ConfirmOptions extends Notifier {
-  options: ComponentProps<VDialog> & Partial<{
+  options: ComponentProps<typeof VDialog> & Partial<{
     divider: boolean
     textAlign: 'left' | 'center' | 'right'
     buttonAlign: 'start' | 'center' | 'end'
@@ -58,6 +58,11 @@ export type NotifierOptions = {
   }
   dialog: {
     width: number
+  }
+  quick: {
+    confirm: ComponentProps<typeof VListItem>
+    input: ComponentProps<typeof VTextField>
+    submitButton: ComponentProps<typeof VBtn>
   }
 }
 
