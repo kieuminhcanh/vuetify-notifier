@@ -15,12 +15,14 @@
           group
           leave-absolute
         >
-          <NotifierAlert
+          <NotifierToast
             v-for="(item, index) in toasters"
             :key="item.notifierId"
-            v-bind="{ item,
-                      isPause: isHovering || (state.toast.sequentialClosing && index > 0),
-                      timeout: state.toast.timeout,
+            v-bind="{ ...item,
+                      options: { ...item.options,
+                                 isPause: isHovering || (state.toast.sequentialClosing && index > 0),
+                                 timeout: state.toast.timeout },
+
             }"
             elevation="5"
           />
@@ -35,7 +37,7 @@ import { computed, inject } from 'vue'
 import { VSlideXReverseTransition, VSlideXTransition, VSlideYReverseTransition, VSlideYTransition } from 'vuetify/components/transitions'
 import useToast from '../composables/useToast'
 import type { NotifierOptions } from '../types'
-import NotifierAlert from './NotifierAlert.vue'
+import NotifierToast from './NotifierToast.vue'
 
 const { items } = useToast()
 

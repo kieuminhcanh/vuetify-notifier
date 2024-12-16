@@ -1,10 +1,10 @@
 import { ref } from 'vue'
-import type { ToastOptions } from '../types'
+import type { ToastItemOptions, ToastOptions } from '../types'
 
-const items = ref<(Partial<ToastOptions> & { icon?: string, notifierId?: number })[]>([])
+const items = ref<(Partial<ToastItemOptions>)[]>([])
 export default function useToast() {
-  const add = (item: Partial<ToastOptions>) => {
-    items.value.push({ ...item, notifierId: new Date().getTime() })
+  const add = (item: ToastOptions) => {
+    items.value.push({ notifierId: new Date().getTime(), ...item })
   }
   const remove = (item?: any) => {
     if (!item) return

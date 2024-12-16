@@ -10,11 +10,10 @@ export default defineNuxtModule({
       nuxt: '>=3.0.0',
     },
   },
-  defaults,
   setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
 
-    nuxt.options.runtimeConfig.public.notifier = defu(nuxt.options.runtimeConfig.public.notifier || {}, options)
+    nuxt.options.runtimeConfig.public.notifier = defu(options, defaults)
 
     addComponent({
       name: 'VNotifierContainer',

@@ -4,9 +4,9 @@ import { getCurrentInstance, h, inject, render, resolveComponent } from 'vue'
 import type { Component } from 'vue'
 import type { AlertOptions, ComponentProps, ConfirmOptions, DialogOptions, NotifierOptions, ToastOptions } from '../types'
 
+import { defaults } from '../../options'
 import NotifierComponent from '../components/NotifierComponent.vue'
 import NotifierConfirm from '../components/NotifierConfirm.vue'
-import { defaultOptions } from '../utils'
 import useToast from './useToast'
 
 // export const NotifierSymbol: InjectionKey<ReturnType<typeof useNotifier>> = Symbol.for('vuetify:notifier')
@@ -43,12 +43,14 @@ export const useNotifier = (_options: any = {}) => {
     return useToast().add(options)
   }
 
-  function confirm(options: Partial<ConfirmOptions> = {}) {
-    return show(NotifierConfirm, defu(defaultOptions.confirm, options))
+  function confirm({ options, ...props }: Partial<ConfirmOptions> = {}) {
+    console.log({ ...props, ...{ options: defu(options, defaults.confirm) } })
+
+    return show(NotifierConfirm, { ...props, ...{ options: defu(options, defaults.confirm) } })
   }
 
-  function alert(options: Partial<AlertOptions> = {}) {
-    return show(NotifierConfirm, defu(defaultOptions.alert, options, { isConfirm: false }))
+  function alert({ options, ...props }: Partial<AlertOptions> = {}) {
+    return show(NotifierConfirm, { ...props, ...{ options: defu(options, defaults.alert, { isConfirm: false }) } })
   }
 
   return {

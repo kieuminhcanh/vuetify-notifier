@@ -6,9 +6,11 @@ export const defaults: NotifierOptions = {
   },
   confirm: {
     width: 400,
+    isConfirm: true,
   },
   alert: {
     width: 400,
+    isConfirm: false,
   },
   toast: {
     location: 'top right',
@@ -16,6 +18,11 @@ export const defaults: NotifierOptions = {
     max: 5,
     width: 400,
     sequentialClosing: false,
+    closeButton: {
+      icon: '$close',
+      size: 'small',
+      variant: 'text',
+    },
   },
   quick: {
     input: {

@@ -1,7 +1,7 @@
 <template>
   <VDialog
     v-model="active"
-    v-bind="options"
+    v-bind="dialogOptions"
   >
     <VCard>
       <VToolbar
@@ -11,19 +11,19 @@
       />
       <VCardText
         v-if="text"
-        :class="{ [`text-${options?.textAlign}`]: options?.textAlign }"
+        :class="{ [`text-${textAlign}`]: textAlign }"
       >
         {{ text }}
       </VCardText>
-      <VDivider v-if="options?.divider" />
-      <VCardActions :class="{ [`justify-${options?.buttonAlign}`]: options?.buttonAlign }">
+      <VDivider v-if="divider" />
+      <VCardActions :class="{ [`justify-${buttonAlign}`]: buttonAlign }">
         <VBtn
           v-if="isConfirm"
-          :text="t('$vuetify.confirmEdit.cancel')"
+          v-bind="{ text: t('$vuetify.confirmEdit.cancel'), ...closeButton }"
           @click="onClose"
         />
         <VBtn
-          :text="t('$vuetify.confirmEdit.ok')"
+          v-bind="{ text: t('$vuetify.confirmEdit.ok'), ...submitButton }"
           @click="onSubmit"
         />
       </VCardActions>
@@ -32,28 +32,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref, type PropType } from 'vue'
-import { useLocale } from 'vuetify'
-
-const { t } = useLocale()
+import { ref } from 'vue';
+import { useLocale } from 'vuetify';
+import type { ConfirmOptions } from '../types';
 
 defineOptions({ inheritAttrs: false })
 const emit = defineEmits(['submit', 'cancel'])
+const { t } = useLocale()
 
 const active = ref(true)
 
-defineProps({
-  title: String,
-  text: String,
-  color: String,
-  options: {
-    type: Object as PropType<Record<string, any>>,
-  },
-  isConfirm: {
-    type: Boolean,
-    default: true,
-  },
-})
+const { options } = defineProps<ConfirmOptions>()
+
+const { isConfirm, submitButton, closeButton, buttonAlign, textAlign, divider, ...dialogOptions } = options
 
 function onSubmit() {
   active.value = false
