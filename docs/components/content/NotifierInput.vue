@@ -24,7 +24,7 @@
     >
       <VBtn
         v-notifier-input="{
-          ...confirmDirectyOptions,
+          ...inputDirectyOptions,
           onSubmit(data: any) {
             console.log('Submit', data)
           },
@@ -41,6 +41,13 @@ const confirmDirectyOptions = reactive(({
   title: 'Are you sure?',
   text: 'Do you want to continue?',
   color: 'primary',
+  onSubmit: () => {},
+  onClose: () => {},
+}))
+
+const inputDirectyOptions = reactive(({
+  label: 'Name?',
+  placeholder: 'Enter your name?',
   onSubmit: () => {},
   onClose: () => {},
 }))
