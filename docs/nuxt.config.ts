@@ -6,9 +6,7 @@ export default defineNuxtConfig({
     '../src/module',
     // 'vuetify-notifier/nuxt'
   ],
-  ssr: false,
   devtools: { enabled: false },
-
   app: {
     baseURL: process.env.NODE_ENV === 'development' ? '' : '/vuetify-notifier/',
   },

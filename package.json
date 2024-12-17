@@ -44,6 +44,7 @@
     "@nuxt/kit": "^3.14.1592"
   },
   "devDependencies": {
+    "@nuxt-themes/docus": "latest",
     "@nuxt/devtools": "^1.6.4",
     "@nuxt/eslint-config": "^0.7.3",
     "@nuxt/module-builder": "^0.8.4",
@@ -51,15 +52,15 @@
     "@nuxt/test-utils": "^3.15.1",
     "@types/node": "latest",
     "changelogen": "^0.5.7",
-    "eslint": "^9.16.0",
+    "eslint": "^9.17.0",
     "nuxt": "^3.14.1592",
+    "pinceau": "0.15.4",
     "sass": "^1.83.0",
     "typescript": "latest",
     "vitest": "^2.1.8",
     "vue-tsc": "^2.1.10",
-    "@nuxt-themes/docus": "latest",
-    "vuetify-nuxt-module": "latest",
-    "vuetify-notifier": "latest"
+    "vuetify-notifier": "latest",
+    "vuetify-nuxt-module": "latest"
   },
   "unbuild": {
     "failOnWarn": false
