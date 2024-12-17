@@ -22,6 +22,7 @@
       text: 'This is test content for the alert dialog',
       color: 'primary',
       onSubmit: () => console.log('Submit'),
+      onClose: () => console.log('close confirm'),
       options: {
         submitButton: {
           text: 'Save',

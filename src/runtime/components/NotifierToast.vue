@@ -30,10 +30,6 @@ import type { ToastItemOptions } from '../types'
 const { options, ...item } = defineProps<ToastItemOptions>()
 
 const { isPause, timeout, closeButton, ...itemProps } = defu(options, defaults.toast)
-console.log({ isPause, timeout, closeButton, ...itemProps })
-
-console.log(item)
-console.log(options)
 
 const state = reactive({
   progress: 0,

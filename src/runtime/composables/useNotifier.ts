@@ -44,8 +44,6 @@ export const useNotifier = (_options: any = {}) => {
   }
 
   function confirm({ options, ...props }: Partial<ConfirmOptions> = {}) {
-    console.log({ ...props, ...{ options: defu(options, defaults.confirm) } })
-
     return show(NotifierConfirm, { ...props, ...{ options: defu(options, defaults.confirm) } })
   }
 

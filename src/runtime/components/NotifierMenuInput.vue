@@ -36,7 +36,7 @@ defineOptions({
 
 const active = ref(false)
 const input = ref('')
-const emit = defineEmits(['submit', 'cancel'])
+const emit = defineEmits(['submit', 'close'])
 
 const { quick } = inject('notifier') as NotifierOptions
 
@@ -51,8 +51,6 @@ const { options, color, ...item } = defineProps<{
 }>()
 
 const itemOptions = defu(item, options?.inputOptions, quick.input)
-console.log(itemOptions)
-
 function onSubmit() {
   emit('submit', input.value)
   active.value = false

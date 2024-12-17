@@ -32,12 +32,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useLocale } from 'vuetify';
-import type { ConfirmOptions } from '../types';
+import { ref } from 'vue'
+import { useLocale } from 'vuetify'
+import type { ConfirmOptions } from '../types'
 
 defineOptions({ inheritAttrs: false })
-const emit = defineEmits(['submit', 'cancel'])
+const emit = defineEmits(['submit', 'close'])
 const { t } = useLocale()
 
 const active = ref(true)
@@ -53,6 +53,6 @@ function onSubmit() {
 
 function onClose() {
   active.value = false
-  emit('cancel')
+  emit('close')
 }
 </script>

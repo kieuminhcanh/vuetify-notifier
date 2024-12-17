@@ -32,7 +32,7 @@ defineOptions({
 })
 
 const active = ref(false)
-const emit = defineEmits(['submit', 'cancel'])
+const emit = defineEmits(['submit', 'close'])
 
 const { quick } = inject('notifier') as NotifierOptions
 

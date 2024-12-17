@@ -18,7 +18,7 @@
         v-if="component"
         v-bind="attrs"
         @submit="onSubmit"
-        @cancel="onClose"
+        @close="onClose"
       />
     </VSheet>
   </VDialog>
@@ -28,7 +28,7 @@
 import { ref, useAttrs, type Component, type PropType } from 'vue'
 
 defineOptions({ inheritAttrs: false })
-const emit = defineEmits(['submit', 'cancel'])
+const emit = defineEmits(['submit', 'close'])
 
 const active = ref(true)
 
@@ -48,6 +48,6 @@ function onSubmit(data: any) {
 
 function onClose() {
   active.value = false
-  emit('cancel')
+  emit('close')
 }
 </script>
