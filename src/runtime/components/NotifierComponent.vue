@@ -2,6 +2,7 @@
   <VDialog
     v-model="active"
     v-bind="options"
+    @after-leave="emit('close')"
   >
     <VSheet>
       <VToolbar
@@ -48,6 +49,5 @@ function onSubmit(data: any) {
 
 function onClose() {
   active.value = false
-  emit('close')
 }
 </script>
