@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v2.0.15
+
+[compare changes](https://github.com/kieuminhcanh/vuetify-notifier/compare/v2.0.14...v2.0.15)
+
+### 🏡 Chore
+
+- **release:** V2.0.14 ([d23d933](https://github.com/kieuminhcanh/vuetify-notifier/commit/d23d933))
+
+### ❤️ Contributors
+
+- Ken Kieu ([@kieuminhcanh](http://github.com/kieuminhcanh))
+
 ## v2.0.14
 
 [compare changes](https://github.com/kieuminhcanh/vuetify-notifier/compare/v2.0.13...v2.0.14)
