@@ -2,5 +2,7 @@
   "eslint.useFlatConfig": true,
   "eslint.enable": true,
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-  "prettier.enable": false,  
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  }
 }

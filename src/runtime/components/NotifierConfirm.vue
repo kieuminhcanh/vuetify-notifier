@@ -2,7 +2,7 @@
   <VDialog
     v-model="active"
     v-bind="dialogOptions"
-    @after-leave="emit('close')"
+    @after-leave="emit('leave')"
   >
     <VCard>
       <VToolbar
@@ -38,7 +38,7 @@ import { useLocale } from 'vuetify'
 import type { ConfirmOptions } from '../types'
 
 defineOptions({ inheritAttrs: false })
-const emit = defineEmits(['submit', 'close'])
+const emit = defineEmits(['submit', 'close', 'leave'])
 const { t } = useLocale()
 
 const active = ref(true)
@@ -54,5 +54,6 @@ function onSubmit() {
 
 function onClose() {
   active.value = false
+  emit('close')
 }
 </script>

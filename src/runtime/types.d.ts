@@ -18,6 +18,7 @@ interface NotifierAction {
 export interface Notifier extends NotifierContent, NotifierAction { }
 
 export type DialogOptions = NotifierAction & {
+  onLeave?: () => void
   options: ComponentProps<typeof VDialog> & {
     title?: string
     [key: string]: any
@@ -42,6 +43,7 @@ export interface ToastItemOptions extends ToastOptions {
 }
 
 export interface ConfirmOptions extends Notifier {
+  onLeave?: () => void
   options: ComponentProps<typeof VDialog> & Partial<{
     divider: boolean
     width: number | string

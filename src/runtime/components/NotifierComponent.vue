@@ -2,7 +2,7 @@
   <VDialog
     v-model="active"
     v-bind="options"
-    @after-leave="emit('close')"
+    @after-leave="emit('leave')"
   >
     <VSheet>
       <VToolbar
@@ -29,7 +29,7 @@
 import { ref, useAttrs, type Component, type PropType } from 'vue'
 
 defineOptions({ inheritAttrs: false })
-const emit = defineEmits(['submit', 'close'])
+const emit = defineEmits(['submit', 'close', 'leave'])
 
 const active = ref(true)
 
@@ -49,5 +49,6 @@ function onSubmit(data: any) {
 
 function onClose() {
   active.value = false
+  emit('close')
 }
 </script>
