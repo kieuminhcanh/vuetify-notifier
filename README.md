@@ -1,9 +1,7 @@
 # Vuetify Notifier
-[![npm version][npm-version-src]][npm-version-href]
-[![npm downloads][npm-downloads-src]][npm-downloads-href]
-[![License][license-src]][license-href]
-[![Nuxt][nuxt-src]][nuxt-href]
-
+![NPM Version](https://img.shields.io/npm/v/vuetify-notifier)
+![NPM Downloads](https://img.shields.io/npm/dm/vuetify-notifier)
+![NPM License](https://img.shields.io/npm/l/vuetify-notifier)
 
 **Effortless Notifications & Dialogs for Vuetify**
 
