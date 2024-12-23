@@ -1,4 +1,9 @@
 # Vuetify Notifier
+[![npm version][npm-version-src]][npm-version-href]
+[![npm downloads][npm-downloads-src]][npm-downloads-href]
+[![License][license-src]][license-href]
+[![Nuxt][nuxt-src]][nuxt-href]
+
 
 **Effortless Notifications & Dialogs for Vuetify**
 
