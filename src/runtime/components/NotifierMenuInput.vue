@@ -27,7 +27,7 @@
 <script setup lang="ts">
 import { defu } from 'defu'
 import { inject, ref } from 'vue'
-import type { VBtn, VTextField } from 'vuetify/components'
+import { VBtn, VMenu, VSheet, VTextField } from 'vuetify/components'
 import type { ComponentProps, NotifierOptions } from '../types'
 
 defineOptions({

@@ -24,7 +24,7 @@
 import { defu } from 'defu'
 import { inject, ref } from 'vue'
 
-import { VBtn, VListItem } from 'vuetify/components'
+import { VBtn, VListItem, VMenu, VSheet } from 'vuetify/components'
 import type { ComponentProps, NotifierOptions } from '../types'
 
 defineOptions({

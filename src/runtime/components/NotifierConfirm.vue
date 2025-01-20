@@ -33,6 +33,8 @@
 </template>
 
 <script setup lang="ts">
+import { VBtn, VCard, VCardActions, VCardText, VDialog, VDivider, VToolbar } from 'vuetify/components'
+
 import { ref } from 'vue'
 import { useLocale } from 'vuetify'
 import type { ConfirmOptions } from '../types'

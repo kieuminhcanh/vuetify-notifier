@@ -34,6 +34,7 @@
 
 <script setup lang="ts">
 import { computed, inject } from 'vue'
+import { VHover, VNoSsr, VSheet } from 'vuetify/components'
 import { VSlideXReverseTransition, VSlideXTransition, VSlideYReverseTransition, VSlideYTransition } from 'vuetify/components/transitions'
 import useToast from '../composables/useToast'
 import type { NotifierOptions } from '../types'

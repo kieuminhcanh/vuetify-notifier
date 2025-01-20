@@ -27,6 +27,7 @@
 
 <script setup lang="ts">
 import { ref, useAttrs, type Component, type PropType } from 'vue'
+import { VDialog, VSheet, VToolbar } from 'vuetify/components'
 
 defineOptions({ inheritAttrs: false })
 const emit = defineEmits(['submit', 'close', 'leave'])
