@@ -23,7 +23,7 @@
 import { defu } from 'defu'
 import { onUnmounted, reactive } from 'vue'
 import { VAlert, VBtn, VProgressCircular } from 'vuetify/components'
-import { defaults } from '../../options'
+import { defaults } from '../options'
 import useToast from '../composables/useToast'
 import type { ToastItemOptions } from '../types'
 

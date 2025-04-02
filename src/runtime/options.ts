@@ -1,4 +1,4 @@
-import type { NotifierOptions } from './runtime/types'
+import type { NotifierOptions } from './types'
 
 export const defaults: NotifierOptions = {
   dialog: {

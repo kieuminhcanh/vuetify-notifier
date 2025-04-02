@@ -1,6 +1,6 @@
 import { addComponent, addImports, addPlugin, createResolver, defineNuxtModule } from '@nuxt/kit'
 import { defu } from 'defu'
-import { defaults } from './options'
+import { defaults } from './runtime/options'
 
 export default defineNuxtModule({
   meta: {

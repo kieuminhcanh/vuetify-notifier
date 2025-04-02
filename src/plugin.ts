@@ -1,6 +1,6 @@
 import { defu } from 'defu'
 import type { App } from 'vue'
-import { defaults } from './options'
+import { defaults } from './runtime/options'
 
 import NotifierContainer from './runtime/components/NotifierContainer.vue'
 import { vNotifierConfirm, vNotifierInput } from './runtime/directives'
